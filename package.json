@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@chakra-ui/react": "^3.27.1",
+    "react-hook-form": "^7.65.0",
     "react-router-dom": "^7.9.4"
   }
 }
