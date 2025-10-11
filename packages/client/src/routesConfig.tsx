@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router'
 import { ROUTES } from './constants/routes'
-import LoginPage from './pages/loginPage'
+import InternalServerError from './pages/internalServerErrorPage'
 import RegistrationPage from './pages/registrationPage'
 import ProfilePage from './pages/profilePage'
 import MainPage from './pages/mainPage'
@@ -9,6 +9,7 @@ import LeaderBoardPage from './pages/leaderBoardPage'
 import ForumPage from './pages/forumPage'
 import TopicPage from './pages/topicPage'
 import NotFoundPage from './pages/notFoundPage'
+import LoginPage from './pages/loginPage'
 
 const RoutesConfig = () => (
   <Routes>
@@ -21,6 +22,10 @@ const RoutesConfig = () => (
     <Route path={ROUTES.forumPage} element={<ForumPage />} />
     <Route path={ROUTES.topicPage} element={<TopicPage />} />
     <Route path={ROUTES.notFoundPage} element={<NotFoundPage />} />
+    <Route
+      path={ROUTES.internalServerError}
+      element={<InternalServerError />}
+    />
   </Routes>
 )
 

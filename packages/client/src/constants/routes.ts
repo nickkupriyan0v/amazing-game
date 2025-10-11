@@ -8,4 +8,5 @@ export const ROUTES = {
   forumPage: '/forum',
   topicPage: '/topic/:id',
   notFoundPage: '*',
+  internalServerError: '/500',
 }
