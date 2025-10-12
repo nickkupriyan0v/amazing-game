@@ -1,13 +1,13 @@
 import { Box, Heading, Button, VStack, Container } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 
-interface NotFoundPageProps {
+interface InternalServerPageProps {
   errorText?: string
 }
 
 const InternalServerError = ({
   errorText = 'Внутренняя ошибка сервера',
-}: NotFoundPageProps) => {
+}: InternalServerPageProps) => {
   const navigate = useNavigate()
 
   return (
