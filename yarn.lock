@@ -7680,6 +7680,11 @@ react-dom@^18.0.0, react-dom@^18.2.0, react-dom@>=18, react-dom@>=18.0.0:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
 
+react-hook-form@^7.65.0:
+  version "7.65.0"
+  resolved "https://registry.npmjs.org/react-hook-form/-/react-hook-form-7.65.0.tgz"
+  integrity sha512-xtOzDz063WcXvGWaHgLNrNzlsdFgtUWcb32E6WFaGTd7kPZG3EeDusjdZfUsPwKCKVXy1ZlntifaHZ4l8pAsmw==
+
 react-is@^16.7.0:
   version "16.13.1"
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
@@ -7715,7 +7720,7 @@ react-router@^7.9.4, react-router@7.9.4:
     cookie "^1.0.1"
     set-cookie-parser "^2.6.0"
 
-react@^18.0.0, react@^18.2.0, react@>=16.8.0, react@>=18, react@>=18.0.0:
+"react@^16.8.0 || ^17 || ^18 || ^19", react@^18.0.0, react@^18.2.0, react@>=16.8.0, react@>=18, react@>=18.0.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
