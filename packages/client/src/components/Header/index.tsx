@@ -33,6 +33,9 @@ const Header = () => {
         <li>
           <Link to="404">404</Link>;
         </li>
+        <li>
+          <Link to={ROUTES.internalServerError}>500</Link>;
+        </li>
       </ul>
     </div>
   )

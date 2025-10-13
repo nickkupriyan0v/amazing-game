@@ -1,16 +1,15 @@
-import React from 'react'
 import { Box, Heading, Button, VStack, Container } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
-import { ROUTES } from '../../constants/routes'
 
-interface NotFoundPageProps {
+interface InternalServerPageProps {
   errorText?: string
 }
 
-const NotFoundPage = ({
-  errorText = 'Страница не найдена',
-}: NotFoundPageProps) => {
+const InternalServerError = ({
+  errorText = 'Внутренняя ошибка сервера',
+}: InternalServerPageProps) => {
   const navigate = useNavigate()
+
   return (
     <Container
       maxW="container.md"
@@ -25,17 +24,17 @@ const NotFoundPage = ({
         </Box>
 
         <Button
-          onClick={() => navigate(ROUTES.mainPage)}
+          onClick={() => navigate(-1)}
           colorScheme="blue"
           size="lg"
           px={8}
           _hover={{ textDecoration: 'none', transform: 'translateY(-2px)' }}
           transition="all 0.2s">
-          На главную
+          Назад
         </Button>
       </VStack>
     </Container>
   )
 }
 
-export default NotFoundPage
+export default InternalServerError

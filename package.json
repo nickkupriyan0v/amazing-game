@@ -21,6 +21,11 @@
   },
   "devDependencies": {
     "@evilmartians/lefthook": "^1.3.9",
+    "@types/react-router-dom": "^5.3.3",
     "lerna": "^5.4.3"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^3.27.1",
+    "react-router-dom": "^7.9.4"
   }
 }
