@@ -90,6 +90,7 @@ const GamePage = () => {
     setCards(prev => [...prev].sort(() => Math.random() - 0.5))
     setFlipped([])
     setMatched([])
+    setCount(0)
     setDisabled(false)
   }
 
