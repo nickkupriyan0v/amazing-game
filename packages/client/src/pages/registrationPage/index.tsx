@@ -19,7 +19,7 @@ const RegistrationPage = () => {
     formState: { errors, isSubmitting },
   } = useForm<FormValues>()
 
-  const onSubmit = handleSubmit((data: FormValues) => {
+  const onSubmit = handleSubmit(() => {
     navigate(ROUTES.mainPage)
   })
   const navigate = useNavigate()
