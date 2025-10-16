@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react'
 
-export const GameCanvas = React.memo(
+const GameCanvas = React.memo(
   ({ cards, flipped, matched, onCardClick, canvasSize }) => {
     const canvasRef = useRef(null)
 
@@ -65,3 +65,5 @@ export const GameCanvas = React.memo(
     )
   }
 )
+
+export default GameCanvas

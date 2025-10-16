@@ -1,9 +1,9 @@
-import React, { useRef, useEffect, useState } from 'react'
 import './styles.css'
-import { Button } from '@chakra-ui/react'
-import { CARD_COLORS, SETTINGS } from '../../constants/game'
+import { SETTINGS } from '../../constants/game'
 import { useGame } from '../../hooks/useGame'
-import { GameCanvas } from '../../components/GameCanvas'
+import GameCanvas from '../../components/GameCanvas'
+import Title from '../../components/Title'
+import GameControls from '../../components/GameControls'
 
 const GamePage = () => {
   const {
@@ -20,7 +20,7 @@ const GamePage = () => {
 
   return (
     <div className="gameBoard">
-      <h1>Memo Game</h1>
+      <Title text="Memo Game" />
       <GameCanvas
         cards={cards}
         flipped={flipped}
@@ -28,10 +28,11 @@ const GamePage = () => {
         onCardClick={handleCardClick}
         canvasSize={{ ...canvasSize, ...SETTINGS }}
       />
-      <Button onClick={reset}>Новая игра</Button>
-      {isGameComplete && (
-        <h2>Поздравляем! Вы прошли игру за {count} ходов(а)! </h2>
-      )}
+      <GameControls
+        reset={reset}
+        count={count}
+        isGameComplete={isGameComplete}
+      />
     </div>
   )
 }
