@@ -1,0 +1,47 @@
+import { useCallback } from 'react'
+import { useBoard } from './useBoard'
+import { useGameLogic } from './useGameLogic'
+import { SETTINGS } from '../constants/game'
+
+export const useGame = (config = SETTINGS) => {
+  const { rows, cols, cardWidth, cardHeight, spacing } = config
+
+  const { cards, resetBoard } = useBoard(
+    rows,
+    cols,
+    cardWidth,
+    cardHeight,
+    spacing
+  )
+  const {
+    flipped,
+    matched,
+    disabled,
+    count,
+    handleCardClick,
+    resetGame,
+    isGameComplete,
+  } = useGameLogic(cards)
+
+  const reset = useCallback(() => {
+    resetBoard()
+    resetGame()
+  }, [resetBoard, resetGame])
+
+  const canvasSize = {
+    width: cols * (cardWidth + spacing),
+    height: rows * (cardHeight + spacing),
+  }
+
+  return {
+    cards,
+    flipped,
+    matched,
+    disabled,
+    count,
+    handleCardClick,
+    reset,
+    isGameComplete: isGameComplete(),
+    canvasSize,
+  }
+}
