@@ -1,11 +1,19 @@
+import { useState } from 'react'
 import { data } from './data'
 import './index.css'
 const ForumPage = () => {
+  const user = useState(false)
   return (
     <div className="forum-container">
       <header className="forum-header">
         <h1>Форум карточной игры «Память»</h1>
-        <button className="create-topic-btn">Создать тему</button>
+        {user ? (
+          <button className="create-topic-btn">Создать тему</button>
+        ) : (
+          <div className="auth-advise">
+            Нужно зарегистрироваться чтобы создать статью
+          </div>
+        )}
       </header>
 
       <div className="topics-list">
@@ -25,6 +33,9 @@ const ForumPage = () => {
                 Кол-во комментариев: {topic.comments}
               </span>
             </div>
+            <details>
+              <div>{topic.text}</div>
+            </details>
           </div>
         ))}
       </div>

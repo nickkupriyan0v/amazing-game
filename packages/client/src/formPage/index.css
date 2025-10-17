@@ -36,6 +36,9 @@ body {
   transition: background 0.2s;
 }
 
+.auth-advise {
+  color: rgb(119, 118, 118);
+}
 .create-topic-btn:hover {
   background-color: #d5dee4;
 }
@@ -105,13 +108,4 @@ body {
 .comments {
   font-size: 0.9rem;
   color: #555;
-}
-
-@media (max-width: 600px) {
-  .topic-header h2 {
-    font-size: 1rem;
-  }
-  .forum-header h1 {
-    font-size: 1.4rem;
-  }
 }
