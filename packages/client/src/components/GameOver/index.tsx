@@ -1,7 +1,7 @@
 import { Button, Container } from '@chakra-ui/react'
 import { useNavigate } from 'react-router'
 
-const GameOver = () => {
+const GameOver = ({ reset }) => {
   const navigate = useNavigate()
 
   return (
@@ -11,7 +11,7 @@ const GameOver = () => {
       gap="10px"
       alignItems="center"
       justifyContent="center">
-      <Button variant="outline" size="xl" onClick={() => navigate('/game')}>
+      <Button variant="outline" size="xl" onClick={reset}>
         Повторить
       </Button>
       <Button variant="ghost" size="xl" onClick={() => navigate('/')}>
