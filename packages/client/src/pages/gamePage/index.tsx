@@ -1,17 +1,38 @@
-import { Button } from '@chakra-ui/react'
-import React, { useState } from 'react'
-import GameOver from '../../components/GameOver'
+import './styles.css'
+import { SETTINGS } from '../../constants/game'
+import { useGame } from '../../hooks/useGame'
+import GameCanvas from '../../components/GameCanvas'
+import Title from '../../components/Title'
+import GameControls from '../../components/GameControls'
 
 const GamePage = () => {
-  const [isVisible, setIsVisible] = useState(true)
+  const {
+    cards,
+    flipped,
+    matched,
+    disabled,
+    count,
+    handleCardClick,
+    reset,
+    isGameComplete,
+    canvasSize,
+  } = useGame()
 
   return (
-    <div>
-      GamePage and Gameover
-      <Button onClick={() => setIsVisible(!isVisible)}>
-        {isVisible ? 'Скрыть' : 'Показать'} контейнер
-      </Button>
-      {isVisible ? <GameOver /> : ''}
+    <div className="gameBoard">
+      <Title text="Memo Game" />
+      <GameCanvas
+        cards={cards}
+        flipped={flipped}
+        matched={matched}
+        onCardClick={handleCardClick}
+        canvasSize={{ ...canvasSize, ...SETTINGS }}
+      />
+      <GameControls
+        reset={reset}
+        count={count}
+        isGameComplete={isGameComplete}
+      />
     </div>
   )
 }
