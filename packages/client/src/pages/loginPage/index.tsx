@@ -15,3 +15,5 @@ const LoginPage = () => {
 
   const onSubmit = handleSubmit((data: FormValues) => console.log(data))
 }
+
+export default LoginPage
