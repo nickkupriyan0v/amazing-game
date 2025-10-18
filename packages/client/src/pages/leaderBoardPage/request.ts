@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { urlAPI } from '../../constants/api'
-import { NumericKeys } from 'react-hook-form/dist/types/path/common'
 
 const api = axios.create({
   baseURL: urlAPI,
