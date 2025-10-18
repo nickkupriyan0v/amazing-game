@@ -10,11 +10,13 @@ type GameControlsProps = {
 const GameControls = ({ reset, isGameComplete, count }: GameControlsProps) => {
   return (
     <>
-      {isGameComplete && (
+      {isGameComplete ? (
         <>
           <GameOver reset={reset}></GameOver>
           <h2>Поздравляем! Вы прошли игру за {count} ходов(а)! </h2>
         </>
+      ) : (
+        <Button onClick={reset}>Новая игра</Button>
       )}
     </>
   )

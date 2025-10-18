@@ -1,5 +1,6 @@
 import { Button, Container } from '@chakra-ui/react'
 import { useNavigate } from 'react-router'
+import { ROUTES } from '../../constants/routes'
 
 const GameOver = ({ reset }) => {
   const navigate = useNavigate()
@@ -14,7 +15,10 @@ const GameOver = ({ reset }) => {
       <Button variant="outline" size="xl" onClick={reset}>
         Повторить
       </Button>
-      <Button variant="ghost" size="xl" onClick={() => navigate('/')}>
+      <Button
+        variant="ghost"
+        size="xl"
+        onClick={() => navigate(ROUTES.mainPage)}>
         Вернуться в главное меню
       </Button>
     </Container>
