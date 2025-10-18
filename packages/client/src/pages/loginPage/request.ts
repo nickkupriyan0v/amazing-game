@@ -23,7 +23,10 @@ export class LoginPageRequest {
 
   public signIn(data: SignInData): Promise<SignInResponse> {
     return axios
-      .post(urlAPI + '/auth/signin', data)
+      .post(urlAPI + '/auth/signin', data, {
+        withCredentials: true,
+        headers: { 'Content-Type': 'application/json' },
+      })
       .then(response => {
         return { success: response.status == 200 }
       })
