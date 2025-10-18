@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { data } from './data'
-import './index.css'
+import './style.css'
 const ForumPage = () => {
   const user = useState(false)
   return (
