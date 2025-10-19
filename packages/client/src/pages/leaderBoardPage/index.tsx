@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import getLeaderboard, { Leader } from './request'
 import './style.css'
+import { Table, Box, Heading } from '@chakra-ui/react'
 const LeaderBoardPage = () => {
   const [leaders, setLeaders] = useState<Leader[]>([])
   const [loading, setLoading] = useState(true)
@@ -20,33 +21,47 @@ const LeaderBoardPage = () => {
   }
 
   return (
-    <div className="leaderboard">
-      <h2 className="leaderboard-title">🏆 Лидерборд</h2>
+    <Box
+      maxW="800px"
+      mx="auto"
+      mt={10}
+      p={6}
+      bg="white"
+      borderRadius="xl"
+      boxShadow="md">
+      <Heading size="lg" mb={6} textAlign="center">
+        🏆 Лидерборд
+      </Heading>
 
-      <table className="leaderboard-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Имя</th>
-            <th>Очки</th>
-          </tr>
-        </thead>
-        <tbody>
-          {leaders.map((item, index) => (
-            <tr key={index}>
-              <td>{index + 1}</td>
-              <td>
-                {item.data.name ||
-                  item.data.userName ||
-                  item.data.username ||
+      <Table.Root variant="outline" size="md">
+        <Table.Header>
+          <Table.Row bg="gray.100">
+            <Table.ColumnHeader textAlign="center">#</Table.ColumnHeader>
+            <Table.ColumnHeader>Имя</Table.ColumnHeader>
+            <Table.ColumnHeader textAlign="center">Очки</Table.ColumnHeader>
+          </Table.Row>
+        </Table.Header>
+
+        <Table.Body>
+          {leaders.map((leader, index) => (
+            <Table.Row key={index + 1} _hover={{ bg: 'gray.50' }}>
+              <Table.Cell textAlign="center" fontWeight="medium">
+                {index + 1}
+              </Table.Cell>
+              <Table.Cell fontWeight="semibold">
+                {leader.data.name ||
+                  leader.data.userName ||
+                  leader.data.username ||
                   '—'}
-              </td>
-              <td>{item.data.score}</td>
-            </tr>
+              </Table.Cell>
+              <Table.Cell textAlign="center" fontWeight="semibold">
+                {leader.data.score}
+              </Table.Cell>
+            </Table.Row>
           ))}
-        </tbody>
-      </table>
-    </div>
+        </Table.Body>
+      </Table.Root>
+    </Box>
   )
 }
 

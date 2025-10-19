@@ -19,14 +19,11 @@ export interface Leader {
 
 async function getLeaderboard() {
   try {
-    const response = await api.post(
-      'https://ya-praktikum.tech/api/v2/leaderboard/all',
-      {
-        ratingFieldName: 'score',
-        cursor: 0,
-        limit: 10,
-      }
-    )
+    const response = await api.post('/leaderboard/all', {
+      ratingFieldName: 'score',
+      cursor: 0,
+      limit: 10,
+    })
     return response.data
   } catch (error) {
     console.error(error)
