@@ -12,18 +12,10 @@ export interface SignInResponse {
   errorType?: number
 }
 
-export class LoginPageRequest {
-  private static instance: LoginPageRequest | null = null
-  public static getInstance(): LoginPageRequest {
-    if (!LoginPageRequest.instance) {
-      LoginPageRequest.instance = new LoginPageRequest()
-    }
-    return LoginPageRequest.instance
-  }
-
+export class LoginPageRequestClass {
   public signIn(data: SignInData): Promise<SignInResponse> {
     return axios
-      .post(urlAPI + '/auth/signin', data)
+      .post(urlAPI + '/auth/signin', data, { withCredentials: true })
       .then(response => {
         return { success: response.status == 200 }
       })
@@ -36,3 +28,5 @@ export class LoginPageRequest {
       })
   }
 }
+
+export const LoginPageRequest = new LoginPageRequestClass()
