@@ -1,16 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import './getStartPage.css'
-export const GetStartPage: React.FC<{ getStart: () => void }> = ({
-  getStart,
-}) => {
+import { useNavigate } from 'react-router-dom'
+import { ROUTES } from '../../constants/routes'
+
+interface GetStartPageProps {
+  getStart?: () => void
+}
+
+export default function GetStartPage({ getStart }: GetStartPageProps) {
   const [timer, setTimer] = useState<number | null>(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (timer === null || timer === 0) return
+
     const countdown = setTimeout(() => setTimer(timer - 1), 1000)
+
     if (timer === 1) {
-      getStart()
+      if (getStart) getStart()
+      navigate(ROUTES.gamePage)
     }
+
     return () => clearTimeout(countdown)
   }, [timer])
 

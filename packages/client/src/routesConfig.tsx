@@ -10,7 +10,7 @@ import TopicPage from './pages/topicPage'
 import NotFoundPage from './pages/notFoundPage'
 import LoginPage from './pages/loginPage'
 import InternalServerError from './pages/internalServerErrorPage'
-import { GetStartPage } from './pages/getStartPage/getStartPage'
+import GetStartPage from './pages/getStartPage/getStartPage'
 
 const RoutesConfig = () => (
   <Routes>
@@ -18,16 +18,8 @@ const RoutesConfig = () => (
     <Route path={ROUTES.registrationPage} element={<RegistrationPage />} />
     <Route path={ROUTES.profilePage} element={<ProfilePage />} />
     <Route path={ROUTES.mainPage} element={<MainPage />} />
-    <Route
-      path={ROUTES.gamePage}
-      element={
-        <GetStartPage
-          getStart={function (): void {
-            throw new Error('Function not implemented.')
-          }}
-        />
-      }
-    />
+    <Route path={ROUTES.getStartGame} element={<GetStartPage />} />
+    <Route path={ROUTES.gamePage} element={<GamePage />} />
     <Route path={ROUTES.leaderBoardPage} element={<LeaderBoardPage />} />
     <Route path={ROUTES.forumPage} element={<ForumPage />} />
     <Route path={ROUTES.topicPage} element={<TopicPage />} />

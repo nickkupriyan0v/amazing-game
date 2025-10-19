@@ -1,6 +1,6 @@
 import React from 'react'
 import { ROUTES } from '../../constants/routes'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 
 const Header = () => {
   return (
@@ -19,7 +19,7 @@ const Header = () => {
           <Link to={ROUTES.mainPage}>Главная</Link>;
         </li>
         <li>
-          <Link to={ROUTES.gamePage}>Игра</Link>;
+          <Link to={ROUTES.getStartGame}>Игра</Link>;
         </li>
         <li>
           <Link to={ROUTES.leaderBoardPage}>Лидерборд</Link>;
