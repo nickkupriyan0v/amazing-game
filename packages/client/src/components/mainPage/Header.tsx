@@ -10,7 +10,7 @@ import {
   Button,
   Flex,
 } from '@chakra-ui/react'
-
+import { ROUTES_WITH_NAMES } from '../../constants/routes'
 export default function Header() {
   return (
     <Box
@@ -25,36 +25,17 @@ export default function Header() {
             Игра Память
           </Heading>
           <HStack gap={8} display={{ base: 'none', md: 'flex' }}>
-            <Link to="/">
-              <Text _hover={{ color: '#6b5dff' }} cursor="pointer">
-                Главная
-              </Text>
-            </Link>
-            <Link to="/game">
-              <Text _hover={{ color: '#6b5dff' }} cursor="pointer">
-                Игра
-              </Text>
-            </Link>
-            <Link to="/leaderboard">
-              <Text _hover={{ color: '#6b5dff' }} cursor="pointer">
-                Лидерборд
-              </Text>
-            </Link>
-            <Link to="/forum">
-              <Text _hover={{ color: '#6b5dff' }} cursor="pointer">
-                Форум
-              </Text>
-            </Link>
-            <Link to="/topic">
-              <Text _hover={{ color: '#6b5dff' }} cursor="pointer">
-                Топик
-              </Text>
-            </Link>
-            <Link to="/profile">
-              <Text _hover={{ color: '#6b5dff' }} cursor="pointer">
-                Профиль
-              </Text>
-            </Link>
+            {ROUTES_WITH_NAMES.filter(
+              route => route.path !== '/login' && route.path !== '/registration'
+            ).map(route => (
+              <Link key={route.path} to={route.path}>
+                <Text _hover={{ color: '#6b5dff' }} cursor="pointer">
+                  {route.name}
+                </Text>
+              </Link>
+            ))}
+          </HStack>
+          <HStack gap={4} display={{ base: 'none', md: 'flex' }}>
             <Link to="/login">
               <Button variant="ghost" color="#6b5dff">
                 Логин
