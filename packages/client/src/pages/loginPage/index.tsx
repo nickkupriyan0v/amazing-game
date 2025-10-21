@@ -23,7 +23,6 @@ const LoginPage = () => {
 
     loginRequest.signIn(data).then(result => {
       if (result.success) {
-        console.log(result)
         navigate(ROUTES.mainPage)
       } else {
         setError('password', {

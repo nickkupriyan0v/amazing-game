@@ -19,10 +19,10 @@ const RegistrationPage = () => {
     formState: { errors, isSubmitting },
   } = useForm<FormValues>()
 
-  const navigate = useNavigate()
   const onSubmit = handleSubmit(() => {
     navigate(ROUTES.mainPage)
   })
+  const navigate = useNavigate()
   return (
     <Container
       maxW="container.md"
