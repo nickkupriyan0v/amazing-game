@@ -17,12 +17,13 @@ const LoginPage = () => {
     setError,
   } = useForm<FormValues>()
 
+  const navigate = useNavigate()
   const onSubmit = handleSubmit((data: FormValues) => {
-    const navigate = useNavigate()
     const loginRequest = LoginPageRequest
 
     loginRequest.signIn(data).then(result => {
       if (result.success) {
+        console.log(result)
         navigate(ROUTES.mainPage)
       } else {
         setError('password', {
