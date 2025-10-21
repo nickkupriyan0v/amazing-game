@@ -12,7 +12,7 @@ const GameControls = ({ reset, isGameComplete, count }: GameControlsProps) => {
     <>
       {isGameComplete ? (
         <>
-          <GameOver reset={reset}></GameOver>
+          <GameOver reset={reset} />
           <h2>Поздравляем! Вы прошли игру за {count} ходов(а)! </h2>
         </>
       ) : (
