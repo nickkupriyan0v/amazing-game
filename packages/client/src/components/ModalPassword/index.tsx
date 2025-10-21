@@ -41,7 +41,6 @@ const ModalPassword = ({ isVisible, onClose }) => {
   }
 
   const onSubmit = (data: FormValues) => {
-    console.log('submit', data.oldPassword, data.newPassword)
     if (data.oldPassword && data.newPassword) {
       changePassword(data.oldPassword, data.newPassword)
     }

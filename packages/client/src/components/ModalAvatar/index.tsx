@@ -30,7 +30,6 @@ const ModalAvatar = ({ isVisible, onClose, onAvatarUpdate }) => {
       }
 
       const result = await response.json()
-      console.log('Аватар успешно загружен:', result)
 
       if (onAvatarUpdate && result.avatar) {
         onAvatarUpdate(result.avatar)
@@ -44,7 +43,6 @@ const ModalAvatar = ({ isVisible, onClose, onAvatarUpdate }) => {
   }
 
   const onSubmit = (data: FormValues) => {
-    console.log('submit', data.avatar[0])
     if (data.avatar && data.avatar.length > 0) {
       uploadAvatar(data.avatar[0])
     }
