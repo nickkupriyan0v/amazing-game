@@ -2,6 +2,14 @@ import React, { useEffect, useState } from 'react'
 import './getStartPage.css'
 import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '../../constants/routes'
+import {
+  Box,
+  Button,
+  Container,
+  Heading,
+  Spinner,
+  Text,
+} from '@chakra-ui/react'
 
 interface GetStartPageProps {
   getStart?: () => void
@@ -25,21 +33,29 @@ export default function GetStartPage({ getStart }: GetStartPageProps) {
   }, [timer])
 
   return (
-    <div className="startScreen">
+    <Container display="flex" alignItems="center" justifyContent="center">
       {timer === null ? (
-        <div className="start-content">
-          <h1>Игра на память</h1>
-          <p>Найди все пары одинаковых карточек как можно быстрее!</p>
-          <button className="start-button" onClick={() => setTimer(3)}>
+        <Box className="start-content">
+          <Heading
+            color="
+purple">
+            Игра на память
+          </Heading>
+          <Text fontSize="m">
+            Найди все пары одинаковых карточек как можно быстрее!
+          </Text>
+          <Button color="white" bg={'green'} onClick={() => setTimer(3)}>
             Начать игру
-          </button>
-        </div>
+          </Button>
+        </Box>
       ) : (
-        <div className="count-down">
-          <div className="loader"></div>
-          <h2 className="game-countdown">Игра начнется через {timer}...</h2>
-        </div>
+        <Box className="count-down">
+          <Heading className="game-countdown">
+            Игра начнется через {timer}...
+          </Heading>
+          <Spinner color="red.500" />
+        </Box>
       )}
-    </div>
+    </Container>
   )
 }
