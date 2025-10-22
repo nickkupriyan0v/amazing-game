@@ -47,3 +47,10 @@
   animation: spin 1s linear infinite;
   margin-bottom: 20px;
 }
+
+.startGame {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  margin-top: 10%;
+}

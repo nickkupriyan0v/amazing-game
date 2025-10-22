@@ -33,7 +33,11 @@ export default function GetStartPage({ getStart }: GetStartPageProps) {
   }, [timer])
 
   return (
-    <Container display="flex" alignItems="center" justifyContent="center">
+    <Container
+      className="startGame"
+      display="flex"
+      alignItems="center"
+      justifyContent="center">
       {timer === null ? (
         <Box className="start-content">
           <Heading
@@ -41,10 +45,15 @@ export default function GetStartPage({ getStart }: GetStartPageProps) {
 purple">
             Игра на память
           </Heading>
-          <Text fontSize="m">
+          <Text fontSize="m" as="u">
             Найди все пары одинаковых карточек как можно быстрее!
           </Text>
-          <Button color="white" bg={'green'} onClick={() => setTimer(3)}>
+          <br />
+          <Button
+            color="white"
+            bg={'green'}
+            margin-top={10}
+            onClick={() => setTimer(3)}>
             Начать игру
           </Button>
         </Box>
