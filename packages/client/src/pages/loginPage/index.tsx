@@ -18,7 +18,8 @@ const LoginPage = () => {
   } = useForm<FormValues>()
 
   const onSubmit = handleSubmit((data: FormValues) => {
-    const loginRequest = LoginPageRequest.getInstance()
+    const navigate = useNavigate()
+    const loginRequest = LoginPageRequest
 
     loginRequest.signIn(data).then(result => {
       if (result.success) {
@@ -31,7 +32,6 @@ const LoginPage = () => {
       }
     })
   })
-  const navigate = useNavigate()
 
   return (
     <Container
