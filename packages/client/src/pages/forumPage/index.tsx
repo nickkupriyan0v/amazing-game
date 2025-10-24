@@ -1,45 +1,61 @@
 import { useState } from 'react'
 import { data } from './data'
 import './style.css'
+import {
+  Avatar,
+  AvatarGroup,
+  Box,
+  Button,
+  Code,
+  Container,
+  Heading,
+  Stack,
+  Text,
+} from '@chakra-ui/react'
 const ForumPage = () => {
   const user = useState(false)
   return (
-    <div className="forum-container">
-      <header className="forum-header">
-        <h1>Форум карточной игры «Память»</h1>
+    <Container className="forum-container">
+      <Box className="forum-header">
+        <Heading>Форум карточной игры «Память»</Heading>
         {user ? (
-          <button className="create-topic-btn">Создать тему</button>
+          <Button className="create-topic-btn">Создать тему</Button>
         ) : (
-          <div className="auth-advise">
+          <Text className="auth-advise">
             Нужно зарегистрироваться чтобы создать статью
-          </div>
+          </Text>
         )}
-      </header>
+      </Box>
 
-      <div className="topics-list">
+      <Stack className="topics-list">
         {data.map(topic => (
-          <div className="topic-card" key={topic.id}>
-            <div className="topic-header">
-              <h2>{topic.title}</h2>
+          <Box className="topic-card" key={topic.id}>
+            <Box className="topic-header">
+              <Heading>{topic.title}</Heading>
               <span className="created">Пост был создан: {topic.created}</span>
-            </div>
+            </Box>
 
             <div className="topic-footer">
-              <div className="author">
-                <div className="avatar">{topic.author[0]}</div>
-                <span>@{topic.author}</span>
-              </div>
+              <AvatarGroup>
+                <Avatar.Root>
+                  <Avatar.Fallback name={topic.author} />
+                  <Avatar.Image />
+                </Avatar.Root>
+              </AvatarGroup>
+              <Text>{topic.author}</Text>
               <span className="comments">
                 Кол-во комментариев: {topic.comments}
               </span>
             </div>
             <details>
-              <div>{topic.text}</div>
+              <Heading>{topic.title}</Heading>
+              <summary>Подробнее:</summary>
+              <p>{topic.text}</p>
             </details>
-          </div>
+          </Box>
         ))}
-      </div>
-    </div>
+      </Stack>
+    </Container>
   )
 }
 

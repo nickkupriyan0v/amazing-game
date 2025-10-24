@@ -109,3 +109,8 @@ body {
   font-size: 0.9rem;
   color: #555;
 }
+details[open] {
+  padding: 10px;
+  background-color: #e4eaef;
+  border-radius: 5px;
+}
