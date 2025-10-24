@@ -25,6 +25,7 @@
     "lerna": "^5.4.3"
   },
   "dependencies": {
+    "@chakra-ui/core": "^0.8.0",
     "@chakra-ui/react": "^3.27.1",
     "@emotion/react": "^11.14.0",
     "axios": "^1.12.2",
