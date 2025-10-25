@@ -1,9 +1,16 @@
 import { useCallback, useEffect, useState } from 'react'
-import { useColors } from './useColors'
+import { useColors } from '../useColors/useColors'
+import { Card } from '../../types/card'
 
-export const useBoard = (rows, cols, cardWidth, cardHeight, spacing) => {
+export const useBoard = (
+  rows: number,
+  cols: number,
+  cardWidth: number,
+  cardHeight: number,
+  spacing: number
+) => {
   const { getColorsForPairs } = useColors()
-  const [cards, setCards] = useState([])
+  const [cards, setCards] = useState<Card[]>([])
 
   const initializeBoard = useCallback(() => {
     const pairsCount = (rows * cols) / 2

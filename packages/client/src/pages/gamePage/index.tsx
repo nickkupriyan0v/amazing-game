@@ -1,7 +1,7 @@
 import './styles.css'
 import { SETTINGS } from '../../constants/game'
-import { useGame } from '../../hooks/useGame'
-import GameCanvas from '../../components/GameCanvas'
+import { useGame } from '../../hooks/useGame/useGame'
+import GameCanvasMemo from '../../components/GameCanvas'
 import Title from '../../components/Title'
 import GameControls from '../../components/GameControls'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
@@ -36,7 +36,7 @@ const GamePage = () => {
       <Title
         text={recordValue === 0 ? '' : `Ваш рекорд: ${recordValue} ходов`}
       />
-      <GameCanvas
+      <GameCanvasMemo
         cards={cards}
         flipped={flipped}
         matched={matched}

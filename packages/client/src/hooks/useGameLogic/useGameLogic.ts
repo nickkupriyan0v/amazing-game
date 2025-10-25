@@ -1,13 +1,14 @@
 import { useCallback, useState } from 'react'
+import { Card } from '../../types/card'
 
-export const useGameLogic = cards => {
+export const useGameLogic = (cards: Card[]) => {
   const [count, setCount] = useState(0)
-  const [flipped, setFlipped] = useState([])
-  const [matched, setMatched] = useState([])
+  const [flipped, setFlipped] = useState<Card['id'][]>([])
+  const [matched, setMatched] = useState<Card['id'][]>([])
   const [disabled, setDisabled] = useState(false)
 
   const handleCardClick = useCallback(
-    cardId => {
+    (cardId: Card['id']) => {
       if (disabled || flipped.includes(cardId) || matched.includes(cardId)) {
         return false
       }
@@ -23,7 +24,7 @@ export const useGameLogic = cards => {
         const firstCard = cards.find(card => card.id === firstId)
         const secondCard = cards.find(card => card.id === secondId)
 
-        if (firstCard.color === secondCard.color) {
+        if (firstCard?.color === secondCard?.color) {
           setMatched(prev => [...prev, firstId, secondId])
           setFlipped([])
           setDisabled(false)
