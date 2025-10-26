@@ -1,8 +1,10 @@
 import { Button, Container, Field, Input, Stack } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '../../constants/routes'
 import { LoginPageRequest } from './request'
+import { addUserInfo2Store } from '../../features/addUserInfo2Store'
+import { useAppDispatch } from '../../store/hooks'
 
 interface FormValues {
   login: string
@@ -10,6 +12,8 @@ interface FormValues {
 }
 
 const LoginPage = () => {
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
   const {
     register,
     handleSubmit,
@@ -18,11 +22,11 @@ const LoginPage = () => {
   } = useForm<FormValues>()
 
   const onSubmit = handleSubmit((data: FormValues) => {
-    const navigate = useNavigate()
     const loginRequest = LoginPageRequest
 
     loginRequest.signIn(data).then(result => {
       if (result.success) {
+        addUserInfo2Store(dispatch)
         navigate(ROUTES.mainPage)
       } else {
         setError('password', {
