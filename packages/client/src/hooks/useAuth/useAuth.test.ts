@@ -29,8 +29,9 @@ describe('useAuth hook', () => {
   })
 
   it('should set user if checkAuth succeeds', async () => {
-    const mockUser: User = { id: '1', login: 'test' }
-    ;(LoginPageRequest.checkAuth as jest.Mock).mockResolvedValue({
+    const mockUser: User = { id: '1', login: 'test' }(
+      LoginPageRequest.checkAuth as jest.Mock
+    ).mockResolvedValue({
       success: true,
       user: mockUser,
     } as CheckAuthResponse)
