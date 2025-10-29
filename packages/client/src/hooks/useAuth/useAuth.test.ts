@@ -29,7 +29,7 @@ describe('useAuth hook', () => {
     jest.clearAllMocks()
   })
 
-  it('should set user if checkAuth succeeds', async () => {
+  it('должен быть установлен пользователь, если checkAuth завершится успешно', async () => {
     const mockUser: User = { id: '1', login: 'test' }
     ;(LoginPageRequest.checkAuth as jest.Mock).mockResolvedValue({
       success: true,
@@ -46,7 +46,7 @@ describe('useAuth hook', () => {
     expect(navigateMock).not.toHaveBeenCalled()
   })
 
-  it('should navigate to login if checkAuth fails', async () => {
+  it('следует перейти к входу в систему, если произойдет сбой checkAuth', async () => {
     ;(LoginPageRequest.checkAuth as jest.Mock).mockResolvedValue({
       success: false,
       user: null,
@@ -59,7 +59,7 @@ describe('useAuth hook', () => {
     expect(navigateMock).toHaveBeenCalledWith(ROUTES.loginPage)
   })
 
-  it('should logout and navigate to login', async () => {
+  it('следует выйти из системы и перейти к входу в систему', async () => {
     ;(axios.post as jest.Mock).mockResolvedValue({})
 
     const { result } = renderHook(() => useAuth())
@@ -72,7 +72,7 @@ describe('useAuth hook', () => {
     expect(navigateMock).toHaveBeenCalledWith(ROUTES.loginPage)
   })
 
-  it('should handle checkAuth throwing error', async () => {
+  it('должен обрабатывать ошибку, вызывающую checkAuth', async () => {
     ;(LoginPageRequest.checkAuth as jest.Mock).mockRejectedValue(
       new Error('fail')
     )
