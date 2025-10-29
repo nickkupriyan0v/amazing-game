@@ -1,6 +1,6 @@
 import { Button, Container, Input, Stack, Field } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
-import { urlAPI } from '../../constants/api'
+import { PasswordModalRequst } from './request'
 
 interface FormValues {
   oldPassword: string
@@ -15,33 +15,21 @@ const ModalPassword = ({ isVisible, onClose }) => {
     reset,
   } = useForm<FormValues>()
 
-  const changePassword = async (oldPassword, newPassword) => {
-    try {
-      const response = await fetch(`${urlAPI}/user/password`, {
-        method: 'PUT',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          oldPassword,
-          newPassword,
-        }),
+  const changePassword = async (oldPassword: string, newPassword: string) => {
+    const passwordRequest = PasswordModalRequst
+
+    passwordRequest
+      .putPassword({ oldPassword: oldPassword, newPassword: newPassword })
+      .then(result => {
+        if (result.success) {
+          onClose()
+          reset()
+        }
       })
-
-      if (!response.ok) {
-        throw new Error('Ошибка при изменении пароля')
-      }
-
-      onClose()
-      reset()
-    } catch (err) {
-      console.error('Ошибка изменения пароля:', err)
-    }
   }
 
   const onSubmit = (data: FormValues) => {
-    console.log('submit', data.oldPassword, data.newPassword)
+    // console.log('submit', data.oldPassword, data.newPassword)
     if (data.oldPassword && data.newPassword) {
       changePassword(data.oldPassword, data.newPassword)
     }

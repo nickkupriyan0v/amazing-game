@@ -1,13 +1,28 @@
-import React, { MouseEventHandler, PureComponent, useState } from 'react'
-import { useNavigate } from 'react-router'
-import { ROUTES } from '../../constants/routes'
+import React, { PureComponent } from 'react'
 import { urlAPI } from '../../constants/api'
 import { Container, Image, Button, Text, Spinner } from '@chakra-ui/react'
 import ModalAvatar from '../../components/ModalAvatar'
 import ModalPassword from '../../components/ModalPassword'
 
-export default class App extends PureComponent {
-  state = {
+interface ProfileData {
+  first_name: string
+  second_name: string
+  login: string
+  email: string
+  phone: string
+  avatar: string
+}
+
+interface AppState {
+  data: ProfileData | null
+  isLoading: boolean
+  error: string | null
+  isAvatarModalVisible: boolean
+  isPasswordModalVisible: boolean
+}
+
+export default class App extends PureComponent<unknown, AppState> {
+  state: AppState = {
     data: null,
     isLoading: true,
     error: null,
@@ -50,12 +65,14 @@ export default class App extends PureComponent {
     this.setState({ isPasswordModalVisible: false })
   }
 
-  handleAvatarUpdate = newAvatarUrl => {
+  handleAvatarUpdate = (newAvatarUrl: string) => {
     this.setState(prevState => ({
-      data: {
-        ...prevState.data,
-        avatar: newAvatarUrl,
-      },
+      data: prevState.data
+        ? {
+            ...prevState.data,
+            avatar: newAvatarUrl,
+          }
+        : null,
       isAvatarModalVisible: false,
     }))
   }
@@ -100,8 +117,14 @@ export default class App extends PureComponent {
       )
     }
 
-    const { first_name, second_name, login, email, phone, avatar } =
-      this.state.data
+    const {
+      first_name,
+      second_name,
+      login,
+      email,
+      phone,
+      avatar,
+    }: ProfileData = data
     const avatarSource = `${urlAPI}/resources/${avatar}`
 
     return (

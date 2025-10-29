@@ -1,6 +1,6 @@
 import { Button, Container, Input, Stack, Field } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
-import { urlAPI } from '../../constants/api'
+import { AvatarModalRequest } from './request'
 
 interface FormValues {
   avatar: FileList
@@ -15,32 +15,15 @@ const ModalAvatar = ({ isVisible, onClose, onAvatarUpdate }) => {
   } = useForm<FormValues>()
 
   const uploadAvatar = async (file: File) => {
-    try {
-      const formData = new FormData()
-      formData.append('avatar', file)
+    const avatarRequest = AvatarModalRequest
 
-      const response = await fetch(`${urlAPI}/user/profile/avatar`, {
-        method: 'PUT',
-        credentials: 'include',
-        body: formData,
-      })
-
-      if (!response.ok) {
-        throw new Error('Ошибка при загрузке аватара')
-      }
-
-      const result = await response.json()
-      console.log('Аватар успешно загружен:', result)
-
+    avatarRequest.putAvatar(file).then(result => {
       if (onAvatarUpdate && result.avatar) {
         onAvatarUpdate(result.avatar)
+        onClose()
+        reset()
       }
-
-      onClose()
-      reset()
-    } catch (err) {
-      console.error('Ошибка загрузки аватара:', err)
-    }
+    })
   }
 
   const onSubmit = (data: FormValues) => {
