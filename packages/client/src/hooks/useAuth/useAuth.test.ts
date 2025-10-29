@@ -1,18 +1,19 @@
-import { renderHook, act, waitFor } from '@testing-library/react'
-import { useNavigate } from 'react-router'
-import { useAuth, User } from './useAuth'
+import { renderHook } from '@testing-library/react'
+import { ROUTES } from '../../constants/routes'
+import { act } from 'react-dom/test-utils'
+import axios from 'axios'
 import {
   CheckAuthResponse,
   LoginPageRequest,
 } from '../../pages/loginPage/request'
-import { ROUTES } from '../../constants/routes'
-import axios from 'axios'
+import { useNavigate } from 'react-router'
+import { useAuth, User } from './useAuth'
 
 jest.mock('react-router', () => ({
   useNavigate: jest.fn(),
 }))
 
-jest.mock('../../pages/loginPage/request', () => ({
+jest.mock('../path/to/request', () => ({
   LoginPageRequest: {
     checkAuth: jest.fn(),
   },
@@ -29,9 +30,8 @@ describe('useAuth hook', () => {
   })
 
   it('should set user if checkAuth succeeds', async () => {
-    const mockUser: User = { id: '1', login: 'test' }(
-      LoginPageRequest.checkAuth as jest.Mock
-    ).mockResolvedValue({
+    const mockUser: User = { id: '1', login: 'test' }
+    ;(LoginPageRequest.checkAuth as jest.Mock).mockResolvedValue({
       success: true,
       user: mockUser,
     } as CheckAuthResponse)
@@ -40,10 +40,9 @@ describe('useAuth hook', () => {
 
     expect(result.current.loading).toBe(true)
 
-    await waitFor(() => expect(result.current.loading).toBe(false))
-
     expect(result.current.user).toEqual(mockUser)
     expect(result.current.isAuthenticated).toBe(true)
+    expect(result.current.loading).toBe(false)
     expect(navigateMock).not.toHaveBeenCalled()
   })
 
@@ -54,8 +53,6 @@ describe('useAuth hook', () => {
     } as unknown as CheckAuthResponse)
 
     const { result } = renderHook(() => useAuth())
-
-    await waitFor(() => expect(result.current.loading).toBe(false))
 
     expect(result.current.user).toBeNull()
     expect(result.current.isAuthenticated).toBe(false)
@@ -81,8 +78,6 @@ describe('useAuth hook', () => {
     )
 
     const { result } = renderHook(() => useAuth())
-
-    await waitFor(() => expect(result.current.loading).toBe(false))
 
     expect(result.current.user).toBeNull()
     expect(result.current.isAuthenticated).toBe(false)
