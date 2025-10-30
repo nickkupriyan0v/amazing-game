@@ -17,8 +17,8 @@ const LoginPage = () => {
     setError,
   } = useForm<FormValues>()
 
+  const navigate = useNavigate()
   const onSubmit = handleSubmit((data: FormValues) => {
-    const navigate = useNavigate()
     const loginRequest = LoginPageRequest
 
     loginRequest.signIn(data).then(result => {
