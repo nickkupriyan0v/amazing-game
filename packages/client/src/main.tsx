@@ -15,4 +15,27 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       </ChakraProvider>
     </ErrorBoundary>
   </React.StrictMode>
+=======
+import { store } from './store/store'
+import { Provider } from 'react-redux'
+import useServiceWorker from './hooks/useServiceWorker/useServiceWorker'
+
+const Root = () => {
+  useServiceWorker()
+
+  return (
+    <React.StrictMode>
+      <Provider store={store}>
+        <ChakraProvider value={defaultSystem}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ChakraProvider>
+      </Provider>
+    </React.StrictMode>
+  )
+}
+
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <Root />
 )
