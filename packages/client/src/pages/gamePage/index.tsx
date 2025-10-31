@@ -12,6 +12,9 @@ const GamePage = () => {
   const recordValue = useAppSelector(state => state.counter.value)
   const dispatch = useAppDispatch()
   const {
+    seconds,
+    startTimer,
+    setTimerRunning,
     cards,
     flipped,
     matched,
@@ -26,6 +29,7 @@ const GamePage = () => {
   useEffect(() => {
     if (isGameComplete && count > 0) {
       dispatch(record(count))
+      setTimerRunning(false)
     }
   }, [isGameComplete, count, dispatch])
 
@@ -36,6 +40,7 @@ const GamePage = () => {
         text={recordValue === 0 ? '' : `Ваш рекорд: ${recordValue} ходов`}
       />
       <GameCanvasMemo
+        startTimer={startTimer}
         cards={cards}
         flipped={flipped}
         matched={matched}
@@ -43,6 +48,8 @@ const GamePage = () => {
         canvasSize={{ ...canvasSize, ...SETTINGS }}
       />
       <GameControls
+        timer={setTimerRunning}
+        seconds={seconds}
         reset={reset}
         count={count}
         isGameComplete={isGameComplete}
