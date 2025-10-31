@@ -1,13 +1,13 @@
-import { renderHook } from '@testing-library/react'
-import { ROUTES } from '../../constants/routes'
+import { renderHook, waitFor } from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
 import axios from 'axios'
+import { useNavigate } from 'react-router'
+import { useAuth, User } from './useAuth'
+import { ROUTES } from '../../constants/routes'
 import {
   CheckAuthResponse,
   LoginPageRequest,
 } from '../../pages/loginPage/request'
-import { useNavigate } from 'react-router'
-import { useAuth, User } from './useAuth'
 
 jest.mock('react-router', () => ({
   useNavigate: jest.fn(),
@@ -38,11 +38,11 @@ describe('useAuth hook', () => {
 
     const { result } = renderHook(() => useAuth())
 
-    expect(result.current.loading).toBe(true)
+    // ожидаем завершения эффекта (checkAuth)
+    await waitFor(() => expect(result.current.loading).toBe(false))
 
     expect(result.current.user).toEqual(mockUser)
     expect(result.current.isAuthenticated).toBe(true)
-    expect(result.current.loading).toBe(false)
     expect(navigateMock).not.toHaveBeenCalled()
   })
 
@@ -53,6 +53,8 @@ describe('useAuth hook', () => {
     } as unknown as CheckAuthResponse)
 
     const { result } = renderHook(() => useAuth())
+
+    await waitFor(() => expect(result.current.loading).toBe(false))
 
     expect(result.current.user).toBeNull()
     expect(result.current.isAuthenticated).toBe(false)
@@ -78,6 +80,8 @@ describe('useAuth hook', () => {
     )
 
     const { result } = renderHook(() => useAuth())
+
+    await waitFor(() => expect(result.current.loading).toBe(false))
 
     expect(result.current.user).toBeNull()
     expect(result.current.isAuthenticated).toBe(false)
