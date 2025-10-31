@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
-import { useBoard } from './useBoard'
-import { useGameLogic } from './useGameLogic'
-import { SETTINGS } from '../constants/game'
+import { useBoard } from '../useBoard/useBoard'
+import { useGameLogic } from '../useGameLogic/useGameLogic'
+import { SETTINGS } from '../../constants/game'
 
 export const useGame = (config = SETTINGS) => {
   const { rows, cols, cardWidth, cardHeight, spacing } = config

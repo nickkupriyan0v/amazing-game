@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { urlAPI } from '../../constants/api'
 
 export interface SignInData {
@@ -11,21 +11,51 @@ export interface SignInResponse {
   error?: string
   errorType?: number
 }
+export interface CheckAuthResponse {
+  success: boolean
+  user?: {
+    id: string
+    login: string
+    password: string
+  }
+  error?: string
+}
 
 export class LoginPageRequestClass {
   public signIn(data: SignInData): Promise<SignInResponse> {
     return axios
       .post(urlAPI + '/auth/signin', data, { withCredentials: true })
       .then(response => {
-        return { success: response.status == 200 }
-      })
-      .catch(error => {
         return {
-          success: false,
-          error: error.response.data?.reason,
-          errorType: error.status,
+          success: response.status == 200,
+          user: response.data.user,
         }
       })
+      .catch(error => {
+        const axiosError = error as AxiosError<{ reason?: string }>
+        return {
+          success: false,
+          error: axiosError.response?.data?.reason || axiosError.message,
+          errorType: axiosError.response?.status,
+        }
+      })
+  }
+  public async checkAuth(): Promise<CheckAuthResponse> {
+    try {
+      const response = await axios.get(urlAPI + '/auth/user', {
+        withCredentials: true,
+      })
+      return {
+        success: response.status === 200,
+        user: response.data.user,
+      }
+    } catch (error) {
+      const axiosError = error as AxiosError<{ reason?: string }>
+      return {
+        success: false,
+        error: axiosError.response?.data?.reason || axiosError.message,
+      }
+    }
   }
 }
 
