@@ -13,7 +13,7 @@ jest.mock('react-router', () => ({
   useNavigate: jest.fn(),
 }))
 
-jest.mock('../path/to/request', () => ({
+jest.mock('../../pages/loginPage/request.ts', () => ({
   LoginPageRequest: {
     checkAuth: jest.fn(),
   },

@@ -19,6 +19,7 @@ describe('useGame хук', () => {
   const resetGame = jest.fn()
   const handleCardClick = jest.fn()
   const isGameComplete = jest.fn()
+  const resetTimer = jest.fn()
 
   beforeEach(() => {
     jest.clearAllMocks()
@@ -66,5 +67,6 @@ describe('useGame хук', () => {
 
     expect(resetBoard).toHaveBeenCalledTimes(1)
     expect(resetGame).toHaveBeenCalledTimes(1)
+    expect(resetTimer).toHaveBeenCalledTimes(1)
   })
 })
