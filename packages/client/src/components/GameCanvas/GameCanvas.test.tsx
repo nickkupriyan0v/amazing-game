@@ -57,12 +57,7 @@ describe('GameCanvas', () => {
   })
 
   it('отображает canvas с правильными атрибутами', () => {
-    ;<GameCanvas
-      startTimer={function (): void {
-        throw new Error('Function not implemented.')
-      }}
-      {...defaultProps}
-    />
+    render(<GameCanvas {...defaultProps} />)
 
     const canvas = screen.getByTestId('game-canvas')
     expect(canvas).toBeInTheDocument()
@@ -71,12 +66,7 @@ describe('GameCanvas', () => {
   })
 
   it('вызывает onCardClick при клике на карточку', () => {
-    ;<GameCanvas
-      startTimer={function (): void {
-        throw new Error('Function not implemented.')
-      }}
-      {...defaultProps}
-    />
+    render(<GameCanvas {...defaultProps} />)
 
     const canvas = screen.getByTestId('game-canvas')
 
@@ -86,12 +76,7 @@ describe('GameCanvas', () => {
   })
 
   it('не вызывает onCardClick при клике вне карточек', () => {
-    ;<GameCanvas
-      startTimer={function (): void {
-        throw new Error('Function not implemented.')
-      }}
-      {...defaultProps}
-    />
+    render(<GameCanvas {...defaultProps} />)
 
     const canvas = screen.getByTestId('game-canvas')
 
@@ -101,12 +86,7 @@ describe('GameCanvas', () => {
   })
 
   it('корректно обрабатывает множественные клики по карточкам', () => {
-    ;<GameCanvas
-      startTimer={function (): void {
-        throw new Error('Function not implemented.')
-      }}
-      {...defaultProps}
-    />
+    render(<GameCanvas {...defaultProps} />)
 
     const canvas = screen.getByTestId('game-canvas')
 
@@ -118,12 +98,7 @@ describe('GameCanvas', () => {
   })
 
   it('вызывает методы canvas', () => {
-    ;<GameCanvas
-      startTimer={function (): void {
-        throw new Error('Function not implemented.')
-      }}
-      {...defaultProps}
-    />
+    render(<GameCanvas {...defaultProps} />)
 
     expect(mockContext.clearRect).toHaveBeenCalledWith(0, 0, 800, 600)
     expect(mockContext.fillRect).toHaveBeenCalled()
@@ -131,28 +106,14 @@ describe('GameCanvas', () => {
   })
 
   it('обновляется при изменении пропсов', () => {
-    const { rerender } = render(
-      <GameCanvas
-        startTimer={function (): void {
-          throw new Error('Function not implemented.')
-        }}
-        {...defaultProps}
-      />
-    )
+    const { rerender } = render(<GameCanvas {...defaultProps} />)
 
     const newProps = {
       ...defaultProps,
       flipped: [1],
     }
 
-    rerender(
-      <GameCanvas
-        startTimer={function (): void {
-          throw new Error('Function not implemented.')
-        }}
-        {...newProps}
-      />
-    )
+    rerender(<GameCanvas {...newProps} />)
 
     expect(mockContext.clearRect).toHaveBeenCalledTimes(2)
   })

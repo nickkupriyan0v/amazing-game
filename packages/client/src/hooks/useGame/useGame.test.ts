@@ -19,24 +19,22 @@ describe('useGame хук', () => {
   const resetGame = jest.fn()
   const handleCardClick = jest.fn()
   const isGameComplete = jest.fn()
-  const resetTimer = jest.fn()
 
   beforeEach(() => {
-    jest.clearAllMocks() as typeof jest
-    ;(useBoard as jest.Mock)
-      .mockReturnValue({
-        cards: mockCards,
-        resetBoard,
-      })(useGameLogic as jest.Mock)
-      .mockReturnValue({
-        flipped: [1],
-        matched: [],
-        disabled: false,
-        count: 0,
-        handleCardClick,
-        resetGame,
-        isGameComplete,
-      })
+    jest.clearAllMocks()
+    ;(useBoard as jest.Mock).mockReturnValue({
+      cards: mockCards,
+      resetBoard,
+    })
+    ;(useGameLogic as jest.Mock).mockReturnValue({
+      flipped: [1],
+      matched: [],
+      disabled: false,
+      count: 0,
+      handleCardClick,
+      resetGame,
+      isGameComplete,
+    })
   })
 
   it('должен корректно возвращать данные и методы', () => {
@@ -68,6 +66,5 @@ describe('useGame хук', () => {
 
     expect(resetBoard).toHaveBeenCalledTimes(1)
     expect(resetGame).toHaveBeenCalledTimes(1)
-    expect(resetTimer).toHaveBeenCalledTimes(1)
   })
 })
