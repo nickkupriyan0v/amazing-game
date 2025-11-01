@@ -33,7 +33,6 @@ describe('useGame хук', () => {
         matched: [],
         disabled: false,
         count: 0,
-        resetTimer,
         handleCardClick,
         resetGame,
         isGameComplete,
