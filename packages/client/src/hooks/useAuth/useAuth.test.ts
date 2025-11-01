@@ -14,63 +14,48 @@ export const useAuth = () => {
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
 
-  const checkAuth = useCallback(async () => {
-    try {
-      const response = await LoginPageRequest.checkAuth()
-
-      if (response?.success && response.user) {
-        setUser(response.user)
-      } else {
-        setUser(null)
-        navigate(ROUTES.loginPage)
-      }
-    } catch (error) {
-      // ⚠️ Не выбрасываем наружу, чтобы тест не ругался
-      if (process.env.NODE_ENV === 'development') {
-        console.error('Ошибка проверки авторизации:', error)
-      }
-      setUser(null)
-      navigate(ROUTES.loginPage)
-    } finally {
-      setLoading(false)
-    }
+  const handleAuthFailure = useCallback(() => {
+    setUser(null)
+    navigate(ROUTES.loginPage)
   }, [navigate])
 
-  useEffect(() => {
-    // Чтобы избежать гонки и act-warning
-    let isMounted = true
-    ;(async () => {
+  const checkAuth = useCallback(
+    async (isMounted = true) => {
       try {
         const response = await LoginPageRequest.checkAuth()
+
         if (!isMounted) return
 
         if (response?.success && response.user) {
           setUser(response.user)
         } else {
-          setUser(null)
-          navigate(ROUTES.loginPage)
+          handleAuthFailure()
         }
       } catch (error) {
         if (process.env.NODE_ENV === 'development') {
           console.error('Ошибка проверки авторизации:', error)
         }
-        if (isMounted) {
-          setUser(null)
-          navigate(ROUTES.loginPage)
-        }
+        if (isMounted) handleAuthFailure()
       } finally {
         if (isMounted) setLoading(false)
       }
-    })()
+    },
+    [handleAuthFailure]
+  )
 
+  useEffect(() => {
+    let isMounted = true
+    checkAuth(isMounted)
     return () => {
       isMounted = false
     }
-  }, [navigate])
+  }, [checkAuth])
 
   const logout = useCallback(async () => {
     try {
       await axios.post('/api/logout')
+    } catch {
+      //
     } finally {
       setUser(null)
       navigate(ROUTES.loginPage)

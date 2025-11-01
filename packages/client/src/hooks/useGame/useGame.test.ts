@@ -23,19 +23,21 @@ describe('useGame хук', () => {
 
   beforeEach(() => {
     jest.clearAllMocks()
-    ;(useBoard as jest.Mock).mockReturnValue({
-      cards: mockCards,
-      resetBoard,
-    })
-    ;(useGameLogic as jest.Mock).mockReturnValue({
-      flipped: [1],
-      matched: [],
-      disabled: false,
-      count: 0,
-      handleCardClick,
-      resetGame,
-      isGameComplete,
-    })
+    ;(useBoard as jest.Mock)
+      .mockReturnValue({
+        cards: mockCards,
+        resetBoard,
+      })(useGameLogic as jest.Mock)
+      .mockReturnValue({
+        flipped: [1],
+        matched: [],
+        disabled: false,
+        count: 0,
+        resetTimer,
+        handleCardClick,
+        resetGame,
+        isGameComplete,
+      })
   })
 
   it('должен корректно возвращать данные и методы', () => {
