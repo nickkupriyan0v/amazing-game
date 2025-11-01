@@ -14,8 +14,8 @@ export const useBoard = (rows, cols, cardWidth, cardHeight, spacing) => {
       .map((color, index) => ({
         id: index,
         color,
-        x: (cardWidth + spacing) * (index % cols),
-        y: (cardHeight + spacing) * Math.floor(index / cols),
+        x: (cardWidth + spacing + 9) * (index % cols),
+        y: (cardHeight + spacing + 5) * Math.floor(index / cols),
       }))
 
     setCards(items)

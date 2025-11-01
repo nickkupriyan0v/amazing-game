@@ -3,7 +3,7 @@ export const SETTINGS = {
   cols: 4,
   cardWidth: 100,
   cardHeight: 100,
-  spacing: 20,
+  spacing: 10,
 }
 
 export const CARD_COLORS = [

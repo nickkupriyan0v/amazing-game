@@ -10,7 +10,7 @@ const GameControls = ({ reset, isGameComplete, count }: GameControlsProps) => {
   return (
     <>
       <Button onClick={reset}>Новая игра</Button>
-      {isGameComplete && (
+      {!isGameComplete && (
         <h2>Поздравляем! Вы прошли игру за {count} ходов(а)! </h2>
       )}
     </>
