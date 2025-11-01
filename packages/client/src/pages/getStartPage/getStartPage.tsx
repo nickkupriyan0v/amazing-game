@@ -6,6 +6,8 @@ import {
   Box,
   Button,
   Container,
+  Card,
+  Flex,
   Heading,
   Spinner,
   Text,
@@ -34,6 +36,12 @@ export default function GetStartPage({ getStart }: GetStartPageProps) {
 
   return (
     <Container
+    <Card.Root
+      mx="auto"
+      mt={10}
+      p={6}
+      height="475px"
+      width="500px"
       className="startGame"
       display="flex"
       alignItems="center"
@@ -66,5 +74,39 @@ purple">
         </Box>
       )}
     </Container>
+      <Card.Title mb={50} mt={100}>
+        Игра на память
+      </Card.Title>
+      {timer === null ? (
+        <Card.Body className="start-content" mb={50}>
+          <Card.Description fontSize="m" as="u">
+            Найди все пары одинаковых карточек как можно быстрее! Важно, чтобы
+            каждая карта ассоциировалась с ярким и необычным образом, а образы
+            сочетались с техникой «Локи» — ментальной картой мест. Это помогает
+            быстро запомнить нужные карты и их комбинации.
+          </Card.Description>
+          <br />
+          <Card.Footer justifyContent="center">
+            <Button
+              mt={110}
+              color="white"
+              bg={'green'}
+              onClick={() => setTimer(3)}>
+              Начать игру
+            </Button>
+          </Card.Footer>
+        </Card.Body>
+      ) : (
+        <Card.Body className="start-content" mb={50}>
+          <Card.Description fontSize="m" as="u" mb={50}>
+            Игра начнется через {timer}...
+          </Card.Description>
+          <Card.Footer justifyContent="center">
+            <Spinner color="colorPalette.600" />
+            <Text color="colorPalette.600">Loading...</Text>
+          </Card.Footer>
+        </Card.Body>
+      )}
+    </Card.Root>
   )
 }

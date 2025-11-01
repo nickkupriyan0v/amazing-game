@@ -10,4 +10,13 @@ export const Screen = () => {
       <GamePage />
     )}
   </>
+  return (
+    <>
+      {!getStart ? (
+        <GetStartPage getStart={() => setGetStart(true)} />
+      ) : (
+        <GamePage />
+      )}
+    </>
+  )
 }
