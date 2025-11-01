@@ -5,6 +5,7 @@ import { ROUTES } from '../../constants/routes'
 import {
   Box,
   Button,
+  Container,
   Card,
   Flex,
   Heading,
@@ -34,6 +35,7 @@ export default function GetStartPage({ getStart }: GetStartPageProps) {
   }, [timer])
 
   return (
+    <Container
     <Card.Root
       mx="auto"
       mt={10}
@@ -44,6 +46,34 @@ export default function GetStartPage({ getStart }: GetStartPageProps) {
       display="flex"
       alignItems="center"
       justifyContent="center">
+      {timer === null ? (
+        <Box className="start-content">
+          <Heading
+            color="
+purple">
+            Игра на память
+          </Heading>
+          <Text fontSize="m" as="u">
+            Найди все пары одинаковых карточек как можно быстрее!
+          </Text>
+          <br />
+          <Button
+            color="white"
+            bg={'green'}
+            margin-top={10}
+            onClick={() => setTimer(3)}>
+            Начать игру
+          </Button>
+        </Box>
+      ) : (
+        <Box className="count-down">
+          <Heading className="game-countdown">
+            Игра начнется через {timer}...
+          </Heading>
+          <Spinner color="red.500" />
+        </Box>
+      )}
+    </Container>
       <Card.Title mb={50} mt={100}>
         Игра на память
       </Card.Title>
