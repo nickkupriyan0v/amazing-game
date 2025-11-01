@@ -30,7 +30,6 @@ export const useGame = (config = SETTINGS) => {
   const reset = useCallback(() => {
     resetBoard()
     resetGame()
-    resetTimer()
   }, [resetBoard, resetGame, resetTimer])
 
   const canvasSize = {
