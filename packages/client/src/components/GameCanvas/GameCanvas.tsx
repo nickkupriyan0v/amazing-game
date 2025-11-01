@@ -8,7 +8,7 @@ type GameCanvasProps = {
   matched: Card['id'][]
   onCardClick: (id: Card['id']) => void
   canvasSize: CanvasSize
-  startTimer: () => void
+  startTimer: (value: boolean) => void
 }
 
 const GameCanvas = ({
@@ -22,7 +22,7 @@ const GameCanvas = ({
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
-    startTimer()
+    startTimer(true)
     const canvas = canvasRef.current
     if (!canvas) return
 
