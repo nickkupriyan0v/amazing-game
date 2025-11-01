@@ -22,7 +22,7 @@ describe('useGame хук', () => {
   const resetTimer = jest.fn()
 
   beforeEach(() => {
-    jest.clearAllMocks()
+    jest.clearAllMocks() as typeof jest
     ;(useBoard as jest.Mock)
       .mockReturnValue({
         cards: mockCards,
