@@ -1,11 +1,11 @@
 import React from 'react'
 import RoutesConfig from './routesConfig'
-import Header from './components/Header'
+// import Header from './components/Header'
 
 const App = () => {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <RoutesConfig />
     </>
   )
