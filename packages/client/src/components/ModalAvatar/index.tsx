@@ -5,8 +5,17 @@ import { AvatarModalRequest } from './request'
 interface FormValues {
   avatar: FileList
 }
+interface IModalAvatarProps {
+  isVisible: boolean
+  onClose: () => void
+  onAvatarUpdate: (avatarUrl: string) => void
+}
 
-const ModalAvatar = ({ isVisible, onClose, onAvatarUpdate }) => {
+const ModalAvatar = ({
+  isVisible,
+  onClose,
+  onAvatarUpdate,
+}: IModalAvatarProps) => {
   const {
     register,
     handleSubmit,

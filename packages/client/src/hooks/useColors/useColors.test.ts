@@ -1,5 +1,4 @@
-import { renderHook } from '@testing-library/react'
-import { act } from 'react'
+import { renderHook, act } from '@testing-library/react'
 import { useColors } from './useColors'
 import { CARD_COLORS } from '../../constants/game'
 

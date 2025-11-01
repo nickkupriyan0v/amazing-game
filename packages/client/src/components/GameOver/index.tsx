@@ -4,7 +4,10 @@ import { ROUTES } from '../../constants/routes'
 import { useRef } from 'react'
 import { useKeyClick } from '../../constants/hotkey'
 
-const GameOver = ({ reset }) => {
+interface IGameOver {
+  reset: () => void
+}
+const GameOver = ({ reset }: IGameOver) => {
   const buttonRef = useRef<HTMLButtonElement>(null)
 
   useKeyClick(buttonRef, 'Enter')
