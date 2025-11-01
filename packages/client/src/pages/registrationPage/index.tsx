@@ -30,7 +30,7 @@ const RegistrationPage = () => {
       display="flex"
       alignItems="center"
       justifyContent="center"
-      marginTop="-10%">
+      marginTop="10%">
       <form onSubmit={onSubmit}>
         <Stack gap="4" align="flex-start" maxW="sm">
           <Field.Root invalid={!!errors.first_name}>
