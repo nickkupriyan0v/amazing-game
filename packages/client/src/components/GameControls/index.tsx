@@ -1,4 +1,5 @@
 import { Button } from '@chakra-ui/react'
+import GameOver from '../GameOver'
 
 type GameControlsProps = {
   reset: () => void
@@ -9,9 +10,13 @@ type GameControlsProps = {
 const GameControls = ({ reset, isGameComplete, count }: GameControlsProps) => {
   return (
     <>
-      <Button onClick={reset}>Новая игра</Button>
-      {isGameComplete && (
-        <h2>Поздравляем! Вы прошли игру за {count} ходов(а)! </h2>
+      {isGameComplete ? (
+        <>
+          <GameOver reset={reset} />
+          <h2>Поздравляем! Вы прошли игру за {count} ходов(а)! </h2>
+        </>
+      ) : (
+        <Button onClick={reset}>Новая игра</Button>
       )}
     </>
   )
