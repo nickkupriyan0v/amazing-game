@@ -2,23 +2,32 @@ import React from 'react'
 import { ROUTES } from '../../constants/routes'
 import { Link } from 'react-router'
 import { Box, Flex } from '@chakra-ui/react'
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
 
 const styleBox = {
   marginTop: '40px',
   width: '150px',
 }
 const Header = () => {
+  const dispatch = useAppDispatch()
+  const user = useAppSelector(state => state.userInfo)
+  const isLoggedIn = !!user?.id
   return (
-    <Flex justify="center" h="100px" marginBottom={'250px'} bg={'#e3eddeff'}>
-      <Box style={styleBox}>
-        <Link to={ROUTES.loginPage}>Логин</Link>
-      </Box>
-      <Box style={styleBox}>
-        <Link to={ROUTES.registrationPage}>Регистрация</Link>
-      </Box>
-      <Box style={styleBox}>
-        <Link to={ROUTES.profilePage}>Профиль</Link>
-      </Box>
+    <Flex justify="center" h="100px" bg={'#e3eddeff'}>
+      {isLoggedIn ? (
+        <Box style={styleBox}>
+          <Link to={ROUTES.profilePage}>{user.login}</Link>
+        </Box>
+      ) : (
+        <>
+          <Box style={styleBox}>
+            <Link to={ROUTES.loginPage}>Авторизация</Link>
+          </Box>
+          <Box style={styleBox}>
+            <Link to={ROUTES.registrationPage}>Регистрация</Link>
+          </Box>
+        </>
+      )}
       <Box style={styleBox}>
         <Link to={ROUTES.mainPage}>Главная</Link>
       </Box>

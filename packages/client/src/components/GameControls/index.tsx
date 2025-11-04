@@ -8,7 +8,6 @@ type GameControlsProps = {
   isGameComplete: boolean
   count: number
   seconds: number
-  timer: (value: boolean) => void
 }
 
 const GameControls = ({
@@ -16,15 +15,9 @@ const GameControls = ({
   isGameComplete,
   count,
   seconds,
-  timer,
 }: GameControlsProps) => {
   const buttonRef = useRef<HTMLButtonElement>(null)
   useKeyClick(buttonRef, 'Enter')
-  useEffect(() => {
-    if (isGameComplete) {
-      timer(false)
-    }
-  }, [timer, isGameComplete])
   return (
     <>
       {isGameComplete ? (

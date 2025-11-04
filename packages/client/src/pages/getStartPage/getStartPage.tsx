@@ -36,7 +36,7 @@ export default function GetStartPage({ getStart }: GetStartPageProps) {
   return (
     <Card.Root
       mx="auto"
-      mt={10}
+      mt={200}
       p={6}
       height="475px"
       width="500px"
@@ -49,16 +49,21 @@ export default function GetStartPage({ getStart }: GetStartPageProps) {
       </Card.Title>
       {timer === null ? (
         <Card.Body className="start-content" mb={50}>
-          <Card.Description fontSize="m" as="u">
-            Найди все пары одинаковых карточек как можно быстрее! Важно, чтобы
-            каждая карта ассоциировалась с ярким и необычным образом, а образы
-            сочетались с техникой «Локи» — ментальной картой мест. Это помогает
-            быстро запомнить нужные карты и их комбинации.
+          <Card.Description>
+            <Text textStyle="lg" mb={10} fontWeight="bold">
+              Найди все пары одинаковых карточек как можно быстрее!{' '}
+            </Text>
+            <strong>Важно:</strong>{' '}
+            <Text fontSize="m" as="u">
+              чтобы каждая карта ассоциировалась с ярким и необычным образом, а
+              образы сочетались с техникой «Локи» — ментальной картой мест. Это
+              помогает быстро запомнить нужные карты и их комбинации.
+            </Text>
           </Card.Description>
           <br />
           <Card.Footer justifyContent="center">
             <Button
-              mt={110}
+              mt={100}
               color="white"
               bg={'green'}
               onClick={() => setTimer(3)}>
