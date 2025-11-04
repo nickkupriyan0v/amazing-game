@@ -33,6 +33,7 @@ describe('useGame хук', () => {
       handleCardClick,
       resetGame,
       isGameComplete,
+      resetTimer,
     })
   })
 
