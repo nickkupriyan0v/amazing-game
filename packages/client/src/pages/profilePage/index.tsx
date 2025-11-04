@@ -27,6 +27,7 @@ interface ProfileData {
   id: string
   first_name: string
   second_name: string
+  display_name: string
   login: string
   email: string
   phone: string
@@ -104,14 +105,16 @@ export class App extends PureComponent<AppProps, AppState> {
     try {
       await axios.post(`${urlAPI}/auth/logout`, {}, { withCredentials: true })
       this.props.setUserInfo({
-        id: '0',
+        id: '',
         first_name: '',
         second_name: '',
+        display_name: '',
         login: '',
         email: '',
         phone: '',
         avatar: '',
       })
+      console.log(this.props.setUserInfo)
       window.location.href = ROUTES.mainPage
     } catch (err) {
       console.log('Ошибка')
@@ -161,6 +164,7 @@ export class App extends PureComponent<AppProps, AppState> {
     const {
       first_name,
       second_name,
+      display_name,
       login,
       email,
       phone,

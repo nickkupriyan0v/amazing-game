@@ -23,7 +23,7 @@ const LoginPage = () => {
 
     loginRequest.signIn(data).then(result => {
       if (result.success) {
-        navigate(ROUTES.mainPage)
+        navigate(ROUTES.profilePage)
       } else {
         setError('password', {
           type: 'server',

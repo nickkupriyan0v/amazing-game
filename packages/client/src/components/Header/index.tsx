@@ -9,14 +9,13 @@ const styleBox = {
   width: '150px',
 }
 const Header = () => {
-  const dispatch = useAppDispatch()
   const user = useAppSelector(state => state.userInfo)
   const isLoggedIn = !!user?.id
   return (
     <Flex justify="center" h="100px" bg={'#e3eddeff'}>
       {isLoggedIn ? (
         <Box style={styleBox}>
-          <Link to={ROUTES.profilePage}>{user.login}</Link>
+          <Link to={ROUTES.profilePage}>Профиль</Link>
         </Box>
       ) : (
         <>
