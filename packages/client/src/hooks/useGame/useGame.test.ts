@@ -18,7 +18,7 @@ describe('useGame хук', () => {
   const resetGame = jest.fn()
   const handleCardClick = jest.fn()
   const isGameComplete = jest.fn()
-
+  const resetTimer = jest.fn()
   beforeEach(() => {
     jest.clearAllMocks() as typeof jest
     ;(useBoard as jest.Mock).mockReturnValue({

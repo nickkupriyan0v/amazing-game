@@ -1,10 +1,9 @@
 import { Button, Container, Field, Input, Stack } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
-import { validations } from './validation'
-import { urlAPI } from '../../constants/api'
 import { useNavigate } from 'react-router'
-import axios, { AxiosError } from 'axios'
 import { ROUTES } from '../../constants/routes'
+import { validations } from './validation'
+
 interface FormValues {
   login: string
   password: string
@@ -15,37 +14,16 @@ interface FormValues {
 }
 
 const RegistrationPage = () => {
-  const navigate = useNavigate()
-
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<FormValues>()
 
-  const signUpPost = async (data: FormValues) => {
-    return axios
-      .post(urlAPI + '/auth/signup', data, { withCredentials: true })
-      .then(response => {
-        navigate(ROUTES.mainPage)
-        return {
-          success: response.status === 200,
-          user: response.data,
-        }
-      })
-      .catch(error => {
-        const axiosError = error as AxiosError<{ reason?: string }>
-        return {
-          success: false,
-          error: axiosError.response?.data?.reason || axiosError.message,
-          errorType: axiosError.response?.status,
-        }
-      })
-  }
-
-  const onSubmit = handleSubmit(async (values: FormValues) => {
-    await signUpPost(values)
+  const onSubmit = handleSubmit(() => {
+    navigate(ROUTES.mainPage)
   })
+  const navigate = useNavigate()
   return (
     <Container
       maxW="container.md"
@@ -159,4 +137,5 @@ const RegistrationPage = () => {
     </Container>
   )
 }
+
 export default RegistrationPage

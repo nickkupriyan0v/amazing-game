@@ -4,3 +4,15 @@
   align-items: center;
   gap: 8px;
 }
+
+.gameBoard.open {
+  padding-top: 150px;
+}
+
+.gameBoard_header {
+  display: flex;
+  max-width: 450px;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
