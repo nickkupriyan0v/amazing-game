@@ -9,7 +9,7 @@ const styleBox = {
 }
 const Header = () => {
   return (
-    <Flex justify="center" h="100px" marginBottom={'250px'} bg={'#e3eddeff'}>
+    <Flex justify="center" h="100px" marginBottom={'50px'} bg={'#e3eddeff'}>
       <Box style={styleBox}>
         <Link to={ROUTES.loginPage}>Логин</Link>
       </Box>
