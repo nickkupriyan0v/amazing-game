@@ -1,10 +1,9 @@
 import { Button, Container, Field, Input, Stack } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
-import { validations } from './validation'
-import { urlAPI } from '../../constants/api'
 import { useNavigate } from 'react-router'
-import axios, { AxiosError } from 'axios'
 import { ROUTES } from '../../constants/routes'
+import { validations } from './validation'
+
 interface FormValues {
   login: string
   password: string
@@ -15,8 +14,6 @@ interface FormValues {
 }
 
 const RegistrationPage = () => {
-  const navigate = useNavigate()
-
   const {
     register,
     handleSubmit,
@@ -45,7 +42,10 @@ const RegistrationPage = () => {
 
   const onSubmit = handleSubmit(async (values: FormValues) => {
     await signUpPost(values)
+  const onSubmit = handleSubmit(() => {
+    navigate(ROUTES.mainPage)
   })
+  const navigate = useNavigate()
   return (
     <Container
       maxW="container.md"
@@ -159,4 +159,5 @@ const RegistrationPage = () => {
     </Container>
   )
 }
+
 export default RegistrationPage

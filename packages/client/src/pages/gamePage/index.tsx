@@ -13,6 +13,7 @@ const GamePage = () => {
   const [isFullBox, setFullBox] = useState(false)
   const toggleFullscreen = async () => {
     if (!document.fullscreenElement) {
+      // Входим в fullscreen
       setFullBox(true)
       await boxRef.current?.requestFullscreen()
     } else {
@@ -85,6 +86,7 @@ const GamePage = () => {
           canvasSize={{ ...canvasSize, ...SETTINGS }}
         />
         <GameControls
+          timer={setTimerRunning}
           seconds={seconds}
           reset={reset}
           count={count}
