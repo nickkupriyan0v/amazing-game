@@ -27,6 +27,17 @@ const Header = () => {
           </Box>
         </>
       )}
+=======
+    <Flex justify="center" h="100px" marginBottom={'50px'} bg={'#e3eddeff'}>
+      <Box style={styleBox}>
+        <Link to={ROUTES.loginPage}>Логин</Link>
+      </Box>
+      <Box style={styleBox}>
+        <Link to={ROUTES.registrationPage}>Регистрация</Link>
+      </Box>
+      <Box style={styleBox}>
+        <Link to={ROUTES.profilePage}>Профиль</Link>
+      </Box>
       <Box style={styleBox}>
         <Link to={ROUTES.mainPage}>Главная</Link>
       </Box>
