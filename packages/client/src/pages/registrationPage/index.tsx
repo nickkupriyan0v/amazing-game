@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router'
 import { ROUTES } from '../../constants/routes'
 import { validations } from './validation'
+import axios, { AxiosError } from 'axios'
+import { urlAPI } from '../../constants/api'
 
 interface FormValues {
   login: string
@@ -19,7 +21,7 @@ const RegistrationPage = () => {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<FormValues>()
-
+  const navigate = useNavigate()
   const signUpPost = async (data: FormValues) => {
     return axios
       .post(urlAPI + '/auth/signup', data, { withCredentials: true })
@@ -42,10 +44,8 @@ const RegistrationPage = () => {
 
   const onSubmit = handleSubmit(async (values: FormValues) => {
     await signUpPost(values)
-  const onSubmit = handleSubmit(() => {
     navigate(ROUTES.mainPage)
   })
-  const navigate = useNavigate()
   return (
     <Container
       maxW="container.md"
