@@ -151,7 +151,7 @@ const RegistrationPage = () => {
             <Field.ErrorText>{errors.phone?.message}</Field.ErrorText>
           </Field.Root>
 
-          <Button type="submit" loading={isSubmitting}>
+          <Button type="submit" loading={isSubmitting} bg={'blue.600'}>
             Зарегистрироваться
           </Button>
         </Stack>

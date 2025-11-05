@@ -75,20 +75,6 @@ const GamePage = () => {
       <Title
         text={recordValue === 0 ? '' : `Ваш рекорд: ${recordValue} ходов`}
       />
-      <GameCanvasMemo
-        startTimer={startTimer}
-        cards={cards}
-        flipped={flipped}
-        matched={matched}
-        onCardClick={handleCardClick}
-        canvasSize={{ ...canvasSize, ...SETTINGS }}
-      />
-      <GameControls
-        seconds={seconds}
-        reset={reset}
-        count={count}
-        isGameComplete={isGameComplete}
-      />
       <div className={`gameBoard ${isFullBox ? 'open' : ''}`} ref={boxRef}>
         <GameCanvasMemo
           startTimer={startTimer}

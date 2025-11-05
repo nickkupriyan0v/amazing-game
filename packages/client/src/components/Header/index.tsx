@@ -2,7 +2,7 @@ import React from 'react'
 import { ROUTES } from '../../constants/routes'
 import { Link } from 'react-router'
 import { Box, Flex } from '@chakra-ui/react'
-import { useAppDispatch, useAppSelector } from '../../store/hooks'
+import { useAppSelector } from '../../store/hooks'
 
 const styleBox = {
   marginTop: '40px',

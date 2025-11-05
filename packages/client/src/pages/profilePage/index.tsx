@@ -182,7 +182,8 @@ export class App extends PureComponent<AppProps, AppState> {
           flexDirection="column"
           alignItems="center"
           justifyContent="center"
-          boxShadow="md">
+          boxShadow="md"
+          mt="200px">
           <Card.Body
             display="flex"
             gap="5px"
