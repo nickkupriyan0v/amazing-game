@@ -1,5 +1,4 @@
-import { renderHook } from '@testing-library/react'
-import { act } from 'react'
+import { renderHook, act } from '@testing-library/react'
 import { useGame } from './useGame'
 
 jest.mock('../useBoard/useBoard')
@@ -19,9 +18,9 @@ describe('useGame хук', () => {
   const resetGame = jest.fn()
   const handleCardClick = jest.fn()
   const isGameComplete = jest.fn()
-
+  const resetTimer = jest.fn()
   beforeEach(() => {
-    jest.clearAllMocks()
+    jest.clearAllMocks() as typeof jest
     ;(useBoard as jest.Mock).mockReturnValue({
       cards: mockCards,
       resetBoard,
@@ -34,6 +33,7 @@ describe('useGame хук', () => {
       handleCardClick,
       resetGame,
       isGameComplete,
+      resetTimer,
     })
   })
 

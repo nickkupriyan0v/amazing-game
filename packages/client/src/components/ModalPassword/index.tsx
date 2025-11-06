@@ -6,8 +6,11 @@ interface FormValues {
   oldPassword: string
   newPassword: string
 }
-
-const ModalPassword = ({ isVisible, onClose }) => {
+interface IModalAvatarProps {
+  isVisible: boolean
+  onClose: () => void
+}
+const ModalPassword = ({ isVisible, onClose }: IModalAvatarProps) => {
   const {
     register,
     handleSubmit,

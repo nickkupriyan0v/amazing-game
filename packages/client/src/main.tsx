@@ -7,19 +7,22 @@ import { ChakraProvider, defaultSystem } from '@chakra-ui/react'
 import { store } from './store/store'
 import { Provider } from 'react-redux'
 import useServiceWorker from './hooks/useServiceWorker/useServiceWorker'
+import ErrorBoundary from './errorHandling'
 
 const Root = () => {
   useServiceWorker()
 
   return (
     <React.StrictMode>
-      <Provider store={store}>
-        <ChakraProvider value={defaultSystem}>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </ChakraProvider>
-      </Provider>
+      <ErrorBoundary>
+        <Provider store={store}>
+          <ChakraProvider value={defaultSystem}>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </ChakraProvider>
+        </Provider>
+      </ErrorBoundary>
     </React.StrictMode>
   )
 }

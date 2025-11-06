@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import getLeaderboard, { Leader } from './request'
 import './style.css'
-import { Table, Box, Heading } from '@chakra-ui/react'
+import { Table, Box, Heading, Spinner } from '@chakra-ui/react'
 const LeaderBoardPage = () => {
   const [leaders, setLeaders] = useState<Leader[]>([])
   const [loading, setLoading] = useState(true)
@@ -17,7 +17,22 @@ const LeaderBoardPage = () => {
   }, [])
 
   if (loading) {
-    return <p className="leaderboard__loading">Загрузка...</p>
+    return (
+      <Box
+        maxW="800px"
+        mx="auto"
+        mt={10}
+        p={6}
+        bg="white"
+        borderRadius="xl"
+        boxShadow="md"
+        textAlign="center">
+        <Heading className="leaderboard__loading">
+          Загрузка... <br />
+          <Spinner color="blue.500" size="xl" />
+        </Heading>
+      </Box>
+    )
   }
 
   return (

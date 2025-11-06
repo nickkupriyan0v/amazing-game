@@ -3,7 +3,7 @@ type TitleProps = {
 }
 
 const Title = ({ text }: TitleProps) => {
-  return <h1>{text}</h1>
+  return <h1>Memory</h1>
 }
 
 export default Title

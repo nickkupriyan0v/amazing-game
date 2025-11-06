@@ -1,4 +1,15 @@
 {
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "declaration": true,
+    "emitDeclarationOnly": false,
+    "strict": true,
+    "esModuleInterop": true,
+    "module": "CommonJS",
+    "target": "ESNext"
+  },
   "extends": "./tsconfig",
-  "exclude": ["**/*.test.ts", "**/*.mock.ts", "**/__test__"]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist","**/*.test.ts", "**/*.mock.ts", "**/__test__"]
 }

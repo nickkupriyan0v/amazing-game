@@ -1,18 +1,41 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent, useState } from 'react'
 import { urlAPI } from '../../constants/api'
-import { Container, Image, Button, Text, Spinner } from '@chakra-ui/react'
+import {
+  Container,
+  Image,
+  Button,
+  Text,
+  Spinner,
+  Card,
+  Avatar,
+  Heading,
+  Flex,
+  Grid,
+  GridItem,
+  Box,
+} from '@chakra-ui/react'
 import ModalAvatar from '../../components/ModalAvatar'
 import ModalPassword from '../../components/ModalPassword'
+import axios from 'axios'
+import { ROUTES } from '../../constants/routes'
+import { AppDispatch, RootState } from '../../store/store'
+import { userInfo } from '../../features/slices/sliceUser'
+import { connect } from 'react-redux'
 
 interface ProfileData {
+  id: string
   first_name: string
   second_name: string
+  display_name: string
   login: string
   email: string
   phone: string
   avatar: string
 }
-
+interface AppProps {
+  user: ProfileData | null
+  setUserInfo: (data: ProfileData) => void
+}
 interface AppState {
   data: ProfileData | null
   isLoading: boolean
@@ -20,8 +43,7 @@ interface AppState {
   isAvatarModalVisible: boolean
   isPasswordModalVisible: boolean
 }
-
-export default class App extends PureComponent<unknown, AppState> {
+export class App extends PureComponent<AppProps, AppState> {
   state: AppState = {
     data: null,
     isLoading: true,
@@ -37,6 +59,7 @@ export default class App extends PureComponent<unknown, AppState> {
     })
       .then(response => response.json())
       .then(data => {
+        this.props.setUserInfo(data)
         this.setState({
           data,
           isLoading: false,
@@ -75,6 +98,26 @@ export default class App extends PureComponent<unknown, AppState> {
         : null,
       isAvatarModalVisible: false,
     }))
+  }
+
+  logout = async () => {
+    try {
+      await axios.post(`${urlAPI}/auth/logout`, {}, { withCredentials: true })
+      this.props.setUserInfo({
+        id: '',
+        first_name: '',
+        second_name: '',
+        display_name: '',
+        login: '',
+        email: '',
+        phone: '',
+        avatar: '',
+      })
+      console.log(this.props.setUserInfo)
+      window.location.href = ROUTES.mainPage
+    } catch (err) {
+      console.log('Ошибка')
+    }
   }
 
   render() {
@@ -120,46 +163,91 @@ export default class App extends PureComponent<unknown, AppState> {
     const {
       first_name,
       second_name,
+      display_name,
       login,
       email,
       phone,
       avatar,
     }: ProfileData = data
     const avatarSource = `${urlAPI}/resources/${avatar}`
-
     return (
-      <Container
-        maxW="container.md"
-        display="flex"
-        gap="10px"
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center">
-        <Container
+      <Flex justify="center">
+        <Card.Root
+          bg={'white.100'}
+          width="520px"
+          maxW="container.md"
           display="flex"
-          gap="5px"
+          gap="10px"
           flexDirection="column"
           alignItems="center"
-          justifyContent="center">
-          <Image src={avatarSource} width="100px" height="100px" />
-          <Button onClick={this.changeAvatar}>Change avatar</Button>
-        </Container>
-        <Text>Имя: {first_name}</Text>
-        <Text>Фамилия: {second_name}</Text>
-        <Text>Логин: {login}</Text>
-        <Text>Почта: {email}</Text>
-        <Text>Телефон: {phone}</Text>
-        <Button onClick={this.changePassword}>Change password</Button>
-        <ModalAvatar
-          isVisible={this.state.isAvatarModalVisible}
-          onClose={this.onCloseModal}
-          onAvatarUpdate={this.handleAvatarUpdate}
-        />
-        <ModalPassword
-          isVisible={this.state.isPasswordModalVisible}
-          onClose={this.onCloseModal}
-        />
-      </Container>
+          justifyContent="center"
+          boxShadow="md"
+          mt="200px">
+          <Card.Body
+            display="flex"
+            gap="5px"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center">
+            <Image
+              src={avatarSource}
+              onClick={this.changeAvatar}
+              boxSize="150px"
+              borderRadius="full"
+              fit="cover"
+              bg={'gray.100'}
+              border="solid 1px"
+            />
+            <Heading>
+              {first_name} {second_name}
+            </Heading>
+          </Card.Body>
+          <Text>Логин: {login}</Text>
+          <Text>Почта: {email}</Text>
+          <Text>Телефон: {phone}</Text>
+          <Card.Footer justifyContent="flex-end">
+            <Grid templateColumns="repeat(2, 1fr)" gap={4} width="100%">
+              <Button
+                onClick={this.changePassword}
+                bg={'green.500'}
+                width={190}>
+                Сменить пароль
+              </Button>
+              <Button onClick={this.changeAvatar} bg={'blue.600'} width={192}>
+                Сменить аватарку
+              </Button>
+              <GridItem colSpan={2}>
+                <Button
+                  onClick={this.logout}
+                  marginBottom={'40px'}
+                  bg={'red'}
+                  width={400}>
+                  Выйти
+                </Button>
+              </GridItem>
+            </Grid>
+          </Card.Footer>
+
+          <ModalAvatar
+            isVisible={this.state.isAvatarModalVisible}
+            onClose={this.onCloseModal}
+            onAvatarUpdate={this.handleAvatarUpdate}
+          />
+          <ModalPassword
+            isVisible={this.state.isPasswordModalVisible}
+            onClose={this.onCloseModal}
+          />
+        </Card.Root>
+      </Flex>
     )
   }
 }
+
+const mapStateToProps = (state: RootState) => ({
+  user: state.userInfo,
+})
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
+  setUserInfo: (data: ProfileData) => dispatch(userInfo(data)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
