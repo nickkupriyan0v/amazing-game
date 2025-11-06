@@ -24,14 +24,14 @@ const GameOver = ({ reset }: IGameOver) => {
         ref={buttonRef}
         size="xl"
         onClick={reset}
-        bg={'green'}>
+        bg={'green'}
+        color={'#fffdfdff'}>
         Повторить
       </Button>
-      <Link to={ROUTES.mainPage}>
-        <Button variant="ghost" size="xl">
-          Вернуться в главное меню
-        </Button>
-      </Link>
+
+      <Button variant="ghost" size="xl">
+        Вернуться в главное меню
+      </Button>
     </Container>
   )
 }

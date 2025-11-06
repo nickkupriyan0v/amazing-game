@@ -23,9 +23,9 @@ const GameControls = ({
       {isGameComplete ? (
         <>
           <GameOver reset={reset} />
-          <h2>
+          <Heading>
             Поздравляем! Вы прошли игру за {count} ходов(а) и {seconds} секунд!{' '}
-          </h2>
+          </Heading>
         </>
       ) : (
         <>

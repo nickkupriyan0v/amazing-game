@@ -18,7 +18,6 @@ import ModalAvatar from '../../components/ModalAvatar'
 import ModalPassword from '../../components/ModalPassword'
 import axios from 'axios'
 import { ROUTES } from '../../constants/routes'
-import { useAppDispatch } from '../../store/hooks'
 import { AppDispatch, RootState } from '../../store/store'
 import { userInfo } from '../../features/slices/sliceUser'
 import { connect } from 'react-redux'
@@ -200,7 +199,7 @@ export class App extends PureComponent<AppProps, AppState> {
               border="solid 1px"
             />
             <Heading>
-              Имя: {first_name} {second_name}
+              {first_name} {second_name}
             </Heading>
           </Card.Body>
           <Text>Логин: {login}</Text>

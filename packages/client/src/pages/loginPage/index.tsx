@@ -62,7 +62,8 @@ const LoginPage = () => {
             type="submit"
             loading={isSubmitting}
             loadingText="Вход..."
-            bg={'blue.600'}>
+            bg={'blue.600'}
+            width={350}>
             Войти
           </Button>
         </Stack>

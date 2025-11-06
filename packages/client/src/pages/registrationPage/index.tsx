@@ -44,7 +44,7 @@ const RegistrationPage = () => {
 
   const onSubmit = handleSubmit(async (values: FormValues) => {
     await signUpPost(values)
-    navigate(ROUTES.mainPage)
+    navigate(ROUTES.profilePage)
   })
   return (
     <Container
@@ -151,7 +151,7 @@ const RegistrationPage = () => {
             <Field.ErrorText>{errors.phone?.message}</Field.ErrorText>
           </Field.Root>
 
-          <Button type="submit" loading={isSubmitting} bg={'blue.600'}>
+          <Button type="submit" loading={isSubmitting} bg={'blue.600'} w={200}>
             Зарегистрироваться
           </Button>
         </Stack>

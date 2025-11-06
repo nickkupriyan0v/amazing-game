@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import './getStartPage.css'
 import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '../../constants/routes'
 import {
   Box,
   Button,
   Card,
-  Flex,
   Heading,
   Spinner,
   Text,
+  VStack,
+  Flex,
 } from '@chakra-ui/react'
 
 interface GetStartPageProps {
@@ -34,54 +34,74 @@ export default function GetStartPage({ getStart }: GetStartPageProps) {
   }, [timer])
 
   return (
-    <Card.Root
-      mx="auto"
-      mt={200}
-      p={6}
-      height="475px"
-      width="500px"
-      className="startGame"
-      display="flex"
-      alignItems="center"
-      justifyContent="center">
-      <Card.Title mb={50} mt={100}>
-        Игра на память
-      </Card.Title>
-      {timer === null ? (
-        <Card.Body className="start-content" mb={50}>
-          <Card.Description>
-            <Text textStyle="lg" mb={10} fontWeight="bold">
-              Найди все пары одинаковых карточек как можно быстрее!{' '}
+    <Flex
+      minH="100vh"
+      align="center"
+      justify="center"
+      bgGradient="linear(to-br, teal.50, teal.100)"
+      px={4}>
+      <Box
+        bg="white"
+        boxShadow="2xl"
+        borderRadius="2xl"
+        p={10}
+        w="500px"
+        textAlign="center"
+        transition="transform 0.3s ease"
+        _hover={{ transform: 'scale(1.02)' }}>
+        <Heading
+          size="xl"
+          mb={6}
+          color="teal.600"
+          letterSpacing="wide"
+          fontWeight="extrabold">
+          Игра на память
+        </Heading>
+
+        {timer === null ? (
+          <VStack>
+            <Text fontSize="lg" color="gray.700" fontWeight="medium">
+              Найди все пары одинаковых карточек как можно быстрее!
             </Text>
-            <strong>Важно:</strong>{' '}
-            <Text fontSize="m" as="u">
-              чтобы каждая карта ассоциировалась с ярким и необычным образом, а
-              образы сочетались с техникой «Локи» — ментальной картой мест. Это
-              помогает быстро запомнить нужные карты и их комбинации.
-            </Text>
-          </Card.Description>
-          <br />
-          <Card.Footer justifyContent="center">
+            <Box
+              fontSize="md"
+              color="gray.600"
+              bg="gray.50"
+              p={4}
+              borderRadius="md"
+              textAlign="left">
+              <Text mb={2}>
+                <strong>Важно:</strong> чтобы каждая карта ассоциировалась с
+                ярким образом, попробуй связать её с техникой <b>«Локи»</b> —
+                ментальной картой мест. Это поможет запоминать пары быстрее.
+              </Text>
+            </Box>
+
             <Button
-              mt={100}
+              mt={8}
+              size="lg"
               color="white"
-              bg={'green'}
-              onClick={() => setTimer(3)}>
+              bg="teal.500"
+              _hover={{ bg: 'teal.600' }}
+              onClick={() => setTimer(3)}
+              w="200px">
               Начать игру
             </Button>
-          </Card.Footer>
-        </Card.Body>
-      ) : (
-        <Card.Body className="start-content" mb={50}>
-          <Card.Description fontSize="m" as="u" mb={50}>
-            Игра начнется через {timer}...
-          </Card.Description>
-          <Card.Footer justifyContent="center">
-            <Spinner color="colorPalette.600" />
-            <Text color="colorPalette.600">Loading...</Text>
-          </Card.Footer>
-        </Card.Body>
-      )}
-    </Card.Root>
+          </VStack>
+        ) : (
+          <VStack>
+            <Text fontSize="xl" fontWeight="semibold" color="teal.600">
+              Игра начнётся через {timer}...
+            </Text>
+            <Flex align="center" justify="center" gap={3}>
+              <Spinner size="lg" color="teal.500" />
+              <Text color="gray.600" fontWeight="medium">
+                Подготовка...
+              </Text>
+            </Flex>
+          </VStack>
+        )}
+      </Box>
+    </Flex>
   )
 }

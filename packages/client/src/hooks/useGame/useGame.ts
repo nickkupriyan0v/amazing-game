@@ -41,7 +41,6 @@ export const useGame = (config = SETTINGS) => {
   return {
     seconds,
     startTimer,
-    setTimerRunning,
     cards,
     flipped,
     matched,
