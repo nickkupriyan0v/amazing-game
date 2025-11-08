@@ -24,13 +24,5 @@
     "@types/react-router-dom": "^5.3.3",
     "lerna": "^5.4.3"
   },
-  "dependencies": {
-    "@chakra-ui/core": "^0.8.0",
-    "@chakra-ui/react": "^3.27.1",
-    "@emotion/react": "^11.14.0",
-    "@reduxjs/toolkit": "^2.9.2",
-    "axios": "^1.12.2",
-    "react-hook-form": "^7.65.0",
-    "react-router-dom": "^7.9.4"
-  }
+  "dependencies": {}
 }
