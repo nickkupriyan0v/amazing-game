@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router'
 import { ROUTES } from '../../constants/routes'
 import { validations } from './validation'
+import axios, { AxiosError } from 'axios'
+import { urlAPI } from '../../constants/api'
 
 interface FormValues {
   login: string
@@ -19,11 +21,31 @@ const RegistrationPage = () => {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<FormValues>()
-
-  const onSubmit = handleSubmit(() => {
-    navigate(ROUTES.mainPage)
-  })
   const navigate = useNavigate()
+  const signUpPost = async (data: FormValues) => {
+    return axios
+      .post(urlAPI + '/auth/signup', data, { withCredentials: true })
+      .then(response => {
+        navigate(ROUTES.profilePage)
+        return {
+          success: response.status === 200,
+          user: response.data,
+        }
+      })
+      .catch(error => {
+        const axiosError = error as AxiosError<{ reason?: string }>
+        return {
+          success: false,
+          error: axiosError.response?.data?.reason || axiosError.message,
+          errorType: axiosError.response?.status,
+        }
+      })
+  }
+
+  const onSubmit = handleSubmit(async (values: FormValues) => {
+    await signUpPost(values)
+    navigate(ROUTES.profilePage)
+  })
   return (
     <Container
       maxW="container.md"
@@ -129,7 +151,7 @@ const RegistrationPage = () => {
             <Field.ErrorText>{errors.phone?.message}</Field.ErrorText>
           </Field.Root>
 
-          <Button type="submit" loading={isSubmitting}>
+          <Button type="submit" loading={isSubmitting} bg={'blue.600'} w={200}>
             Зарегистрироваться
           </Button>
         </Stack>

@@ -13,7 +13,6 @@ const GamePage = () => {
   const [isFullBox, setFullBox] = useState(false)
   const toggleFullscreen = async () => {
     if (!document.fullscreenElement) {
-      // Входим в fullscreen
       setFullBox(true)
       await boxRef.current?.requestFullscreen()
     } else {
@@ -26,7 +25,6 @@ const GamePage = () => {
   const {
     seconds,
     startTimer,
-    setTimerRunning,
     cards,
     flipped,
     matched,
@@ -54,7 +52,6 @@ const GamePage = () => {
   useEffect(() => {
     if (isGameComplete && count > 0) {
       dispatch(record(count))
-      setTimerRunning(false)
     }
   }, [isGameComplete, count, dispatch])
 
@@ -88,7 +85,6 @@ const GamePage = () => {
           canvasSize={{ ...canvasSize, ...SETTINGS }}
         />
         <GameControls
-          timer={setTimerRunning}
           seconds={seconds}
           reset={reset}
           count={count}

@@ -30,6 +30,7 @@ export const useGame = (config = SETTINGS) => {
   const reset = useCallback(() => {
     resetBoard()
     resetGame()
+    resetTimer()
   }, [resetBoard, resetGame, resetTimer])
 
   const canvasSize = {
@@ -40,7 +41,6 @@ export const useGame = (config = SETTINGS) => {
   return {
     seconds,
     startTimer,
-    setTimerRunning,
     cards,
     flipped,
     matched,

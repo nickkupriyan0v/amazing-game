@@ -1,14 +1,9 @@
 import React, { ErrorInfo, ReactNode } from 'react'
 
-// Интерфейс для props
-// Компонент принимает дочерние элементы, которые он будет "оборачивать" и отслеживать ошибки внутри них.
 interface ErrorBoundaryProps {
   children: ReactNode
 }
 
-// Интерфейс для состояния (state)
-// hasError — флаг, что произошла ошибка.
-// error — объект ошибки, если она есть.
 interface ErrorBoundaryState {
   hasError: boolean
   error: Error | null

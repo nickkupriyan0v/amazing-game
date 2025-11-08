@@ -23,7 +23,7 @@ const LoginPage = () => {
 
     loginRequest.signIn(data).then(result => {
       if (result.success) {
-        navigate(ROUTES.mainPage)
+        navigate(ROUTES.profilePage)
       } else {
         setError('password', {
           type: 'server',
@@ -38,7 +38,8 @@ const LoginPage = () => {
       maxW="container.md"
       display="flex"
       alignItems="center"
-      justifyContent="center">
+      justifyContent="center"
+      mt={250}>
       <form onSubmit={onSubmit}>
         <Stack gap="4" align="flex-start" maxW="sm">
           <Field.Root invalid={!!errors.login}>
@@ -57,7 +58,12 @@ const LoginPage = () => {
             <Field.ErrorText>{errors.password?.message}</Field.ErrorText>
           </Field.Root>
 
-          <Button type="submit" loading={isSubmitting} loadingText="Вход...">
+          <Button
+            type="submit"
+            loading={isSubmitting}
+            loadingText="Вход..."
+            bg={'blue.600'}
+            width={350}>
             Войти
           </Button>
         </Stack>
