@@ -13,16 +13,16 @@ export const useGameLogic = (cards: Card[]) => {
       setTimerRunning(true)
     }
   }, [timerRunning])
-  const resetTimer = useCallback(() => {
+  const resetTimer = () => {
     setSeconds(0)
     setTimerRunning(false)
-  }, [])
+  }
 
-  const pauseTimer = useCallback(() => {
+  const pauseTimer = () => {
     if (timerRunning) {
       setTimerRunning(false)
     }
-  }, [timerRunning])
+  }
   useEffect(() => {
     if (!timerRunning) return
     const t = setInterval(() => {

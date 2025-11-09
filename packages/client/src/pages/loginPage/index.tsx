@@ -35,11 +35,11 @@ const LoginPage = () => {
 
   return (
     <Container
+      minH="100vh"
       maxW="container.md"
       display="flex"
       alignItems="center"
-      justifyContent="center"
-      mt={250}>
+      justifyContent="center">
       <form onSubmit={onSubmit}>
         <Stack gap="4" align="flex-start" maxW="sm">
           <Field.Root invalid={!!errors.login}>

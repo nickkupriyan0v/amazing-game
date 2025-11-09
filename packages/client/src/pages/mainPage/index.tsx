@@ -6,7 +6,7 @@ import Statistics from '../../components/mainPage/Statistics'
 import Footer from '../../components/mainPage/Footer'
 import PreFooter from '../../components/mainPage/PreFooter'
 
-export default function Home() {
+const Home = () => {
   return (
     <Box bg="#f8f9fa">
       <Hero />
@@ -18,3 +18,4 @@ export default function Home() {
     </Box>
   )
 }
+export default Home

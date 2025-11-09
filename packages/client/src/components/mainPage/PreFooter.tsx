@@ -1,7 +1,7 @@
 import { Box, Button, Container, Heading, Text, VStack } from '@chakra-ui/react'
 import { Link } from 'react-router'
 
-export default function PreFooter() {
+const PreFooter = () => {
   return (
     <Box
       bg="linear-gradient(135deg, #4ecdc4 0%, #6b5dff 100%)"
@@ -35,3 +35,5 @@ export default function PreFooter() {
     </Box>
   )
 }
+
+export default PreFooter

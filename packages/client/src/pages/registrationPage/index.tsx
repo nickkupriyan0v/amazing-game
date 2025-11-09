@@ -48,11 +48,11 @@ const RegistrationPage = () => {
   })
   return (
     <Container
+      minH="100vh"
       maxW="container.md"
       display="flex"
       alignItems="center"
-      justifyContent="center"
-      marginTop="10%">
+      justifyContent="center">
       <form onSubmit={onSubmit}>
         <Stack gap="4" align="flex-start" maxW="sm">
           <Field.Root invalid={!!errors.first_name}>

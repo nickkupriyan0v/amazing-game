@@ -1,4 +1,4 @@
-import React, { PureComponent, useState } from 'react'
+import React, { PureComponent } from 'react'
 import { urlAPI } from '../../constants/api'
 import {
   Container,
@@ -7,12 +7,10 @@ import {
   Text,
   Spinner,
   Card,
-  Avatar,
   Heading,
   Flex,
   Grid,
   GridItem,
-  Box,
 } from '@chakra-ui/react'
 import ModalAvatar from '../../components/ModalAvatar'
 import ModalPassword from '../../components/ModalPassword'
@@ -23,7 +21,7 @@ import { userInfo } from '../../features/slices/sliceUser'
 import { connect } from 'react-redux'
 
 interface ProfileData {
-  id: string
+  id: number
   first_name: string
   second_name: string
   display_name: string
@@ -104,7 +102,7 @@ export class App extends PureComponent<AppProps, AppState> {
     try {
       await axios.post(`${urlAPI}/auth/logout`, {}, { withCredentials: true })
       this.props.setUserInfo({
-        id: '',
+        id: 0,
         first_name: '',
         second_name: '',
         display_name: '',
@@ -126,6 +124,7 @@ export class App extends PureComponent<AppProps, AppState> {
     if (isLoading) {
       return (
         <Container
+          minH="100vh"
           display="flex"
           justifyContent="center"
           alignItems="center"
@@ -139,6 +138,7 @@ export class App extends PureComponent<AppProps, AppState> {
     if (error) {
       return (
         <Container
+          minH="100vh"
           display="flex"
           justifyContent="center"
           alignItems="center"
@@ -163,7 +163,6 @@ export class App extends PureComponent<AppProps, AppState> {
     const {
       first_name,
       second_name,
-      display_name,
       login,
       email,
       phone,

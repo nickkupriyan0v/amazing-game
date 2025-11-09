@@ -15,24 +15,21 @@ class ErrorBoundary extends React.Component<
 > {
   constructor(props: ErrorBoundaryProps) {
     super(props)
-    // Изначально ошибок нет
     this.state = { hasError: false, error: null }
   }
 
-  // Этот метод вызывается React при ошибке в потомках
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
-    // Возвращаем новое состояние, чтобы показать запасной UI
-    return { hasError: true, error }
+    // Вызывается React при ошибке в потомках
+    return { hasError: true, error } // Возвращаем новое состояние, чтобы показать запасной UI
   }
 
-  // Этот метод срабатывает после того, как ошибка была "поймана"
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    // Можно отправить информацию об ошибке на сервер (логирование, мониторинг)
-    console.error('Ошибка в компоненте:', error, errorInfo)
+    // Срабатывает после того, как ошибка была "поймана"
+    console.error('Ошибка в компоненте:', error, errorInfo) // Можно отправить информацию об ошибке на сервер
   }
 
-  // Отрисовка UI: если есть ошибка — показываем fallback, иначе — детей
   render() {
+    // Отрисовка UI: если есть ошибка — показываем fallback, иначе — детей
     if (this.state.hasError) {
       return (
         <div style={{ color: 'red' }}>

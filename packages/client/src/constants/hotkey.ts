@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-export function useKeyClick(ref: React.RefObject<HTMLElement>, key: string) {
+export const useKeyClick = (ref: React.RefObject<HTMLElement>, key: string) => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === key) {

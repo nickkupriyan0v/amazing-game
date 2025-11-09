@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react'
 import { ROUTES } from '../../constants/routes'
 
-export default function Hero() {
+export const Hero = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
 
   return (
@@ -85,3 +85,4 @@ export default function Hero() {
     </Box>
   )
 }
+export default Hero

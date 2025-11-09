@@ -12,6 +12,7 @@ const NotFoundPage = ({
   const navigate = useNavigate()
   return (
     <Container
+      minH="100vh"
       maxW="container.md"
       display="flex"
       alignItems="center"

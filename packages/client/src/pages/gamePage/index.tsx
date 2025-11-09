@@ -28,7 +28,6 @@ const GamePage = () => {
     cards,
     flipped,
     matched,
-    disabled,
     count,
     handleCardClick,
     reset,
