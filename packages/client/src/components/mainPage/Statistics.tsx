@@ -1,5 +1,5 @@
 import { Box, Container, Text, Heading, Grid } from '@chakra-ui/react'
-export default function Statistics() {
+const Statistics = () => {
   return (
     <Box py={{ base: 16, md: 24 }} bg="white">
       <Container maxW="1200px">
@@ -23,3 +23,4 @@ export default function Statistics() {
     </Box>
   )
 }
+export default Statistics

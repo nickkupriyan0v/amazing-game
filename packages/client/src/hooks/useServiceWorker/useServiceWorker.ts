@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-export default function useServiceWorker() {
+const useServiceWorker = () => {
   useEffect(() => {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker
@@ -17,3 +17,4 @@ export default function useServiceWorker() {
     }
   }, [])
 }
+export default useServiceWorker

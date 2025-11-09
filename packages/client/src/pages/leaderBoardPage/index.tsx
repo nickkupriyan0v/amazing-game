@@ -19,6 +19,7 @@ const LeaderBoardPage = () => {
   if (loading) {
     return (
       <Box
+        minH="100vh"
         maxW="800px"
         mx="auto"
         mt={10}

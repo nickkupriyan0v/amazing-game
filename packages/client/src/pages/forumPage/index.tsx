@@ -6,19 +6,20 @@ import {
   AvatarGroup,
   Box,
   Button,
-  Code,
   Container,
   Heading,
   Stack,
   Text,
 } from '@chakra-ui/react'
+import { useAppSelector } from '../../store/hooks'
 const ForumPage = () => {
-  const user = useState(false)
+  const user = useAppSelector(state => state.userInfo)
+  const isLoggedIn = !!user?.id
   return (
-    <Container className="forum-container">
+    <Container className="forum-container" minH="100vh">
       <Box className="forum-header">
         <Heading>Форум карточной игры «Память»</Heading>
-        {user ? (
+        {isLoggedIn ? (
           <Button className="create-topic-btn">Создать тему</Button>
         ) : (
           <Text className="auth-advise">

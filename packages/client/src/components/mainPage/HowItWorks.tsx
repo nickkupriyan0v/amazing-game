@@ -1,5 +1,5 @@
 import { Box, Container, Text, Heading, Grid } from '@chakra-ui/react'
-export default function HowItWorks() {
+const HowItWorks = () => {
   return (
     <Box py={{ base: 16, md: 24 }} bg="#f8f9fa">
       <Container maxW="1200px">
@@ -72,3 +72,4 @@ export default function HowItWorks() {
     </Box>
   )
 }
+export default HowItWorks

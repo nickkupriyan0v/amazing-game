@@ -4,7 +4,6 @@ import { ROUTES } from '../../constants/routes'
 import {
   Box,
   Button,
-  Card,
   Heading,
   Spinner,
   Text,
@@ -16,7 +15,7 @@ interface GetStartPageProps {
   getStart?: () => void
 }
 
-export default function GetStartPage({ getStart }: GetStartPageProps) {
+const GetStartPage = ({ getStart }: GetStartPageProps) => {
   const [timer, setTimer] = useState<number | null>(null)
   const navigate = useNavigate()
 
@@ -105,3 +104,4 @@ export default function GetStartPage({ getStart }: GetStartPageProps) {
     </Flex>
   )
 }
+export default GetStartPage

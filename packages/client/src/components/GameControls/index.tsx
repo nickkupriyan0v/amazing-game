@@ -1,6 +1,6 @@
 import { Button, Heading } from '@chakra-ui/react'
 import GameOver from '../GameOver'
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { useKeyClick } from '../../constants/hotkey'
 
 type GameControlsProps = {

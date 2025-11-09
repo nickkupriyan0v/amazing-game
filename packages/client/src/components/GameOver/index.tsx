@@ -1,8 +1,8 @@
 import { Button, Container } from '@chakra-ui/react'
-import { Link, useNavigate } from 'react-router'
-import { ROUTES } from '../../constants/routes'
 import { useRef } from 'react'
 import { useKeyClick } from '../../constants/hotkey'
+import { Link } from 'react-router'
+import { ROUTES } from '../../constants/routes'
 
 interface IGameOver {
   reset: () => void
@@ -29,9 +29,11 @@ const GameOver = ({ reset }: IGameOver) => {
         Повторить
       </Button>
 
-      <Button variant="ghost" size="xl">
-        Вернуться в главное меню
-      </Button>
+      <Link to={ROUTES.mainPage}>
+        <Button variant="ghost" size="xl">
+          Вернуться в главное меню
+        </Button>
+      </Link>
     </Container>
   )
 }

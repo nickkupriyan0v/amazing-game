@@ -24,7 +24,6 @@ export const useGame = (config = SETTINGS) => {
     handleCardClick,
     resetGame,
     isGameComplete,
-    setTimerRunning,
   } = useGameLogic(cards)
 
   const reset = useCallback(() => {
