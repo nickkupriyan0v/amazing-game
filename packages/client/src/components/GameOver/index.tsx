@@ -1,8 +1,14 @@
 import { Button, Container } from '@chakra-ui/react'
 import { useNavigate } from 'react-router'
 import { ROUTES } from '../../constants/routes'
+import { useRef } from 'react'
+import { useKeyClick } from '../../constants/hotkey'
 
 const GameOver = ({ reset }) => {
+  const buttonRef = useRef<HTMLButtonElement>(null)
+
+  useKeyClick(buttonRef, 'Enter')
+
   const navigate = useNavigate()
 
   return (
@@ -12,7 +18,12 @@ const GameOver = ({ reset }) => {
       gap="10px"
       alignItems="center"
       justifyContent="center">
-      <Button variant="outline" size="xl" onClick={reset}>
+      <Button
+        variant="outline"
+        ref={buttonRef}
+        size="xl"
+        onClick={reset}
+        bg={'green'}>
         Повторить
       </Button>
       <Button

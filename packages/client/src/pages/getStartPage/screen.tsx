@@ -3,6 +3,13 @@ import GetStartPage from './getStartPage'
 import GamePage from '../gamePage'
 export const Screen = () => {
   const [getStart, setGetStart] = useState<boolean>(false)
+  ;<>
+    {!getStart ? (
+      <GetStartPage getStart={() => setGetStart(true)} />
+    ) : (
+      <GamePage />
+    )}
+  </>
   return (
     <>
       {!getStart ? (
