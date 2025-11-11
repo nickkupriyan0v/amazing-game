@@ -27,6 +27,4 @@ const Root = () => {
   )
 }
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <Root />
-)
+ReactDOM.hydrateRoot(document.getElementById('root') as HTMLElement, <Root />)

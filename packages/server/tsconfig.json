@@ -18,10 +18,11 @@
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
     "importsNotUsedAsValues": "error",
     "lib": ["es2019", "esnext.asynciterable"],
     "types": ["node", "jest"],
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
       "*": ["types/*"]
     },
