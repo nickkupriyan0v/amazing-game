@@ -57,6 +57,32 @@ export class LoginPageRequestClass {
       }
     }
   }
+
+  async getYandexServiceId(redirectUri: string) {
+    const url = `/oauth/yandex/service-id?redirect_uri=${encodeURIComponent(
+      redirectUri
+    )}`
+
+    const response = await axios.get(urlAPI + url, {
+      withCredentials: true,
+    })
+
+    console.log('Yandex ServiceId response:', response.data)
+
+    return response.data
+  }
+
+  async oauthSignIn(code: string, redirectUri: string) {
+    const url = `/oauth/yandex`
+
+    const response = await axios.post(
+      urlAPI + url,
+      { code, redirect_uri: redirectUri },
+      { withCredentials: true }
+    )
+
+    return response.data
+  }
 }
 
 export const LoginPageRequest = new LoginPageRequestClass()
