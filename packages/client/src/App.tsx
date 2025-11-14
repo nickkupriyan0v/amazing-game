@@ -1,12 +1,9 @@
-import React from 'react'
 import RoutesConfig from './routesConfig'
 import Header from './components/Header'
+import { useYandexAuth } from './hooks/useYandexAuth/useYandexAuth'
 
 const App = () => {
-  function something() {
-    return
-  }
-  something()
+  useYandexAuth()
   return (
     <>
       <Header />
