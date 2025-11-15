@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import getLeaderboard, { Leader } from './request'
+import { getLeaderboard, Leader } from '../../api/leaderBoard'
 import './style.css'
 import { Table, Box, Heading, Spinner } from '@chakra-ui/react'
 const LeaderBoardPage = () => {

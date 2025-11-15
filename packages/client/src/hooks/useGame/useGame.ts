@@ -2,6 +2,7 @@ import { useCallback } from 'react'
 import { useBoard } from '../useBoard/useBoard'
 import { useGameLogic } from '../useGameLogic/useGameLogic'
 import { SETTINGS } from '../../constants/game'
+import { setResult } from '../../api/leaderBoard'
 
 export const useGame = (config = SETTINGS) => {
   const { rows, cols, cardWidth, cardHeight, spacing } = config
@@ -13,6 +14,7 @@ export const useGame = (config = SETTINGS) => {
     cardHeight,
     spacing
   )
+
   const {
     flipped,
     matched,
@@ -27,6 +29,7 @@ export const useGame = (config = SETTINGS) => {
   } = useGameLogic(cards)
 
   const reset = useCallback(() => {
+    setResult(seconds)
     resetBoard()
     resetGame()
     resetTimer()
