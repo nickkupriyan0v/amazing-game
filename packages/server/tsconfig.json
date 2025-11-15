@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "rootDir":"src",
     "composite": true,
     "target": "es2019",
     "module": "commonjs",
@@ -15,15 +14,13 @@
     "noImplicitReturns": true,
     "noImplicitOverride": true,
     "noFallthroughCasesInSwitch": true,
-    "noUnusedParameters": true,
-    "noUnusedLocals": true,
     "forceConsistentCasingInFileNames": true,
     "importsNotUsedAsValues": "error",
-    "lib": ["es2019", "esnext.asynciterable"],
+    "lib": ["DOM", "es2019", "esnext.asynciterable"],
     "types": ["node", "jest"],
-    "baseUrl": ".",
+    "baseUrl": "src",
     "paths": {
-      "*": ["types/*"]
+      "*": ["src/types/*"]
     },
     "outDir": "dist"
   }

@@ -12,6 +12,7 @@
     "format": "lerna run format",
     "preview": "lerna run preview"
   },
+  
   "license": "MIT",
   "workspaces": [
     "packages/*"
@@ -22,7 +23,9 @@
   "devDependencies": {
     "@evilmartians/lefthook": "^1.3.9",
     "@types/react-router-dom": "^5.3.3",
-    "lerna": "^5.4.3"
+    "lerna": "^5.4.3",
+    "sirv": "^3.0.2",
+    "cross-env": "^10.0.0"
   },
   "dependencies": {}
 }
