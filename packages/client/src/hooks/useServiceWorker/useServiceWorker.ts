@@ -2,6 +2,9 @@ import { useEffect } from 'react'
 
 const useServiceWorker = () => {
   useEffect(() => {
+    if (import.meta.env.MODE !== 'production') {
+      return
+    }
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker
         .register('/service-worker.js')
