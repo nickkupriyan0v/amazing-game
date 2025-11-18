@@ -67,8 +67,6 @@ export class LoginPageRequestClass {
       withCredentials: true,
     })
 
-    console.log('Yandex ServiceId response:', response.data)
-
     return response.data
   }
 
