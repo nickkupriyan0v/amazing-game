@@ -39,6 +39,15 @@ export const useGameLogic = (cards: Card[]) => {
     }
   }, [])
 
+  useEffect(() => {
+    Notification.requestPermission(function (permission) {
+      // Если пользователь разрешил, то создаём уведомление
+      if (permission === 'granted') {
+        new Notification('Hi there!')
+      }
+    })
+  }, [])
+
   const handleCardClick = useCallback(
     (cardId: Card['id']) => {
       if (disabled || flipped.includes(cardId) || matched.includes(cardId)) {
