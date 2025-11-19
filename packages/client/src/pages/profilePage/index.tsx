@@ -17,7 +17,7 @@ import ModalPassword from '../../components/ModalPassword'
 import axios from 'axios'
 import { ROUTES } from '../../constants/routes'
 import { AppDispatch, RootState } from '../../store/store'
-import { userInfo } from '../../features/slices/sliceUser'
+import { updateUser } from '../../features/slices/sliceUser'
 import { connect } from 'react-redux'
 
 interface ProfileData {
@@ -243,10 +243,10 @@ export class App extends PureComponent<AppProps, AppState> {
 }
 
 const mapStateToProps = (state: RootState) => ({
-  user: state.userInfo,
+  user: state.updateUser,
 })
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
-  setUserInfo: (data: ProfileData) => dispatch(userInfo(data)),
+  setUserInfo: (data: ProfileData) => dispatch(updateUser(data)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
