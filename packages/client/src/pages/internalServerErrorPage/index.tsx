@@ -1,5 +1,5 @@
 import { Box, Heading, Button, VStack, Container } from '@chakra-ui/react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 
 interface InternalServerPageProps {
   errorText?: string

@@ -8,7 +8,6 @@ import { store } from './store/store'
 import { Provider } from 'react-redux'
 import useServiceWorker from './hooks/useServiceWorker/useServiceWorker'
 import ErrorBoundary from './errorHandling'
-import Example from './example'
 
 const Root = () => {
   useServiceWorker()
