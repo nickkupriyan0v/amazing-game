@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router'
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react'
 import { store } from './store/store'
 import { Provider } from 'react-redux'
@@ -27,6 +27,9 @@ const Root = () => {
   )
 }
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <Root />
+ReactDOM.hydrateRoot(
+  document.getElementById('root') as HTMLElement,
+  <StrictMode>
+    <Root />
+  </StrictMode>
 )

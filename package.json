@@ -24,5 +24,7 @@
     "@types/react-router-dom": "^5.3.3",
     "lerna": "^5.4.3"
   },
-  "dependencies": {}
+  "dependencies": {
+    "react-router-dom": "^7.9.6"
+  }
 }
