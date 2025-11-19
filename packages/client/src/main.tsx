@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
@@ -8,6 +8,7 @@ import { store } from './store/store'
 import { Provider } from 'react-redux'
 import useServiceWorker from './hooks/useServiceWorker/useServiceWorker'
 import ErrorBoundary from './errorHandling'
+import Example from './example'
 
 const Root = () => {
   useServiceWorker()
@@ -27,6 +28,9 @@ const Root = () => {
   )
 }
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <Root />
+ReactDOM.hydrateRoot(
+  document.getElementById('root') as HTMLElement,
+  <StrictMode>
+    <Root />
+  </StrictMode>
 )
