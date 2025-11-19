@@ -30,7 +30,7 @@ const GetStartPage = ({ getStart }: GetStartPageProps) => {
     }
 
     return () => clearTimeout(countdown)
-  }, [timer])
+  }, [timer, getStart, navigate])
 
   return (
     <Flex
