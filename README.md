@@ -24,6 +24,37 @@
 ```yarn lerna add {your_dep} --dev --scope server```
 
 
+### Создание `.env` файла из примера
+
+```bash
+cp .env.example .env
+```
+
+### Команды Docker Compose
+
+```bash
+# Запустить контейнеры в фоне
+docker compose up -d
+
+# Запустить с пересборкой образов
+docker compose up -d --build
+
+# Остановить контейнеры
+docker compose down
+
+# Остановить и удалить volume'ы (очистить БД)
+docker compose down -v
+
+# Просмотр логов всех сервисов
+docker compose logs -f
+
+# Логи конкретного сервиса
+docker compose logs -f server
+docker compose logs -f client
+docker compose logs -f db
+```
+
+
 ### Тесты
 
 Для клиента используется [`react-testing-library`](https://testing-library.com/docs/react-testing-library/intro/)
