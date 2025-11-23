@@ -7,12 +7,15 @@ export const addUserInfo2Store = (dispatch: Dispatch) => {
     .getUserInfo()
     .then(data => {
       if (data.success === true) {
+        console.log(data)
         dispatch(updateUser(data.data))
       } else {
+        console.log(data)
         console.log('error -->', data.error)
       }
     })
     .catch(data => {
+      console.log(data)
       console.log('error -->', data.error)
     })
 }
