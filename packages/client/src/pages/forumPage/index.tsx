@@ -14,7 +14,7 @@ import {
 import { useAppSelector } from '../../store/hooks'
 import Header from '../../components/Header'
 const ForumPage = () => {
-  const user = useAppSelector(state => state.userInfo)
+  const user = useAppSelector(state => state.updateUser)
   const isLoggedIn = !!user?.id
   return (
     <>

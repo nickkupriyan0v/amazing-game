@@ -5,6 +5,9 @@ import { ChakraProvider, defaultSystem } from '@chakra-ui/react'
 import { store } from './store/store'
 import { Provider } from 'react-redux'
 import { routes } from './routes'
+import { addUserInfo2Store } from './features/addUserInfo2Store'
+
+addUserInfo2Store(store.dispatch)
 const router = createBrowserRouter(routes)
 
 ReactDOM.hydrateRoot(
