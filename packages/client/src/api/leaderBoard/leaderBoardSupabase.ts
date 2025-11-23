@@ -4,7 +4,6 @@ import { LeaderboardResponse } from './types'
 export async function setResult(seconds: number): Promise<LeaderboardResponse> {
   try {
     const name = localStorage.getItem('currentUserName') || '-'
-    console.log('in set result')
     const { data, error } = await supabase
       .from('Scores')
       .insert([{ name, seconds }])
