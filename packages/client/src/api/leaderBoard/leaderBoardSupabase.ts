@@ -20,7 +20,7 @@ export async function getLeaderboard(limit = 10): Promise<LeaderboardResponse> {
     const { data, error } = await supabase
       .from('Scores')
       .select('*')
-      .order('seconds', { ascending: false })
+      .order('seconds', { ascending: true })
       .limit(limit)
 
     return { data, error }
