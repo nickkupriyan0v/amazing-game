@@ -2,15 +2,16 @@
   "name": "client",
   "version": "0.0.0",
   "type": "module",
- "scripts": {
-  "dev": "vite",
-  "build": "npm run build-client && npm run build-ssr",
-  "build-client": "vite build --outDir dist",
-  "build-ssr": "vite build --ssr ./src/entry-server.tsx --outDir ./dist/server",
-  "preview": "node ./server.js"
-},
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run build-client && npm run build-ssr",
+    "build-client": "vite build --outDir dist",
+    "build-ssr": "vite build --ssr ./src/entry-server.tsx --outDir ./dist/server",
+    "preview": "node ./server.js"
+  },
   "dependencies": {
     "@emotion/react": "^11.14.0",
+    "@supabase/supabase-js": "^2.84.0",
     "compression": "^1.8.1",
     "dotenv": "^16.0.2",
     "eslint-config-prettier": "^8.5.0",

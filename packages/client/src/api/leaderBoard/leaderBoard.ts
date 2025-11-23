@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { urlAPI } from '../constants/api'
+import { urlAPI } from '../../constants/api'
 
 const api = axios.create({
   baseURL: urlAPI,
@@ -20,10 +20,11 @@ export interface Leader {
 export async function getLeaderboard() {
   try {
     const response = await api.post('/leaderboard/cinnamoroll', {
-      ratingFieldName: 'score',
+      ratingFieldName: 'seconds',
       cursor: 0,
       limit: 10,
     })
+
     return response.data
   } catch (error) {
     console.error(error)
@@ -33,10 +34,13 @@ export async function getLeaderboard() {
 export async function setResult(result: number) {
   try {
     const response = await api.post('/leaderboard', {
-      data: {},
-      ratingFieldName: result,
+      data: {
+        seconds: result,
+      },
+      ratingFieldName: 'seconds',
       teamName: 'cinnamoroll',
     })
+
     return response.data
   } catch (error) {
     console.error(error)

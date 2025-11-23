@@ -8,6 +8,8 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { record } from '../../features/slices/sliceRecord'
 import { useEffect, useRef, useState } from 'react'
 import { IconButton } from '@chakra-ui/react'
+import { setResult } from '../../api/leaderBoard/leaderBoardSupabase'
+
 const GamePage = () => {
   const boxRef = useRef<HTMLDivElement>(null)
   const [isFullBox, setFullBox] = useState(false)
@@ -50,6 +52,7 @@ const GamePage = () => {
 
   useEffect(() => {
     if (isGameComplete && count > 0) {
+      setResult(count)
       dispatch(record(count))
     }
   }, [isGameComplete, count, dispatch])

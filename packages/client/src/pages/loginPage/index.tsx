@@ -22,7 +22,7 @@ const LoginPage = () => {
     const loginRequest = LoginPageRequest
 
     loginRequest.signIn(data).then(result => {
-      if (result.success) {
+      if (result.success || result.errorType === 400) {
         navigate(ROUTES.profilePage)
       } else {
         setError('password', {

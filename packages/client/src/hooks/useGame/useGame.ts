@@ -2,7 +2,6 @@ import { useCallback } from 'react'
 import { useBoard } from '../useBoard/useBoard'
 import { useGameLogic } from '../useGameLogic/useGameLogic'
 import { SETTINGS } from '../../constants/game'
-import { setResult } from '../../api/leaderBoard'
 
 export const useGame = (config = SETTINGS) => {
   const { rows, cols, cardWidth, cardHeight, spacing } = config
@@ -22,18 +21,15 @@ export const useGame = (config = SETTINGS) => {
     count,
     seconds,
     startTimer,
-    resetTimer,
     handleCardClick,
     resetGame,
     isGameComplete,
   } = useGameLogic(cards)
 
   const reset = useCallback(() => {
-    setResult(seconds)
     resetBoard()
     resetGame()
-    resetTimer()
-  }, [resetBoard, resetGame, resetTimer])
+  }, [resetBoard, resetGame])
 
   const canvasSize = {
     width: cols * (cardWidth + spacing),
