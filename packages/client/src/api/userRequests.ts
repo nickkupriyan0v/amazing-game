@@ -31,7 +31,6 @@ export class UserRequestsClass {
       .get(urlAPI + '/auth/user', { withCredentials: true })
       .then(response => {
         const result: SuccessResponse = { success: true, data: response.data }
-        localStorage.setItem('currentUserName', result.data.display_name)
         return result
       })
       .catch(error => {
