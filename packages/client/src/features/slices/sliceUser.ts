@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
 import { RootState } from '../../store/store'
+import { SERVER_HOST } from '../../constants/ports'
 
 interface UserInfo {
   id: number
@@ -28,7 +29,10 @@ const initialState: UserInfo = {
 export const fetchUserThunk = createAsyncThunk(
   'user/fetchUserThunk',
   async (_: void) => {
-    const url = `http://localhost:3001/user`
+    if (typeof window === 'undefined') {
+      return initialState
+    }
+    const url = `${SERVER_HOST}/user`
     return fetch(url).then(res => res.json())
   }
 )

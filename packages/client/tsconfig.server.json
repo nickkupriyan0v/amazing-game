@@ -4,8 +4,9 @@
     "outDir": "dist-server",
     "module": "ESNext",
     "target": "ES2022",
-    "rootDir": ".",       
+    "rootDir": ".",
     "noEmit": false
   },
-  "include": ["server.ts"]    
+  "include": ["server.ts", "server/**/*", "src/ssr-types.d.ts"],
+  "exclude": ["node_modules", "dist"]
 }
