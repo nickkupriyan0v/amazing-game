@@ -5,6 +5,7 @@ import { ROUTES } from '../../constants/routes'
 import { validations } from './validation'
 import axios, { AxiosError } from 'axios'
 import { urlAPI } from '../../constants/api'
+import Header from '../../components/Header'
 
 interface FormValues {
   login: string
@@ -47,116 +48,123 @@ const RegistrationPage = () => {
     navigate(ROUTES.profilePage)
   })
   return (
-    <Container
-      minH="100vh"
-      maxW="container.md"
-      display="flex"
-      alignItems="center"
-      justifyContent="center">
-      <form onSubmit={onSubmit}>
-        <Stack gap="4" align="flex-start" maxW="sm">
-          <Field.Root invalid={!!errors.first_name}>
-            {/* @ts-ignore */}
-            <Field.Label>Имя</Field.Label>
-            <Input
-              {...register('first_name', {
-                required: `Введите ${validations.first_name.name}`,
-                pattern: {
-                  value: validations.first_name.regex,
-                  message: validations.first_name.errorMessage,
-                },
-              })}
-            />
-            {/* @ts-ignore */}
-            <Field.ErrorText>{errors.first_name?.message}</Field.ErrorText>
-          </Field.Root>
+    <>
+      <Header />
+      <Container
+        minH="100vh"
+        maxW="container.md"
+        display="flex"
+        alignItems="center"
+        justifyContent="center">
+        <form onSubmit={onSubmit}>
+          <Stack gap="4" align="flex-start" maxW="sm">
+            <Field.Root invalid={!!errors.first_name}>
+              {/* @ts-ignore */}
+              <Field.Label>Имя</Field.Label>
+              <Input
+                {...register('first_name', {
+                  required: `Введите ${validations.first_name.name}`,
+                  pattern: {
+                    value: validations.first_name.regex,
+                    message: validations.first_name.errorMessage,
+                  },
+                })}
+              />
+              {/* @ts-ignore */}
+              <Field.ErrorText>{errors.first_name?.message}</Field.ErrorText>
+            </Field.Root>
 
-          <Field.Root invalid={!!errors.second_name}>
-            {/* @ts-ignore */}
-            <Field.Label>Фамилия</Field.Label>
-            <Input
-              {...register('second_name', {
-                required: `Введите ${validations.second_name.name}`,
-                pattern: {
-                  value: validations.second_name.regex,
-                  message: validations.second_name.errorMessage,
-                },
-              })}
-            />
-            {/* @ts-ignore */}
-            <Field.ErrorText>{errors.second_name?.message}</Field.ErrorText>
-          </Field.Root>
+            <Field.Root invalid={!!errors.second_name}>
+              {/* @ts-ignore */}
+              <Field.Label>Фамилия</Field.Label>
+              <Input
+                {...register('second_name', {
+                  required: `Введите ${validations.second_name.name}`,
+                  pattern: {
+                    value: validations.second_name.regex,
+                    message: validations.second_name.errorMessage,
+                  },
+                })}
+              />
+              {/* @ts-ignore */}
+              <Field.ErrorText>{errors.second_name?.message}</Field.ErrorText>
+            </Field.Root>
 
-          <Field.Root invalid={!!errors.login}>
-            {/* @ts-ignore */}
-            <Field.Label>Логин</Field.Label>
-            <Input
-              {...register('login', {
-                required: `Введите ${validations.login.name}`,
-                pattern: {
-                  value: validations.login.regex,
-                  message: validations.login.errorMessage,
-                },
-              })}
-            />
-            {/* @ts-ignore */}
-            <Field.ErrorText>{errors.login?.message}</Field.ErrorText>
-          </Field.Root>
+            <Field.Root invalid={!!errors.login}>
+              {/* @ts-ignore */}
+              <Field.Label>Логин</Field.Label>
+              <Input
+                {...register('login', {
+                  required: `Введите ${validations.login.name}`,
+                  pattern: {
+                    value: validations.login.regex,
+                    message: validations.login.errorMessage,
+                  },
+                })}
+              />
+              {/* @ts-ignore */}
+              <Field.ErrorText>{errors.login?.message}</Field.ErrorText>
+            </Field.Root>
 
-          <Field.Root invalid={!!errors.email}>
-            {/* @ts-ignore */}
-            <Field.Label>Почта</Field.Label>
-            <Input
-              {...register('email', {
-                required: `Введите ${validations.email.name}`,
-                pattern: {
-                  value: validations.email.regex,
-                  message: validations.email.errorMessage,
-                },
-              })}
-            />
-            {/* @ts-ignore */}
-            <Field.ErrorText>{errors.email?.message}</Field.ErrorText>
-          </Field.Root>
+            <Field.Root invalid={!!errors.email}>
+              {/* @ts-ignore */}
+              <Field.Label>Почта</Field.Label>
+              <Input
+                {...register('email', {
+                  required: `Введите ${validations.email.name}`,
+                  pattern: {
+                    value: validations.email.regex,
+                    message: validations.email.errorMessage,
+                  },
+                })}
+              />
+              {/* @ts-ignore */}
+              <Field.ErrorText>{errors.email?.message}</Field.ErrorText>
+            </Field.Root>
 
-          <Field.Root invalid={!!errors.password}>
-            {/* @ts-ignore */}
-            <Field.Label>Пароль</Field.Label>
-            <Input
-              {...register('password', {
-                required: `Введите ${validations.password.name}`,
-                pattern: {
-                  value: validations.password.regex,
-                  message: validations.password.errorMessage,
-                },
-              })}
-            />
-            {/* @ts-ignore */}
-            <Field.ErrorText>{errors.password?.message}</Field.ErrorText>
-          </Field.Root>
+            <Field.Root invalid={!!errors.password}>
+              {/* @ts-ignore */}
+              <Field.Label>Пароль</Field.Label>
+              <Input
+                {...register('password', {
+                  required: `Введите ${validations.password.name}`,
+                  pattern: {
+                    value: validations.password.regex,
+                    message: validations.password.errorMessage,
+                  },
+                })}
+              />
+              {/* @ts-ignore */}
+              <Field.ErrorText>{errors.password?.message}</Field.ErrorText>
+            </Field.Root>
 
-          <Field.Root invalid={!!errors.phone}>
-            {/* @ts-ignore */}
-            <Field.Label>Телефон</Field.Label>
-            <Input
-              {...register('phone', {
-                required: `Введите ${validations.phone.name}`,
-                pattern: {
-                  value: validations.phone.regex,
-                  message: validations.phone.errorMessage,
-                },
-              })}
-            />
-            {/* @ts-ignore */}
-            <Field.ErrorText>{errors.phone?.message}</Field.ErrorText>
-          </Field.Root>
+            <Field.Root invalid={!!errors.phone}>
+              {/* @ts-ignore */}
+              <Field.Label>Телефон</Field.Label>
+              <Input
+                {...register('phone', {
+                  required: `Введите ${validations.phone.name}`,
+                  pattern: {
+                    value: validations.phone.regex,
+                    message: validations.phone.errorMessage,
+                  },
+                })}
+              />
+              {/* @ts-ignore */}
+              <Field.ErrorText>{errors.phone?.message}</Field.ErrorText>
+            </Field.Root>
 
-          <Button type="submit" loading={isSubmitting} bg={'blue.600'} w={200}>
-            Зарегистрироваться
-          </Button>
-        </Stack>
-      </form>
-    </Container>
+            <Button
+              type="submit"
+              loading={isSubmitting}
+              bg={'blue.600'}
+              w={200}>
+              Зарегистрироваться
+            </Button>
+          </Stack>
+        </form>
+      </Container>
+    </>
   )
 }
 
