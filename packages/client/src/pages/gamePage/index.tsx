@@ -36,6 +36,9 @@ const GamePage = () => {
   } = useGame()
 
   useEffect(() => {
+    if (Notification.permission === 'default') {
+      Notification.requestPermission()
+    }
     const handleFullscreenChange = () => {
       if (!document.fullscreenElement) {
         setFullBox(false)
@@ -51,6 +54,18 @@ const GamePage = () => {
   useEffect(() => {
     if (isGameComplete && count > 0) {
       dispatch(record(count))
+
+      Notification.requestPermission().then(res => {
+        if (res === 'granted') {
+          try {
+            new Notification('Поздравляем!', {
+              body: `Вы выиграли игру за ${count} ходов! `,
+            })
+          } catch (err) {
+            console.error('Notification failed', err)
+          }
+        }
+      })
     }
   }, [isGameComplete, count, dispatch])
 
@@ -58,7 +73,6 @@ const GamePage = () => {
     <div className="gameBoard">
       <div className="gameBoard_header">
         <span></span>
-        <Title text="Memo Game" />
         <div>
           <IconButton variant={'ghost'} onClick={toggleFullscreen}>
             <img
