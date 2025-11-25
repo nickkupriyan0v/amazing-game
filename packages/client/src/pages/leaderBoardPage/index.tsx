@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react'
-import getLeaderboard, { Leader } from './request'
+import { getLeaderboard } from '../../api/leaderBoard/leaderBoardSupabase'
 import './style.css'
 import { Table, Box, Heading, Spinner } from '@chakra-ui/react'
+import { LeaderboardResponse } from '../../api/leaderBoard/types'
 import Header from '../../components/Header'
+
 const LeaderBoardPage = () => {
-  const [leaders, setLeaders] = useState<Leader[]>([])
+  const [leaders, setLeaders] = useState<LeaderboardResponse>()
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchLeaders = async () => {
-      const data = await getLeaderboard()
-      if (data) setLeaders(data)
+      const response = await getLeaderboard()
+      if (response) setLeaders(response)
       setLoading(false)
     }
 
@@ -64,22 +66,21 @@ const LeaderBoardPage = () => {
           </Table.Header>
 
           <Table.Body>
-            {leaders.map((leader, index) => (
-              <Table.Row key={index + 1} _hover={{ bg: 'gray.50' }}>
-                <Table.Cell textAlign="center" fontWeight="medium">
-                  {index + 1}
-                </Table.Cell>
-                <Table.Cell fontWeight="semibold">
-                  {leader.data.name ||
-                    leader.data.userName ||
-                    leader.data.username ||
-                    '—'}
-                </Table.Cell>
-                <Table.Cell textAlign="center" fontWeight="semibold">
-                  {leader.data.score}
-                </Table.Cell>
-              </Table.Row>
-            ))}
+            {leaders &&
+              leaders.data &&
+              leaders.data.map((leader, index) => (
+                <Table.Row key={index + 1} _hover={{ bg: 'gray.50' }}>
+                  <Table.Cell textAlign="center" fontWeight="medium">
+                    {index + 1}
+                  </Table.Cell>
+                  <Table.Cell fontWeight="semibold">
+                    {leader.name || '—'}
+                  </Table.Cell>
+                  <Table.Cell textAlign="center" fontWeight="semibold">
+                    {leader.seconds}
+                  </Table.Cell>
+                </Table.Row>
+              ))}
           </Table.Body>
         </Table.Root>
       </Box>

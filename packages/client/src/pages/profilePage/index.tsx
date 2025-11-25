@@ -64,6 +64,7 @@ export class App extends PureComponent<AppProps, AppState> {
           isLoading: false,
           error: null,
         })
+        localStorage.setItem('currentUserName', data.login)
         return data
       })
       .catch(error => {
