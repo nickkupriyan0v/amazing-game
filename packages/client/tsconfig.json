@@ -18,8 +18,8 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "types": ["jest", "node"],
-    "noImplicitAny": true, 
+    "noImplicitAny": true
   },
-  "include": ["src", "server.ts"],
-  "references": [{ "path": "./tsconfig.node.json" }],
+  "include": ["src", "index.ts"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

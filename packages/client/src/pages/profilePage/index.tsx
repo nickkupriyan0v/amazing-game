@@ -17,8 +17,9 @@ import ModalPassword from '../../components/ModalPassword'
 import axios from 'axios'
 import { ROUTES } from '../../constants/routes'
 import { AppDispatch, RootState } from '../../store/store'
-import { userInfo } from '../../features/slices/sliceUser'
+import { updateUser } from '../../features/slices/sliceUser'
 import { connect } from 'react-redux'
+import Header from '../../components/Header'
 
 interface ProfileData {
   id: number
@@ -171,83 +172,86 @@ export class App extends PureComponent<AppProps, AppState> {
     }: ProfileData = data
     const avatarSource = `${urlAPI}/resources/${avatar}`
     return (
-      <Flex justify="center">
-        <Card.Root
-          bg={'white.100'}
-          width="520px"
-          maxW="container.md"
-          display="flex"
-          gap="10px"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-          boxShadow="md"
-          mt="200px">
-          <Card.Body
+      <>
+        <Header />
+        <Flex justify="center">
+          <Card.Root
+            bg={'white.100'}
+            width="520px"
+            maxW="container.md"
             display="flex"
-            gap="5px"
+            gap="10px"
             flexDirection="column"
             alignItems="center"
-            justifyContent="center">
-            <Image
-              src={avatarSource}
-              onClick={this.changeAvatar}
-              boxSize="150px"
-              borderRadius="full"
-              fit="cover"
-              bg={'gray.100'}
-              border="solid 1px"
-            />
-            <Heading>
-              {first_name} {second_name}
-            </Heading>
-          </Card.Body>
-          <Text>Логин: {login}</Text>
-          <Text>Почта: {email}</Text>
-          <Text>Телефон: {phone}</Text>
-          <Card.Footer justifyContent="flex-end">
-            <Grid templateColumns="repeat(2, 1fr)" gap={4} width="100%">
-              <Button
-                onClick={this.changePassword}
-                bg={'green.500'}
-                width={190}>
-                Сменить пароль
-              </Button>
-              <Button onClick={this.changeAvatar} bg={'blue.600'} width={192}>
-                Сменить аватарку
-              </Button>
-              <GridItem colSpan={2}>
+            justifyContent="center"
+            boxShadow="md"
+            mt="200px">
+            <Card.Body
+              display="flex"
+              gap="5px"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center">
+              <Image
+                src={avatarSource}
+                onClick={this.changeAvatar}
+                boxSize="150px"
+                borderRadius="full"
+                fit="cover"
+                bg={'gray.100'}
+                border="solid 1px"
+              />
+              <Heading>
+                {first_name} {second_name}
+              </Heading>
+            </Card.Body>
+            <Text>Логин: {login}</Text>
+            <Text>Почта: {email}</Text>
+            <Text>Телефон: {phone}</Text>
+            <Card.Footer justifyContent="flex-end">
+              <Grid templateColumns="repeat(2, 1fr)" gap={4} width="100%">
                 <Button
-                  onClick={this.logout}
-                  marginBottom={'40px'}
-                  bg={'red'}
-                  width={400}>
-                  Выйти
+                  onClick={this.changePassword}
+                  bg={'green.500'}
+                  width={190}>
+                  Сменить пароль
                 </Button>
-              </GridItem>
-            </Grid>
-          </Card.Footer>
+                <Button onClick={this.changeAvatar} bg={'blue.600'} width={192}>
+                  Сменить аватарку
+                </Button>
+                <GridItem colSpan={2}>
+                  <Button
+                    onClick={this.logout}
+                    marginBottom={'40px'}
+                    bg={'red'}
+                    width={400}>
+                    Выйти
+                  </Button>
+                </GridItem>
+              </Grid>
+            </Card.Footer>
 
-          <ModalAvatar
-            isVisible={this.state.isAvatarModalVisible}
-            onClose={this.onCloseModal}
-            onAvatarUpdate={this.handleAvatarUpdate}
-          />
-          <ModalPassword
-            isVisible={this.state.isPasswordModalVisible}
-            onClose={this.onCloseModal}
-          />
-        </Card.Root>
-      </Flex>
+            <ModalAvatar
+              isVisible={this.state.isAvatarModalVisible}
+              onClose={this.onCloseModal}
+              onAvatarUpdate={this.handleAvatarUpdate}
+            />
+            <ModalPassword
+              isVisible={this.state.isPasswordModalVisible}
+              onClose={this.onCloseModal}
+            />
+          </Card.Root>
+        </Flex>
+      </>
     )
   }
 }
 
 const mapStateToProps = (state: RootState) => ({
-  user: state.userInfo,
+  user: state.updateUser,
 })
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
-  setUserInfo: (data: ProfileData) => dispatch(userInfo(data)),
+  setUserInfo: (data: ProfileData) => dispatch(updateUser(data)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
