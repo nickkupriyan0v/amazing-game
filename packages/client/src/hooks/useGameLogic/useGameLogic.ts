@@ -8,21 +8,20 @@ export const useGameLogic = (cards: Card[]) => {
   const [disabled, setDisabled] = useState(false)
   const [seconds, setSeconds] = useState<number>(0)
   const [timerRunning, setTimerRunning] = useState<boolean>(false)
+
+  const pauseTimer = useCallback(() => {
+    setTimerRunning(false)
+  }, [])
+
   const startTimer = useCallback(() => {
-    if (!timerRunning) {
-      setTimerRunning(true)
-    }
-  }, [timerRunning])
-  const resetTimer = () => {
+    setTimerRunning(true)
+  }, [])
+
+  const resetTimer = useCallback(() => {
     setSeconds(0)
     setTimerRunning(false)
-  }
+  }, [])
 
-  const pauseTimer = () => {
-    if (timerRunning) {
-      setTimerRunning(false)
-    }
-  }
   useEffect(() => {
     if (!timerRunning) return
     const t = setInterval(() => {
@@ -70,18 +69,19 @@ export const useGameLogic = (cards: Card[]) => {
     setMatched([])
     setCount(0)
     setDisabled(false)
-    resetTimer()
-  }, [resetTimer])
+    setTimerRunning(false)
+    setSeconds(0)
+  }, [])
 
   const isGameComplete = useCallback(() => {
     return matched.length === cards.length && cards.length > 0
   }, [matched.length, cards.length])
 
   useEffect(() => {
-    if (isGameComplete()) {
+    if (isGameComplete() && timerRunning) {
       pauseTimer()
     }
-  }, [isGameComplete, pauseTimer])
+  }, [isGameComplete, timerRunning, pauseTimer])
 
   return {
     flipped,
@@ -89,7 +89,6 @@ export const useGameLogic = (cards: Card[]) => {
     disabled,
     count,
     seconds,
-    setTimerRunning,
     startTimer,
     resetTimer,
     handleCardClick,

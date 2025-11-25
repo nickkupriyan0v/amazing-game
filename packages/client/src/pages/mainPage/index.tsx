@@ -5,17 +5,21 @@ import HowItWorks from '../../components/mainPage/HowItWorks'
 import Statistics from '../../components/mainPage/Statistics'
 import Footer from '../../components/mainPage/Footer'
 import PreFooter from '../../components/mainPage/PreFooter'
+import Header from '../../components/Header'
 
 const Home = () => {
   return (
-    <Box bg="#f8f9fa">
-      <Hero />
-      <Features />
-      <HowItWorks />
-      <Statistics />
-      <PreFooter />
-      <Footer />
-    </Box>
+    <>
+      <Header />
+      <Box bg="#f8f9fa">
+        <Hero />
+        <Features />
+        <HowItWorks />
+        <Statistics />
+        <PreFooter />
+        <Footer />
+      </Box>
+    </>
   )
 }
 export default Home

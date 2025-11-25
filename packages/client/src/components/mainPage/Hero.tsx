@@ -62,7 +62,7 @@ export const Hero = () => {
             ))}
           </HStack>
 
-          <Link to={ROUTES.getStartGame}>
+          <Link to={ROUTES.gamePage}>
             <Button
               size="lg"
               bg="white"

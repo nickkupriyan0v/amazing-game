@@ -23,6 +23,9 @@ const GameCanvas = ({
 
   useEffect(() => {
     startTimer(true)
+  }, [startTimer])
+
+  useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
 
