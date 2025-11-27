@@ -1,3 +1,29 @@
 .css-1af85vd {
   margin-bottom: 0px !important;
 }
+
+/* Базовые стили для светлой темы */
+/*
+:root {
+  --bg-color: #ffffff;
+  --text-color: #2d3748;
+  --border-color: #e2e8f0;
+}
+
+[data-theme='dark'] {
+  --bg-color: #1a202c;
+  --text-color: #ffffff;
+  --border-color: #4a5568;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme='dark'] .chakra-ui-light {
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+*/

@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import { Button, Flex, HStack, Text } from '@chakra-ui/react'
 import { useAppSelector } from '../../store/hooks'
 import { MdForum, MdLeaderboard, MdHome } from 'react-icons/md'
+import { ColorModeSwitcher } from '../Themes'
 const Header = () => {
   const user = useAppSelector(state => state.updateUser)
   const isLoggedIn = !!user?.id
@@ -51,6 +52,7 @@ const Header = () => {
       </HStack>
 
       <HStack>
+        <ColorModeSwitcher />
         {isLoggedIn ? (
           <Text
             fontWeight="semibold"
