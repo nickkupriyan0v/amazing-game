@@ -1,29 +1,22 @@
-.css-1af85vd {
-  margin-bottom: 0px !important;
-}
-
-/* Базовые стили для светлой темы */
-/*
-:root {
-  --bg-color: #ffffff;
-  --text-color: #2d3748;
-  --border-color: #e2e8f0;
-}
-
-[data-theme='dark'] {
-  --bg-color: #1a202c;
-  --text-color: #ffffff;
-  --border-color: #4a5568;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
 }
 
 body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  background: var(--chakra-colors-bg-canvas);
+  color: var(--chakra-colors-fg-default);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-[data-theme='dark'] .chakra-ui-light {
-  background-color: var(--bg-color) !important;
-  color: var(--text-color) !important;
+:root,
+:host {
+  color-scheme: light dark;
 }
-*/
+
+.css-1af85vd {
+  margin-bottom: 0px !important;
+}

@@ -51,6 +51,7 @@ const RegistrationPage = () => {
     <>
       <Header />
       <Container
+        _dark={{ bg: 'black' }}
         minH="100vh"
         maxW="container.md"
         display="flex"
@@ -60,7 +61,7 @@ const RegistrationPage = () => {
           <Stack gap="4" align="flex-start" maxW="sm">
             <Field.Root invalid={!!errors.first_name}>
               {/* @ts-ignore */}
-              <Field.Label>Имя</Field.Label>
+              <Field.Label _dark={{ color: 'white' }}>Имя</Field.Label>
               <Input
                 {...register('first_name', {
                   required: `Введите ${validations.first_name.name}`,
@@ -69,6 +70,7 @@ const RegistrationPage = () => {
                     message: validations.first_name.errorMessage,
                   },
                 })}
+                _dark={{ bg: 'gray.50' }}
               />
               {/* @ts-ignore */}
               <Field.ErrorText>{errors.first_name?.message}</Field.ErrorText>
@@ -76,7 +78,7 @@ const RegistrationPage = () => {
 
             <Field.Root invalid={!!errors.second_name}>
               {/* @ts-ignore */}
-              <Field.Label>Фамилия</Field.Label>
+              <Field.Label _dark={{ color: 'white' }}>Фамилия</Field.Label>
               <Input
                 {...register('second_name', {
                   required: `Введите ${validations.second_name.name}`,
@@ -85,6 +87,7 @@ const RegistrationPage = () => {
                     message: validations.second_name.errorMessage,
                   },
                 })}
+                _dark={{ bg: 'gray.50' }}
               />
               {/* @ts-ignore */}
               <Field.ErrorText>{errors.second_name?.message}</Field.ErrorText>
@@ -92,7 +95,7 @@ const RegistrationPage = () => {
 
             <Field.Root invalid={!!errors.login}>
               {/* @ts-ignore */}
-              <Field.Label>Логин</Field.Label>
+              <Field.Label _dark={{ color: 'white' }}>Логин</Field.Label>
               <Input
                 {...register('login', {
                   required: `Введите ${validations.login.name}`,
@@ -101,6 +104,7 @@ const RegistrationPage = () => {
                     message: validations.login.errorMessage,
                   },
                 })}
+                _dark={{ bg: 'gray.50' }}
               />
               {/* @ts-ignore */}
               <Field.ErrorText>{errors.login?.message}</Field.ErrorText>
@@ -108,7 +112,7 @@ const RegistrationPage = () => {
 
             <Field.Root invalid={!!errors.email}>
               {/* @ts-ignore */}
-              <Field.Label>Почта</Field.Label>
+              <Field.Label _dark={{ color: 'white' }}>Почта</Field.Label>
               <Input
                 {...register('email', {
                   required: `Введите ${validations.email.name}`,
@@ -117,6 +121,7 @@ const RegistrationPage = () => {
                     message: validations.email.errorMessage,
                   },
                 })}
+                _dark={{ bg: 'gray.50' }}
               />
               {/* @ts-ignore */}
               <Field.ErrorText>{errors.email?.message}</Field.ErrorText>
@@ -124,7 +129,7 @@ const RegistrationPage = () => {
 
             <Field.Root invalid={!!errors.password}>
               {/* @ts-ignore */}
-              <Field.Label>Пароль</Field.Label>
+              <Field.Label _dark={{ color: 'white' }}>Пароль</Field.Label>
               <Input
                 {...register('password', {
                   required: `Введите ${validations.password.name}`,
@@ -133,6 +138,7 @@ const RegistrationPage = () => {
                     message: validations.password.errorMessage,
                   },
                 })}
+                _dark={{ bg: 'gray.50' }}
               />
               {/* @ts-ignore */}
               <Field.ErrorText>{errors.password?.message}</Field.ErrorText>
@@ -140,7 +146,7 @@ const RegistrationPage = () => {
 
             <Field.Root invalid={!!errors.phone}>
               {/* @ts-ignore */}
-              <Field.Label>Телефон</Field.Label>
+              <Field.Label _dark={{ color: 'white' }}>Телефон</Field.Label>
               <Input
                 {...register('phone', {
                   required: `Введите ${validations.phone.name}`,
@@ -149,6 +155,7 @@ const RegistrationPage = () => {
                     message: validations.phone.errorMessage,
                   },
                 })}
+                _dark={{ bg: 'gray.50' }}
               />
               {/* @ts-ignore */}
               <Field.ErrorText>{errors.phone?.message}</Field.ErrorText>
@@ -158,6 +165,7 @@ const RegistrationPage = () => {
               type="submit"
               loading={isSubmitting}
               bg={'blue.600'}
+              _dark={{ bg: 'orange.500' }}
               w={200}>
               Зарегистрироваться
             </Button>
