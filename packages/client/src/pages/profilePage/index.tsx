@@ -174,8 +174,9 @@ export class App extends PureComponent<AppProps, AppState> {
     return (
       <>
         <Header />
-        <Flex justify="center">
+        <Flex justify="center" _dark={{ bg: 'black' }}>
           <Card.Root
+            _dark={{ bg: 'black' }}
             bg={'white.100'}
             width="520px"
             maxW="container.md"

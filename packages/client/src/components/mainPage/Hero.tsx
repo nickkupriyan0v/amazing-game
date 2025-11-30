@@ -17,6 +17,7 @@ export const Hero = () => {
   return (
     <Box
       bg="linear-gradient(135deg, #6b5dff 0%, #4ecdc4 100%)"
+      _dark={{ bg: 'black' }}
       py={{ base: 16, md: 24 }}
       color="white">
       <Container maxW="1200px">
@@ -66,6 +67,7 @@ export const Hero = () => {
             <Button
               size="lg"
               bg="white"
+              _dark={{ bg: 'black' }}
               color="#6b5dff"
               fontWeight="bold"
               _hover={{

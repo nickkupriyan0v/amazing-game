@@ -63,6 +63,7 @@ const LoginPage = () => {
     <>
       <Header />
       <Container
+        _dark={{ bg: 'black' }}
         minH="100vh"
         maxW="container.md"
         display="flex"
@@ -72,16 +73,21 @@ const LoginPage = () => {
           <Stack gap="4" align="flex-start" maxW="sm">
             <Field.Root invalid={!!errors.login}>
               {/* @ts-ignore */}
-              <Field.Label>Логин</Field.Label>
-              <Input {...register('login')} />
+              <Field.Label _dark={{ color: 'white' }}>Логин</Field.Label>
+              <Input
+                {...register('login')}
+                _dark={{ bg: 'gray.50' }}
+                borderColor="border.default"
+                color="fg.default"
+              />
               {/* @ts-ignore */}
               <Field.ErrorText>{errors.login?.message}</Field.ErrorText>
             </Field.Root>
 
             <Field.Root invalid={!!errors.password}>
               {/* @ts-ignore */}
-              <Field.Label>Пароль</Field.Label>
-              <Input {...register('password')} />
+              <Field.Label _dark={{ color: 'white' }}>Пароль</Field.Label>
+              <Input {...register('password')} _dark={{ bg: 'gray.50' }} />
               {/* @ts-ignore */}
               <Field.ErrorText>{errors.password?.message}</Field.ErrorText>
             </Field.Root>
@@ -91,14 +97,15 @@ const LoginPage = () => {
               loading={isSubmitting}
               loadingText="Вход..."
               bg={'blue.600'}
+              _dark={{ bg: 'orange.500' }}
               width={350}>
               Войти
             </Button>
 
             <Button
               onClick={handleYandexLogin}
-              bg="white"
-              color="black"
+              bg="blue.600"
+              _dark={{ bg: 'orange.500' }}
               width={350}>
               Войти через Яндекс
             </Button>
