@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <>
       <Header />
-      <Box bg="#f8f9fa">
+      <Box bg="#f8f9fa" _dark={{ bg: 'black' }}>
         <Hero />
         <Features />
         <HowItWorks />

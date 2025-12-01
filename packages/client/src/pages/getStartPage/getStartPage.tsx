@@ -34,7 +34,7 @@ const GetStartPage = ({ getStart }: GetStartPageProps) => {
   }, [timer])
 
   return (
-    <>
+    <Box _dark={{ bg: 'black' }}>
       <Header />
       <Flex
         minH="100vh"
@@ -44,6 +44,7 @@ const GetStartPage = ({ getStart }: GetStartPageProps) => {
         px={4}>
         <Box
           bg="white"
+          _dark={{ bg: 'black' }}
           boxShadow="2xl"
           borderRadius="2xl"
           p={10}
@@ -69,6 +70,7 @@ const GetStartPage = ({ getStart }: GetStartPageProps) => {
                 fontSize="md"
                 color="gray.600"
                 bg="gray.50"
+                _dark={{ bg: 'black' }}
                 p={4}
                 borderRadius="md"
                 textAlign="left">
@@ -84,6 +86,7 @@ const GetStartPage = ({ getStart }: GetStartPageProps) => {
                 size="lg"
                 color="white"
                 bg="teal.500"
+                _dark={{ bg: 'black' }}
                 _hover={{ bg: 'teal.600' }}
                 onClick={() => setTimer(3)}
                 w="200px">
@@ -105,7 +108,7 @@ const GetStartPage = ({ getStart }: GetStartPageProps) => {
           )}
         </Box>
       </Flex>
-    </>
+    </Box>
   )
 }
 export default GetStartPage

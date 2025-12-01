@@ -1,7 +1,7 @@
 import { Box, Container, Text, Heading, Grid } from '@chakra-ui/react'
 const HowItWorks = () => {
   return (
-    <Box py={{ base: 16, md: 24 }} bg="#f8f9fa">
+    <Box py={{ base: 16, md: 24 }} bg="#f8f9fa" _dark={{ bg: 'black' }}>
       <Container maxW="1200px">
         <Heading as="h2" size="xl" textAlign="center" mb={12} color="#333">
           Как это работает
@@ -41,6 +41,7 @@ const HowItWorks = () => {
               key={index}
               p={8}
               bg="white"
+              _dark={{ bg: 'black' }}
               borderRadius="12px"
               textAlign="center"
               boxShadow="0 2px 8px rgba(0,0,0,0.05)">
@@ -48,6 +49,7 @@ const HowItWorks = () => {
                 w="50px"
                 h="50px"
                 bg="#6b5dff"
+                _dark={{ bg: 'black' }}
                 color="white"
                 borderRadius="50%"
                 display="flex"

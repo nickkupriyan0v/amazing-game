@@ -17,13 +17,22 @@ const ForumPage = () => {
   const user = useAppSelector(state => state.updateUser)
   const isLoggedIn = !!user?.id
   return (
-    <>
+    <Box _dark={{ bg: 'black' }}>
       <Header />
-      <Container className="forum-container" minH="100vh">
-        <Box className="forum-header">
-          <Heading>Форум карточной игры «Память»</Heading>
+      <Container
+        className="forum-container"
+        minH="100vh"
+        _dark={{ bg: 'black' }}>
+        <Box className="forum-header" _dark={{ bg: 'black' }}>
+          <Heading _dark={{ color: 'white' }}>
+            Форум карточной игры «Память»
+          </Heading>
           {isLoggedIn ? (
-            <Button className="create-topic-btn">Создать тему</Button>
+            <Button
+              className="create-topic-btn"
+              _dark={{ bg: 'orange', color: 'white' }}>
+              Создать тему
+            </Button>
           ) : (
             <Text className="auth-advise">
               Нужно зарегистрироваться чтобы создать статью
@@ -33,9 +42,14 @@ const ForumPage = () => {
 
         <Stack className="topics-list">
           {data.map(topic => (
-            <Box className="topic-card" key={topic.id}>
-              <Box className="topic-header">
-                <Heading>{topic.title}</Heading>
+            <Box
+              className="topic-card"
+              key={topic.id}
+              _dark={{ bg: 'cyan.600', color: 'white' }}>
+              <Box
+                className="topic-header"
+                _dark={{ bg: 'cyan.600', color: 'white' }}>
+                <Heading _dark={{ color: 'white' }}>{topic.title}</Heading>
                 <span className="created">
                   Пост был создан: {topic.created}
                 </span>
@@ -54,7 +68,9 @@ const ForumPage = () => {
                 </span>
               </div>
               <details>
-                <Heading>{topic.title}</Heading>
+                <Heading _dark={{ bg: 'cyan.600', color: 'white' }}>
+                  {topic.title}
+                </Heading>
                 <summary>Подробнее:</summary>
                 <p>{topic.text}</p>
               </details>
@@ -62,7 +78,7 @@ const ForumPage = () => {
           ))}
         </Stack>
       </Container>
-    </>
+    </Box>
   )
 }
 

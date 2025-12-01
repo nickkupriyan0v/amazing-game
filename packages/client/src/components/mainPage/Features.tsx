@@ -42,6 +42,7 @@ export const Features = () => {
               key={index}
               p={8}
               bg="#f8f9fa"
+              _dark={{ bg: 'black' }}
               borderRadius="12px"
               textAlign="center"
               _hover={{
