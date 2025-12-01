@@ -13,7 +13,6 @@ if (!DATABASE_URL) {
   throw new Error('❌ DATABASE_URL не найдено in .env')
 }
 
-// Sequelize ORM подключение
 export const sequelize = new Sequelize(DATABASE_URL, {
   logging: false,
   models: [Topic, Reaction, Comment],
