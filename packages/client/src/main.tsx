@@ -6,6 +6,7 @@ import { store } from './store/store'
 import { Provider } from 'react-redux'
 import { routes } from './routes'
 import { addUserInfo2Store } from './features/addUserInfo2Store'
+import { ColorModeProvider } from './components/ui/color-mode'
 
 const router = createBrowserRouter(routes)
 
@@ -16,7 +17,9 @@ const initApp = async () => {
     document.getElementById('root') as HTMLElement,
     <Provider store={store}>
       <ChakraProvider value={defaultSystem}>
-        <RouterProvider router={router} />
+        <ColorModeProvider>
+          <RouterProvider router={router} />
+        </ColorModeProvider>
       </ChakraProvider>
     </Provider>
   )

@@ -1,6 +1,5 @@
 import LoginPage from './pages/loginPage'
 import RegistrationPage from './pages/registrationPage'
-//import { App as ProfilePage } from './pages/profilePage'
 import ProfilePage from './pages/profilePage'
 import Home from './pages/mainPage'
 import ForumPage from './pages/forumPage/index'
@@ -11,50 +10,59 @@ import TopicPage from './pages/topicPage'
 import NotFoundPage from './pages/notFoundPage'
 import InternalServerError from './pages/internalServerErrorPage'
 import { RouteObject } from 'react-router-dom'
+import { RootLayout } from './components/Themes/RootLayout'
+import { ComponentType } from 'react'
 
-export const routes = [
+// Вспомогательная функция для оборачивания в layout
+const withLayout = (Component: ComponentType) => (
+  <RootLayout>
+    <Component />
+  </RootLayout>
+)
+
+export const routes: RouteObject[] = [
   {
     path: '/login',
-    Component: LoginPage,
+    element: withLayout(LoginPage),
   },
   {
     path: '/registration',
-    Component: RegistrationPage,
+    element: withLayout(RegistrationPage),
   },
   {
     path: '/profile',
-    Component: ProfilePage,
+    element: withLayout(ProfilePage),
   },
   {
     path: '/',
-    Component: Home,
+    element: withLayout(Home),
   },
   {
     path: '/getStart',
-    Component: GetStartPage,
+    element: withLayout(GetStartPage),
   },
   {
     path: '/getStart/game',
-    Component: GamePage,
+    element: withLayout(GamePage),
   },
   {
     path: '/leaderboard',
-    Component: LeaderBoardPage,
+    element: withLayout(LeaderBoardPage),
   },
   {
     path: '/forum',
-    Component: ForumPage,
+    element: withLayout(ForumPage),
   },
   {
     path: '/topic/:id',
-    Component: TopicPage,
+    element: withLayout(TopicPage),
   },
   {
     path: '*',
-    Component: NotFoundPage,
+    element: withLayout(NotFoundPage),
   },
   {
     path: '/500',
-    Component: InternalServerError,
+    element: withLayout(InternalServerError),
   },
-] as RouteObject[]
+]
