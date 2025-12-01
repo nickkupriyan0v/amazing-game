@@ -50,7 +50,8 @@ export class CommentController {
     if (isNaN(id)) return res.status(400).json({ message: 'Некорректный id' })
 
     const comment = await Comment.findByPk(id)
-    if (!comment) return res.status(404).json({ message: 'Не найдено' })
+    if (!comment)
+      return res.status(404).json({ message: `Не найдено: ${comment}` })
     if (comment.login !== login)
       return res.status(403).json({ message: 'Запрещено' })
 
