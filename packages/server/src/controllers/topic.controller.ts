@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/ban-types */
-// controllers/topic.controller.ts
 import { Request, Response } from 'express'
 import { Topic } from '../models/topic.model'
 import { ITopic } from '../types/topic.interface'
