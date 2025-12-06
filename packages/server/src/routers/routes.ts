@@ -32,6 +32,7 @@ router.post('/comments/:parentId/replies', CommentController.create)
 // Реакции
 router.post('/reactions', ReactionController.create)
 router.put('/reactions/:id', ReactionController.update),
-  router.delete('/reactions/:id', ReactionController.delete)
-
+router.delete('/reactions/:id', ReactionController.delete)
+router.post('/topics/:topicId/reactions', ReactionController.reactToTopic)
+router.get('/topics/:topicId/reactions', ReactionController.getTopicReactions)
 export default router
