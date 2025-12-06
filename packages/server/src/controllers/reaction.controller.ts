@@ -61,9 +61,9 @@ export class ReactionController {
     await reaction.destroy()
     return res.json({ message: 'Удалено' })
   }
-    
+  
   static async reactToTopic(
-    req: Request<{ topicId: string }, {}, { type: string }>,
+    req: Request<{ topicId: string }, Record<string, never>, { type: string }>,
     res: Response
   ) {
     const { type } = req.body
