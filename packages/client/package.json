@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "tsc --project tsconfig.server.json && cross-env NODE_ENV=development EXTERNAL_SERVER_URL='http://localhost:3001' INTERNAL_SERVER_URL='http://localhost:3001' node dist-server/server.js vite",
+    "dev": "tsc --project tsconfig.server.json && cross-env NODE_ENV=development EXTERNAL_SERVER_URL='http://localhost:3011' INTERNAL_SERVER_URL='http://localhost:3011' node dist-server/server.js vite",
     "build": "npm run build-client && npm run build-ssr && npm run build-server",
     "build-client": "vite build --outDir dist",
     "build-ssr": "vite build --ssr ./src/entry-server.tsx --outDir ./dist/server",
@@ -16,7 +16,6 @@
     "@emotion/react": "^11.14.0",
     "@reduxjs/toolkit": "^2.10.1",
     "@supabase/supabase-js": "^2.86.0",
-    "@supabase/supabase-js": "^2.84.0",
     "compression": "^1.8.1",
     "dotenv": "^16.0.2",
     "eslint-config-prettier": "^8.5.0",

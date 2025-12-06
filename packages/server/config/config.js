@@ -3,15 +3,15 @@ require('dotenv').config()
 
 module.exports = {
   development: {
-    url: "postgresql://postgres:utorrent123@localhost:5432/forum?schema=public",
+    url: "postgresql://amazing:changeme@localhost:5432/amazing_db",
     dialect: 'postgres',
   },
   test: {
-    url: "postgresql://postgres:utorrent123@localhost:5432/forum?schema=public",
+    url: "postgresql://amazing:changeme@localhost:5432/amazing_db",
     dialect: 'postgres',
   },
   production: {
-    url: "postgresql://postgres:utorrent123@localhost:5432/forum?schema=public",
+    url: "postgresql://amazing:changeme@localhost:5432/amazing_db",
     dialect: 'postgres',
   },
 }

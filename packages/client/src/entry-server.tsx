@@ -1,8 +1,9 @@
 import ReactDOM from 'react-dom/server'
-import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 import { Request as ExpressRequest } from 'express'
-import { reducer } from './store/store'
+import { configureStore } from '@reduxjs/toolkit'
+import { reducer } from './store/reducer' // <-- общий rootReducer
+import { forumApi } from './api/forumApi/forumApi'
 import './index.css'
 import {
   createStaticHandler,
@@ -17,11 +18,14 @@ export const render = async (req: ExpressRequest) => {
   const { query, dataRoutes } = createStaticHandler(routes)
   const fetchRequest = createFetchRequest(req)
   const context = await query(fetchRequest)
+
   if (context instanceof Response) {
     throw context
   }
+
   const store = configureStore({
     reducer,
+    middleware: gdm => gdm().concat(forumApi.middleware),
   })
 
   const router = createStaticRouter(dataRoutes, context)

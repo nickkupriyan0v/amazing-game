@@ -4,6 +4,14 @@ import { CommentController } from '../controllers/comment.controller'
 import { ReactionController } from '../controllers/reaction.controller'
 
 const router = Router()
+
+// const authStub = (req, res, next) => {
+//   console.log("Временная заглушка для Middleware:", req.method, req.url)
+//   req.user = {id: 1, login:"testUser"}
+//   next()
+// }
+// router.use(authStub)
+
 //Темы(Topics) для форума
 router.post('/topics', TopicController.create)
 router.get('/topics', TopicController.list)
@@ -23,7 +31,7 @@ router.post('/comments/:parentId/replies', CommentController.create)
 
 // Реакции
 router.post('/reactions', ReactionController.create)
-router.put('/reactions/:id'),
+router.put('/reactions/:id', ReactionController.update),
   router.delete('/reactions/:id', ReactionController.delete)
 
 export default router

@@ -5,5 +5,5 @@ export interface IComment {
   id: number
   comment: string
   reactions: string
-  parentId: number
+  parentId?: number
 }

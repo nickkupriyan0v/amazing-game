@@ -13,7 +13,6 @@ import { RouteObject } from 'react-router-dom'
 import { RootLayout } from './components/Themes/RootLayout'
 import { ComponentType } from 'react'
 
-// Вспомогательная функция для оборачивания в layout
 const withLayout = (Component: ComponentType) => (
   <RootLayout>
     <Component />
@@ -54,7 +53,7 @@ export const routes: RouteObject[] = [
     element: withLayout(ForumPage),
   },
   {
-    path: '/topic/:id',
+    path: '/forum/:id',
     element: withLayout(TopicPage),
   },
   {
