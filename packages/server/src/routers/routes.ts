@@ -1,16 +1,16 @@
-import { Router } from 'express'
+import { NextFunction, Router } from 'express'
 import { TopicController } from '../controllers/topic.controller'
 import { CommentController } from '../controllers/comment.controller'
 import { ReactionController } from '../controllers/reaction.controller'
 
 const router = Router()
 
-// const authStub = (req, res, next) => {
-//   console.log("Временная заглушка для Middleware:", req.method, req.url)
-//   req.user = {id: 1, login:"testUser"}
-//   next()
-// }
-// router.use(authStub)
+const authStub = (req: Request, res: Response, next: NextFunction) => {
+  console.log('Временная заглушка для Middleware:', req.method, req.url)
+  req.user = { id: 1, login: 'testUser' }
+  next()
+}
+router.use(authStub)
 
 //Темы(Topics) для форума
 router.post('/topics', TopicController.create)
