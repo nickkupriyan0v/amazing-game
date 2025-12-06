@@ -27,7 +27,6 @@ export type Response = SuccessResponse | ErrorResponse
 
 export class UserRequestsClass {
   public getUserInfo(): Promise<Response> {
-    console.log('in get user')
     return axios
       .get(urlAPI + '/auth/user', { withCredentials: true })
       .then(response => {
