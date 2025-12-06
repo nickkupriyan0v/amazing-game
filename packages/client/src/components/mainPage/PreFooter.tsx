@@ -20,6 +20,7 @@ const PreFooter = () => {
             <Button
               size="lg"
               bg="white"
+              _dark={{ bg: 'black' }}
               color="#6b5dff"
               fontWeight="bold"
               _hover={{
