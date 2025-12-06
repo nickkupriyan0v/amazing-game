@@ -55,6 +55,5 @@
     "typescript": "^4.8.2",
     "vite": "^3.0.7"
   },
-  "license": "MIT",
-  "proxy": "http://localhost:3002"
+  "license": "MIT"
 }

@@ -24,9 +24,7 @@ export interface CheckAuthResponse {
 export class LoginPageRequestClass {
   public signIn(data: SignInData): Promise<SignInResponse> {
     return axios
-      .post(urlAPI + '/auth/signin', data, {
-        withCredentials: true,
-      })
+      .post(urlAPI + '/auth/signin', data, { withCredentials: true })
       .then(response => {
         return {
           success: response.status == 200,

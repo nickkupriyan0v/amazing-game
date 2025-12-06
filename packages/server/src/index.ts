@@ -8,15 +8,9 @@ import { authMiddleware } from './middleware/auth'
 dotenv.config()
 
 const app = express()
-app.use(cookieParser())
-app.use(
-  cors({
-    origin: 'http://localhost:3001',
-    credentials: true, // Разрешаем отправку кук
-  })
-)
-
+app.use(cors())
 app.use(express.json())
+app.use(cookieParser())
 app.use(authMiddleware)
 
 const port = Number(process.env.SERVER_PORT) || 3001
