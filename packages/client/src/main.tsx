@@ -1,35 +1,28 @@
-import React, { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App'
 import './index.css'
-import { BrowserRouter } from 'react-router'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react'
 import { store } from './store/store'
 import { Provider } from 'react-redux'
-import useServiceWorker from './hooks/useServiceWorker/useServiceWorker'
-import ErrorBoundary from './errorHandling'
+import { routes } from './routes'
+import { addUserInfo2Store } from './features/addUserInfo2Store'
+import { ColorModeProvider } from './components/ui/color-mode'
 
-const Root = () => {
-  useServiceWorker()
+const router = createBrowserRouter(routes)
 
-  return (
-    <React.StrictMode>
-      <ErrorBoundary>
-        <Provider store={store}>
-          <ChakraProvider value={defaultSystem}>
-            <BrowserRouter>
-              <App />
-            </BrowserRouter>
-          </ChakraProvider>
-        </Provider>
-      </ErrorBoundary>
-    </React.StrictMode>
+const initApp = async () => {
+  await addUserInfo2Store(store.dispatch)
+
+  ReactDOM.hydrateRoot(
+    document.getElementById('root') as HTMLElement,
+    <Provider store={store}>
+      <ChakraProvider value={defaultSystem}>
+        <ColorModeProvider>
+          <RouterProvider router={router} />
+        </ColorModeProvider>
+      </ChakraProvider>
+    </Provider>
   )
 }
 
-ReactDOM.hydrateRoot(
-  document.getElementById('root') as HTMLElement,
-  <StrictMode>
-    <Root />
-  </StrictMode>
-)
+initApp()

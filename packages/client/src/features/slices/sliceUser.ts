@@ -1,4 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
+import { RootState } from '../../store/store'
+import { SERVER_HOST } from '../../constants/ports'
 
 interface UserInfo {
   id: number
@@ -9,6 +11,7 @@ interface UserInfo {
   login: string
   avatar: string
   email: string
+  isLoading: boolean
 }
 
 const initialState: UserInfo = {
@@ -20,17 +23,47 @@ const initialState: UserInfo = {
   login: '',
   avatar: '',
   email: '',
+  isLoading: false,
 }
 
-const userInfoSlice = createSlice({
-  name: 'UserInfo',
+export const fetchUserThunk = createAsyncThunk(
+  'user/fetchUserThunk',
+  async (_: void) => {
+    if (typeof window === 'undefined') {
+      return initialState
+    }
+    const url = `${SERVER_HOST}/user`
+    return fetch(url).then(res => res.json())
+  }
+)
+
+const updateUserSlice = createSlice({
+  name: 'updateUser',
   initialState,
   reducers: {
-    userInfo(state, action: PayloadAction<UserInfo>) {
+    updateUser(state, action: PayloadAction<UserInfo>) {
       return action.payload
     },
   },
+  extraReducers: builder => {
+    builder
+      .addCase(fetchUserThunk.pending.type, state => {
+        Object.assign(state, initialState)
+        state.isLoading = true
+      })
+      .addCase(
+        fetchUserThunk.fulfilled.type,
+        (state, { payload }: PayloadAction<UserInfo>) => {
+          Object.assign(state, payload)
+          state.isLoading = false
+        }
+      )
+      .addCase(fetchUserThunk.rejected.type, state => {
+        state.isLoading = false
+      })
+  },
 })
 
-export const { userInfo } = userInfoSlice.actions
-export default userInfoSlice.reducer
+export const selectUser = (state: RootState) => state.updateUser
+export const { updateUser } = updateUserSlice.actions
+export default updateUserSlice.reducer

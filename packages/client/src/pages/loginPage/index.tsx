@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router'
 import { ROUTES } from '../../constants/routes'
 import { LoginPageRequest } from './request'
+import Header from '../../components/Header'
 
 interface FormValues {
   login: string
@@ -22,7 +23,7 @@ const LoginPage = () => {
     const loginRequest = LoginPageRequest
 
     loginRequest.signIn(data).then(result => {
-      if (result.success) {
+      if (result.success || result.errorType === 400) {
         navigate(ROUTES.profilePage)
       } else {
         setError('password', {
@@ -59,49 +60,59 @@ const LoginPage = () => {
   }
 
   return (
-    <Container
-      minH="100vh"
-      maxW="container.md"
-      display="flex"
-      alignItems="center"
-      justifyContent="center">
-      <form onSubmit={onSubmit}>
-        <Stack gap="4" align="flex-start" maxW="sm">
-          <Field.Root invalid={!!errors.login}>
-            {/* @ts-ignore */}
-            <Field.Label>Логин</Field.Label>
-            <Input {...register('login')} />
-            {/* @ts-ignore */}
-            <Field.ErrorText>{errors.login?.message}</Field.ErrorText>
-          </Field.Root>
+    <>
+      <Header />
+      <Container
+        _dark={{ bg: 'black' }}
+        minH="100vh"
+        maxW="container.md"
+        display="flex"
+        alignItems="center"
+        justifyContent="center">
+        <form onSubmit={onSubmit}>
+          <Stack gap="4" align="flex-start" maxW="sm">
+            <Field.Root invalid={!!errors.login}>
+              {/* @ts-ignore */}
+              <Field.Label _dark={{ color: 'white' }}>Логин</Field.Label>
+              <Input
+                {...register('login')}
+                _dark={{ bg: 'gray.50' }}
+                borderColor="border.default"
+                color="fg.default"
+              />
+              {/* @ts-ignore */}
+              <Field.ErrorText>{errors.login?.message}</Field.ErrorText>
+            </Field.Root>
 
-          <Field.Root invalid={!!errors.password}>
-            {/* @ts-ignore */}
-            <Field.Label>Пароль</Field.Label>
-            <Input {...register('password')} />
-            {/* @ts-ignore */}
-            <Field.ErrorText>{errors.password?.message}</Field.ErrorText>
-          </Field.Root>
+            <Field.Root invalid={!!errors.password}>
+              {/* @ts-ignore */}
+              <Field.Label _dark={{ color: 'white' }}>Пароль</Field.Label>
+              <Input {...register('password')} _dark={{ bg: 'gray.50' }} />
+              {/* @ts-ignore */}
+              <Field.ErrorText>{errors.password?.message}</Field.ErrorText>
+            </Field.Root>
 
-          <Button
-            type="submit"
-            loading={isSubmitting}
-            loadingText="Вход..."
-            bg={'blue.600'}
-            width={350}>
-            Войти
-          </Button>
+            <Button
+              type="submit"
+              loading={isSubmitting}
+              loadingText="Вход..."
+              bg={'blue.600'}
+              _dark={{ bg: 'orange.500' }}
+              width={350}>
+              Войти
+            </Button>
 
-          <Button
-            onClick={handleYandexLogin}
-            bg="white"
-            color="black"
-            width={350}>
-            Войти через Яндекс
-          </Button>
-        </Stack>
-      </form>
-    </Container>
+            <Button
+              onClick={handleYandexLogin}
+              bg="blue.600"
+              _dark={{ bg: 'orange.500' }}
+              width={350}>
+              Войти через Яндекс
+            </Button>
+          </Stack>
+        </form>
+      </Container>
+    </>
   )
 }
 

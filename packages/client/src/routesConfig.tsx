@@ -22,7 +22,7 @@ const RoutesConfig = () => (
     <Route path={ROUTES.gamePage} element={<GamePage />} />
     <Route path={ROUTES.leaderBoardPage} element={<LeaderBoardPage />} />
     <Route path={ROUTES.forumPage} element={<ForumPage />} />
-    <Route path={ROUTES.topicPage} element={<TopicPage />} />
+    <Route path={`${ROUTES.topicPage}/:id`} element={<TopicPage />} />
     <Route path={ROUTES.notFoundPage} element={<NotFoundPage />} />
     <Route
       path={ROUTES.internalServerError}

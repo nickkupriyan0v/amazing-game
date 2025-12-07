@@ -1,11 +1,11 @@
-import React from 'react'
 import { ROUTES } from '../../constants/routes'
 import { Link } from 'react-router'
 import { Button, Flex, HStack, Text } from '@chakra-ui/react'
 import { useAppSelector } from '../../store/hooks'
 import { MdForum, MdLeaderboard, MdHome } from 'react-icons/md'
+import { ColorModeButton } from '../ui/color-mode'
 const Header = () => {
-  const user = useAppSelector(state => state.userInfo)
+  const user = useAppSelector(state => state.updateUser)
   const isLoggedIn = !!user?.id
 
   const navLinks = [
@@ -22,6 +22,7 @@ const Header = () => {
       h="80px"
       px="60px"
       bg="teal.50"
+      _dark={{ bg: 'black' }}
       boxShadow="sm"
       position="sticky"
       top="0"
@@ -52,6 +53,7 @@ const Header = () => {
       </HStack>
 
       <HStack>
+        <ColorModeButton />
         {isLoggedIn ? (
           <Text
             fontWeight="semibold"
@@ -64,6 +66,7 @@ const Header = () => {
             <Button
               fontWeight="medium"
               bg="teal.500"
+              _dark={{ bg: 'black' }}
               color="white"
               variant="solid"
               _hover={{ bg: 'teal.600' }}>
@@ -72,6 +75,7 @@ const Header = () => {
             <Button
               fontWeight="medium"
               bg="orange.400"
+              _dark={{ bg: 'black' }}
               color="white"
               variant="solid"
               _hover={{ bg: 'orange.500' }}>

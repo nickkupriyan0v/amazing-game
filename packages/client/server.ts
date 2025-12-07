@@ -1,76 +1,78 @@
-import fs from 'node:fs/promises'
-import express, { Request, Response } from 'express'
-import type { ViteDevServer } from 'vite'
-
-const isProduction = process.env.NODE_ENV === 'production'
-const port: number = Number(process.env.PORT) || 5176
-const base: string = process.env.BASE || '/'
-
-let templateHtml = ''
-
-if (isProduction) {
-  templateHtml = await fs.readFile('./dist/index.html', 'utf-8')
-}
-
-const app = express()
-
-let vite: ViteDevServer | undefined
-
-if (!isProduction) {
-  const { createServer } = await import('vite')
-  vite = await createServer({
-    server: { middlewareMode: true },
-    appType: 'custom',
-    base,
-  })
-  app.use(vite.middlewares)
-} else {
-  const compression = (await import('compression')).default
-  const sirv = (await import('sirv')).default
-  app.use(compression())
-  app.use(base, sirv('./dist', { extensions: [] }))
-}
-
-app.use(/.*/, async (req: Request, res: Response) => {
-  try {
-    const url = req.originalUrl.replace(base, '')
-
-    let template: string
-    let render: (url: string) => Promise<{ html: string; head?: string }>
-
-    if (!isProduction) {
-      template = await fs.readFile('index.html', 'utf-8')
-      template = await vite!.transformIndexHtml(url, template)
-
-      const mod = await vite!.ssrLoadModule('/src/entry-server.tsx')
-      render = mod.render
-    } else {
-      template = templateHtml
-      const mod = (await import('../dist/server/entry-server.js')) as {
-        render: (url: string) => Promise<{ html: string; head?: string }>
-      }
-      render = mod.render
-    }
-
-    const rendered = await render(url)
-
-    const html = template
-      .replace('<!--app-head-->', rendered.head ?? '')
-      .replace('<!--app-html-->', rendered.html ?? '')
-
-    res.status(200).set({ 'Content-Type': 'text/html' }).send(html)
-  } catch (e) {
-    if (vite && e instanceof Error) {
-      vite?.ssrFixStacktrace?.(e)
-      console.error(e)
-      res.status(500).end(e.stack)
-    } else {
-      console.error('Неизвестный тип')
-      res.status(500).end('Ошибка')
-    }
+import dotenv from 'dotenv'
+dotenv.config()
+import express, { Request as ExpressRequest } from 'express'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import { dirname, join } from 'path'
+import fs from 'fs/promises'
+import { createServer as createViteServer, ViteDevServer } from 'vite'
+import serialize from 'serialize-javascript'
+const port = process.env.PORT || 3010
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+const clientPath = join(__dirname, '..')
+const isDev = process.env.NODE_ENV === 'development'
+async function createServer() {
+  const app = express()
+  let vite: ViteDevServer | undefined
+  if (isDev) {
+    vite = await createViteServer({
+      server: { middlewareMode: true },
+      root: clientPath,
+      appType: 'custom',
+    })
+    app.use(vite.middlewares)
+  } else {
+    app.use(
+      express.static(path.join(clientPath, 'dist/client'), { index: false })
+    )
   }
-})
-
-app.listen(port, () => {
-  console.log(`Server started at http://localhost:${port}`)
-})
+  app.get('*', async (req, res, next) => {
+    const url = req.originalUrl
+    try {
+      let render: (
+        req: ExpressRequest
+      ) => Promise<{ html: string; initialState: unknown }>
+      let template
+      if (vite) {
+        template = await fs.readFile(
+          path.resolve(clientPath, 'index.html'),
+          'utf-8'
+        )
+        template = await vite.transformIndexHtml(url, template)
+        render = (
+          await vite.ssrLoadModule(
+            path.join(clientPath, 'src/entry-server.tsx')
+          )
+        ).render
+      } else {
+        template = await fs.readFile(
+          path.join(clientPath, 'dist/client/index.html'),
+          'utf-8'
+        )
+        const pathToServer = path.join(
+          clientPath,
+          'dist/server/entry-server.js'
+        )
+        render = (await import(pathToServer)).render
+      }
+      const { html: appHtml, initialState } = await render(req)
+      const html = template.replace(`<!--ssr-outlet-->`, appHtml).replace(
+        `<!--ssr-initial-state-->`,
+        `<script>window.APP_INITIAL_STATE = ${serialize(initialState, {
+          isJSON: true,
+        })}</script>`
+      )
+      res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
+    } catch (e) {
+      if (vite && e instanceof Error) {
+        vite.ssrFixStacktrace(e)
+      }
+      next(e)
+    }
+  })
+  app.listen(port, () => {
+    console.log(`Client is listening on port: ${port}`)
+  })
+}
+createServer()

@@ -13,6 +13,7 @@ export const useGame = (config = SETTINGS) => {
     cardHeight,
     spacing
   )
+
   const {
     flipped,
     matched,
@@ -20,7 +21,6 @@ export const useGame = (config = SETTINGS) => {
     count,
     seconds,
     startTimer,
-    resetTimer,
     handleCardClick,
     resetGame,
     isGameComplete,
@@ -29,8 +29,7 @@ export const useGame = (config = SETTINGS) => {
   const reset = useCallback(() => {
     resetBoard()
     resetGame()
-    resetTimer()
-  }, [resetBoard, resetGame, resetTimer])
+  }, [resetBoard, resetGame])
 
   const canvasSize = {
     width: cols * (cardWidth + spacing),
