@@ -1,7 +1,3 @@
-CREATE DATABASE amazing_db;
-
-\c amazing_db;
-
 CREATE TABLE IF NOT EXISTS public.users (
   id SERIAL PRIMARY KEY,
   login TEXT NOT NULL UNIQUE,
