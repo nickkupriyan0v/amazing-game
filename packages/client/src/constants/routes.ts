@@ -7,7 +7,7 @@ export const ROUTES = {
   gamePage: '/getStart/game',
   leaderBoardPage: '/leaderboard',
   forumPage: '/forum',
-  topicPage: '/topic/:id',
+  topicPage: '/forum',
   notFoundPage: '*',
   internalServerError: '/500',
 }
