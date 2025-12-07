@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import { data } from './data'
 import './style.css'
 import {
   Avatar,
@@ -13,7 +11,12 @@ import {
 } from '@chakra-ui/react'
 import { useAppSelector } from '../../store/hooks'
 import Header from '../../components/Header'
+import { useGetTopicsQuery } from '../../api/forumApi/forumApi'
+import ModalForum from '../../components/ModalForum'
+import { Link } from 'react-router'
+import { ROUTES } from '../../constants/routes'
 const ForumPage = () => {
+  const { data, isLoading, error } = useGetTopicsQuery('')
   const user = useAppSelector(state => state.updateUser)
   const isLoggedIn = !!user?.id
   return (
@@ -39,43 +42,44 @@ const ForumPage = () => {
             </Text>
           )}
         </Box>
-
         <Stack className="topics-list">
-          {data.map(topic => (
-            <Box
-              className="topic-card"
-              key={topic.id}
-              _dark={{ bg: 'cyan.600', color: 'white' }}>
+          {isLoading && <Text>Загрузка..</Text>}
+          {error && <Text>Произошла ошибка: {data}</Text>}
+          <ModalForum />
+          {data &&
+            data?.map(element => (
               <Box
-                className="topic-header"
-                _dark={{ bg: 'cyan.600', color: 'white' }}>
-                <Heading _dark={{ color: 'white' }}>{topic.title}</Heading>
-                <span className="created">
-                  Пост был создан: {topic.created}
-                </span>
-              </Box>
+                className="topic-card"
+                _dark={{ bg: 'cyan.600', color: 'white' }}
+                key={element.id}>
+                <Box
+                  className="topic-header"
+                  _dark={{ bg: 'cyan.600', color: 'white' }}>
+                  <Heading _dark={{ color: 'white' }}>{element.title}</Heading>
+                  <span className="created">
+                    Пост был создан:{element.createdAt}
+                  </span>
+                </Box>
 
-              <div className="topic-footer">
-                <AvatarGroup>
-                  <Avatar.Root>
-                    <Avatar.Fallback name={topic.author} />
-                    <Avatar.Image />
-                  </Avatar.Root>
-                </AvatarGroup>
-                <Text>{topic.author}</Text>
-                <span className="comments">
-                  Кол-во комментариев: {topic.comments}
-                </span>
-              </div>
-              <details>
-                <Heading _dark={{ bg: 'cyan.600', color: 'white' }}>
-                  {topic.title}
-                </Heading>
-                <summary>Подробнее:</summary>
-                <p>{topic.text}</p>
-              </details>
-            </Box>
-          ))}
+                <div className="topic-footer">
+                  <AvatarGroup>
+                    <Avatar.Root>
+                      <Avatar.Fallback name={element.login} />
+                      <Avatar.Image />
+                    </Avatar.Root>
+                  </AvatarGroup>
+                  <Text>{element.login}</Text>
+                  <Link to={`${ROUTES.topicPage}/${element.id}`}>Перейти</Link>
+                </div>
+                <details>
+                  <Heading _dark={{ bg: 'cyan.600', color: 'white' }}>
+                    {element.title}
+                  </Heading>
+                  <summary>Подробнее:</summary>
+                  <p>{element.text}</p>
+                </details>
+              </Box>
+            ))}
         </Stack>
       </Container>
     </Box>
