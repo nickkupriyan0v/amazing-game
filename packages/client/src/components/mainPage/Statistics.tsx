@@ -1,7 +1,7 @@
 import { Box, Container, Text, Heading, Grid } from '@chakra-ui/react'
 const Statistics = () => {
   return (
-    <Box py={{ base: 16, md: 24 }} bg="white">
+    <Box py={{ base: 16, md: 24 }} bg="white" _dark={{ bg: 'black' }}>
       <Container maxW="1200px">
         <Grid templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }} gap={8}>
           {[

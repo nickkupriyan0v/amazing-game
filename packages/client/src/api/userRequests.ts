@@ -31,13 +31,15 @@ export class UserRequestsClass {
       .get(urlAPI + '/auth/user', { withCredentials: true })
       .then(response => {
         const result: SuccessResponse = { success: true, data: response.data }
+        console.log('Данные:', JSON.stringify(result, null, 2))
+        console.log('Cookies:', document.cookie)
         return result
       })
       .catch(error => {
         const result: ErrorResponse = {
           success: false,
-          error: error.response.data?.reason,
-          errorType: error.status,
+          error: error.response?.data?.reason || error.message,
+          errorType: error.response?.status,
         }
         return result
       })
