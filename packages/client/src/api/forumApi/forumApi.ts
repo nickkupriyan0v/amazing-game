@@ -1,9 +1,8 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const forumApi = createApi({
   reducerPath: 'forumApi',
 
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:3005/api',
+    baseUrl: 'http://localhost:3001/api',
     credentials: 'include',
   }),
 
@@ -25,6 +24,19 @@ export const forumApi = createApi({
         body,
       }),
     }),
+    reactToTopic: build.mutation({
+      query: ({
+        topicId,
+        reaction,
+      }: {
+        topicId: number
+        reaction: string
+      }) => ({
+        url: `/topics/${topicId}/reactions`,
+        method: 'POST',
+        body: { reaction },
+      }),
+    }),
     getForumByName: build.query({
       query: (id: string) => `/${id}`,
     }),
@@ -38,6 +50,7 @@ export const {
   useGetTopicsQuery,
   useGetTopicByIdQuery,
   useCreateTopicMutation,
+  useReactToTopicMutation,
   useGetForumByNameQuery,
   useGetCommentsByIdQuery,
 } = forumApi
