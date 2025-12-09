@@ -11,6 +11,7 @@
     "test": "jest ."
   },
   "dependencies": {
+    "@types/cookie-parser": "^1.4.10",
     "@vitejs/plugin-react": "5.1.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
