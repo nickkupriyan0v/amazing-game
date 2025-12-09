@@ -1,8 +1,23 @@
 import { Request, Response, NextFunction } from 'express'
 import axios from 'axios'
 
+export interface IUser {
+  id: number
+  login: string
+  display_name: string | null
+  avatar: string | null
+  email: string
+  first_name: string
+  second_name: string
+  phone: string
+}
+
+export interface AuthenticatedRequest extends Request {
+  user?: IUser
+}
+
 export const authMiddleware = async (
-  req: Request,
+  req: AuthenticatedRequest,
   res: Response,
   next: NextFunction
 ) => {
@@ -21,13 +36,16 @@ export const authMiddleware = async (
 
     const apiAdress = 'https://ya-praktikum.tech/api/v2'
 
-    await axios.get(`${apiAdress}/auth/user`, {
+    const response = await axios.get(`${apiAdress}/auth/user`, {
       headers: {
         Cookie: cookies,
         'Content-Type': 'application/json',
       },
       withCredentials: true,
     })
+
+    req.user = response.data
+
     next()
   } catch (error) {
     const status = error.response?.status || 500
