@@ -1,7 +1,7 @@
-import { Box, Flex, Heading, Text, Card } from '@chakra-ui/react'
 import Header from '../../components/Header'
 import { useGetTopicByIdQuery } from '../../api/forumApi/forumApi'
 import { useParams } from 'react-router'
+import { ReactionPopover } from '../../components/TopicPage/ReactionPopover'
 
 const TopicPage = () => {
   const { id } = useParams<{ id: string }>()
@@ -36,6 +36,7 @@ const TopicPage = () => {
             </Text>
           </Text>
           <Text mt={2}>{data.text}</Text>
+          <ReactionPopover topicId={Number(id)} />
         </Card.Root>
 
         {data.comments &&
