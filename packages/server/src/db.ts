@@ -1,7 +1,6 @@
 import dotenv from 'dotenv'
 dotenv.config()
 
-<<<<<<< HEAD
 const {
   POSTGRES_USER,
   POSTGRES_PASSWORD,
@@ -9,7 +8,6 @@ const {
   POSTGRES_PORT,
   POSTGRES_HOST,
 } = process.env
-=======
 import { Client } from 'pg'
 import { Sequelize } from 'sequelize-typescript'
 import { Topic } from './models/topic.model'
@@ -36,21 +34,17 @@ export async function connectDb() {
     throw err
   }
 }
->>>>>>> origin/dev
 
 export const createClientAndConnect = async (): Promise<Client | null> => {
   try {
     const client = new Client({
-<<<<<<< HEAD
       user: POSTGRES_USER,
       host: POSTGRES_HOST,
       database: POSTGRES_DB,
       password: POSTGRES_PASSWORD,
       port: Number(POSTGRES_PORT),
-=======
       connectionString: DATABASE_URL,
       ssl: false,
->>>>>>> origin/dev
     })
 
     await client.connect()

@@ -13,12 +13,12 @@ app.use(
   })
 )
 app.use(express.json())
-const port = Number(process.env.SERVER_PORT) || 3005
+const port = Number(process.env.SERVER_PORT) || 3001
 
 createClientAndConnect()
 app.use('/api', router)
 app.get('/', (_, res) => {
-  res.json('👋 Howdy from the server :)')
+  res.json('👋 Привет сервер :)')
 })
 
 app.listen(port, () => {

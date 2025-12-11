@@ -1,17 +1,16 @@
 {
   "compilerOptions": {
-    "module": "ESNext",
-    "moduleResolution": "node",
-    "target": "ES2023",
-    "strict": true,
-    "esModuleInterop": true,
-    "ignoreDeprecations": "6.0",
     "rootDir":"src",
     "composite": true,
+    "target": "es2022",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
     "removeComments": true,
+    "strict": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitOverride": true,
@@ -22,7 +21,7 @@
     "importsNotUsedAsValues": "error",
     "lib": ["es2019", "esnext.asynciterable"],
     "types": ["node", "jest"],
-    "baseUrl": ".",
+    "baseUrl": "src",
     "paths": {
       "*": ["types/*"]
     },
