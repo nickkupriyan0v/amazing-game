@@ -7,7 +7,7 @@ import { dirname, join } from 'path';
 import fs from 'fs/promises';
 import { createServer as createViteServer } from 'vite';
 import serialize from 'serialize-javascript';
-const port = process.env.PORT || 3010;
+const port = process.env.PORT || 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const clientPath = join(__dirname, '..');
