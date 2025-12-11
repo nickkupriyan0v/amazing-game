@@ -5,7 +5,7 @@ dotenv.config()
 
 export default defineConfig({
   server: {
-    port: Number(process.env.CLIENT_PORT) || 3010,
+    port: Number(process.env.CLIENT_PORT) || 3000,
   },
   define: {
     __EXTERNAL_SERVER_URL__: JSON.stringify(process.env.EXTERNAL_SERVER_URL),

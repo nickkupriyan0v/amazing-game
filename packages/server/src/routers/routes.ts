@@ -5,12 +5,12 @@ import { ReactionController } from '../controllers/reaction.controller'
 
 const router = Router()
 
-const authStub = (req: Request, res: Response, next: NextFunction) => {
-  console.log('Временная заглушка для Middleware:', req.method, req.url)
-  req.user = { id: 1, login: 'testUser' }
-  next()
-}
-router.use(authStub)
+// const authStub = (req: Request, res: Response, next: NextFunction) => {
+//   console.log('Временная заглушка для Middleware:', req.method, req.url)
+//   req.user = { id: 1, login: 'testUser' }
+//   next()
+// }
+// router.use(authStub)
 
 //Темы(Topics) для форума
 router.post('/topics', TopicController.create)
@@ -21,8 +21,10 @@ router.delete('/topics/:id', TopicController.delete)
 
 //Комментарии
 router.post('/topics/:topicId/comments', CommentController.create)
+router.get('/comments/:id', CommentController.get)
 router.put('/comments/:id', CommentController.update)
 router.delete('/comments/:id', CommentController.delete)
+router.get('comments/:id', CommentController.get)
 router.get(
   '/topics/:topicId/comments',
   CommentController.getCommentsWithReplies
