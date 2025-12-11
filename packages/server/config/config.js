@@ -3,15 +3,15 @@ require('dotenv').config()
 
 module.exports = {
   development: {
-    url: "postgresql://amazing:changeme@localhost:5432/amazing_db",
+    url: process.env.DATABASE_URL,
     dialect: 'postgres',
   },
   test: {
-    url: "postgresql://amazing:changeme@localhost:5432/amazing_db",
+    url: process.env.DATABASE_URL,
     dialect: 'postgres',
   },
   production: {
-    url: "postgresql://amazing:changeme@localhost:5432/amazing_db",
+    url: process.env.DATABASE_URL,
     dialect: 'postgres',
   },
 }

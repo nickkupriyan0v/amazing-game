@@ -39,7 +39,20 @@ export class CommentController {
 
     return res.json(comment)
   }
+  static async get(req: Request<{ id: number }>, res: Response) {
+    const { id } = req.params
+    if (isNaN(id)) {
+      return res.status(400).json({ message: 'Не корректный id' })
+    }
 
+    const comment = await Comment.findByPk(id, {
+      include: [{ model: Comment, as: 'replies' }],
+    })
+    if (!comment) {
+      return res.status(404).json({ message: 'Не найден комментарий' })
+    }
+    return res.json(comment)
+  }
   static async update(
     req: Request<{ id: string }, unknown, IComment>,
     res: Response
