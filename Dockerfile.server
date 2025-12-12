@@ -11,13 +11,16 @@ RUN yarn install --frozen-lockfile --network-concurrency 1
 COPY . .
 RUN yarn lerna bootstrap
 
+WORKDIR /app/packages/server
+RUN yarn build
 FROM base as development
 
 COPY --from=builder /app/node_modules /app/node_modules
-COPY --from=builder /app/packages /app/packages
+COPY --from=builder /app/packages/server/dist /app/dist/
+
 COPY package.json yarn.lock ./
 
 WORKDIR /app/packages/server
 
 EXPOSE 3001
-CMD ["yarn", "dev"]
+CMD ["yarn", "preview"]

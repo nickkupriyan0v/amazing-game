@@ -8,7 +8,7 @@
     "build-client": "vite build --outDir dist",
     "build-ssr": "vite build --ssr ./src/entry-server.tsx --outDir ./dist/server",
     "build-server": "tsc -p tsconfig.server.json",
-    "preview": "node server/index.js"
+    "preview": "node dist-server/server"
   },
   "dependencies": {
     "@chakra-ui/color-mode": "^2.2.0",

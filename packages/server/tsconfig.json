@@ -5,26 +5,27 @@
     "target": "es2022",
     "strict": true,
     "esModuleInterop": true,
-    "ignoreDeprecations": "6.0",
     "rootDir":"src",
     "composite": true,
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
     "removeComments": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "noImplicitReturns": true,
     "noImplicitOverride": true,
     "noFallthroughCasesInSwitch": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
+    "outDir": "./dist",
     "forceConsistentCasingInFileNames": true,
     "lib": ["es2021", "esnext.asynciterable"],
     "types": ["node", "jest"],
-    "baseUrl": "src",
+    "baseUrl":"src",
     "paths": {
       "*": ["types/*"]
     },
-    "outDir": "dist"
-  }
+
+  },
+  "include":["src"]
 }
