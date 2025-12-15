@@ -8,10 +8,13 @@ import {
   Table,
 } from 'sequelize-typescript'
 import { Topic } from './topic.model'
-import { Reaction } from './reaction.model'
+import { CommentAttribute, CommentCreationAttributes } from 'comment.interface'
 
 @Table({ tableName: 'comments', timestamps: true })
-export class Comment extends Model<Comment> {
+export class Comment extends Model<
+  CommentAttribute,
+  CommentCreationAttributes
+> {
   @Column({ type: DataType.TEXT, allowNull: false })
   text!: string
 
@@ -20,21 +23,18 @@ export class Comment extends Model<Comment> {
 
   @ForeignKey(() => Topic)
   @Column({ type: DataType.INTEGER, allowNull: false })
-  topicId!: number
+  topicId!: number | null
 
   @BelongsTo(() => Topic)
   topic!: Topic
 
   @ForeignKey(() => Comment)
   @Column({ type: DataType.INTEGER, allowNull: true })
-  parentId!: number
+  parentId!: number | null
 
   @BelongsTo(() => Comment, { as: 'parent' })
   parent!: Comment
 
   @HasMany(() => Comment, { as: 'replies', foreignKey: 'parentId' })
   replies!: Comment[]
-
-  @HasMany(() => Reaction)
-  reactions!: Reaction[]
 }

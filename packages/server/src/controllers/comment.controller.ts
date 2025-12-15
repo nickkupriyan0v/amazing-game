@@ -1,43 +1,59 @@
+/* eslint-disable prefer-const */
 import { Request, Response } from 'express'
-import { IComment } from '../types/comment.interface'
+import { CommentAttribute } from '../types/comment.interface'
 import { Comment } from '../models/comment.model'
 
 export class CommentController {
   static async create(
-    req: Request<{ topicId?: string; parentId: number }, unknown, IComment>,
+    req: Request<
+      { topicId?: string; parentId?: string | number },
+      unknown,
+      CommentAttribute
+    >,
     res: Response
   ) {
-    const { text, login } = req.body
+    try {
+      const { text, login } = req.body
 
-    const parentId = req.params.parentId ? Number(req.params.parentId) : null
-    let topicId = req.params.topicId ? Number(req.params.topicId) : null
+      if (!login) return res.status(400).json({ message: 'Логин не получен' })
+      if (!text)
+        return res.status(400).json({ message: 'Текст комментария обязателен' })
 
-    if (!login) return res.status(400).json({ message: 'Логин не получен' })
+      const parentId: number | null = req.params.parentId
+        ? Number(req.params.parentId)
+        : null
+      let topicId: number | null = req.params.topicId
+        ? Number(req.params.topicId)
+        : null
 
-    if (parentId) {
-      if (isNaN(parentId))
-        return res.status(400).json({ message: 'Некорректный parentId' })
+      if (parentId !== null) {
+        if (isNaN(parentId))
+          return res.status(400).json({ message: 'Некорректный parentId' })
 
-      const parentComment = await Comment.findByPk(parentId)
-      if (!parentComment)
-        return res
-          .status(404)
-          .json({ message: 'Родительский комментарий не найден' })
+        const parentComment = await Comment.findByPk(parentId)
+        if (!parentComment)
+          return res
+            .status(404)
+            .json({ message: 'Родительский комментарий не найден' })
 
-      topicId = parentComment.topicId
+        topicId = parentComment.topicId
+      }
+
+      if (topicId === null || isNaN(topicId))
+        return res.status(400).json({ message: 'Некорректный topicId' })
+
+      const comment = await Comment.create({
+        login,
+        text,
+        topicId,
+        parentId,
+      })
+
+      return res.json(comment)
+    } catch (error) {
+      console.error(error)
+      return res.status(500).json({ message: 'Internal server error' })
     }
-
-    if (!topicId || isNaN(topicId))
-      return res.status(400).json({ message: 'Некорректный topicId' })
-
-    const comment = await Comment.create({
-      text,
-      login,
-      topicId,
-      parentId: parentId,
-    })
-
-    return res.json(comment)
   }
   static async get(req: Request<{ id: number }>, res: Response) {
     const { id } = req.params
@@ -54,7 +70,7 @@ export class CommentController {
     return res.json(comment)
   }
   static async update(
-    req: Request<{ id: string }, unknown, IComment>,
+    req: Request<{ id: string }, unknown, CommentAttribute>,
     res: Response
   ) {
     const { text, login } = req.body
@@ -75,7 +91,7 @@ export class CommentController {
   }
 
   static async delete(
-    req: Request<{ id: string }, unknown, IComment>,
+    req: Request<{ id: string }, unknown, CommentAttribute>,
     res: Response
   ) {
     const { login } = req.body

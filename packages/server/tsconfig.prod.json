@@ -1,15 +1,17 @@
 {
+  "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./src",
-    "declaration": true,
-    "emitDeclarationOnly": false,
     "strict": true,
     "esModuleInterop": true,
-    "module": "CommonJS",
-    "target": "ESNext"
+    "module": "commonjs",
+    "target": "es2022",
+    "declaration": true,
+    "emitDeclarationOnly": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
-  "extends": "./tsconfig",
   "include": ["src"],
-  "exclude": ["node_modules", "dist","**/*.test.ts", "**/*.mock.ts", "**/__test__"]
+  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.mock.ts", "**/test"]
 }

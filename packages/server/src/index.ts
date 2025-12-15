@@ -4,23 +4,20 @@ import express from 'express'
 import cookieParser from 'cookie-parser'
 import { createClientAndConnect } from './db'
 import router from './routers/routes'
-import { authMiddleware } from './middleware/auth'
-
 dotenv.config()
 
 const app = express()
 app.use(
   cors({
-    origin: 'http://localhost:3010',
+    origin: 'http://localhost:3000',
     credentials: true,
   })
 )
 app.use(express.json())
 const port = Number(process.env.SERVER_PORT) || 3001
 app.use(cookieParser())
-app.use(authMiddleware)
+// app.use(authMiddleware)
 
-const port = Number(process.env.SERVER_PORT) || 3005
 createClientAndConnect()
 app.use('/api', router)
 app.get('/', (_, res) => {
