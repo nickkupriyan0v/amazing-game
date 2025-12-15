@@ -17,6 +17,8 @@
     "noFallthroughCasesInSwitch": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "outDir": "./dist",
     "forceConsistentCasingInFileNames": true,
     "lib": ["es2021", "esnext.asynciterable"],

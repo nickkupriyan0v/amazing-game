@@ -1,9 +1,9 @@
 ARG NODE_VERSION=22
 
-FROM node:$NODE_VERSION-bookworm as base
+FROM node:${NODE_VERSION}-bookworm AS base
 WORKDIR /app
 
-FROM base as builder
+FROM base AS builder
 
 COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile --network-concurrency 1
@@ -13,14 +13,14 @@ RUN yarn lerna bootstrap
 
 WORKDIR /app/packages/server
 RUN yarn build
-FROM base as development
 
-COPY --from=builder /app/node_modules /app/node_modules
-COPY --from=builder /app/packages/server/dist /app/dist/
+FROM base AS runtime
 
-COPY package.json yarn.lock ./
+ENV NODE_ENV=production
+
+COPY --from=builder /app /app
 
 WORKDIR /app/packages/server
 
 EXPOSE 3001
-CMD ["yarn", "preview"]
+CMD ["node", "dist/index.js"]
