@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState, useRef } from 'react'
 import { Card } from '../../types/card'
 
 export const useGameLogic = (cards: Card[]) => {
@@ -30,6 +30,23 @@ export const useGameLogic = (cards: Card[]) => {
     return () => clearInterval(t)
   }, [timerRunning])
 
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    }
+  }, [])
+
+  useEffect(() => {
+    Notification.requestPermission(function (permission) {
+      // Если пользователь разрешил, то создаём уведомление
+      if (permission === 'granted') {
+        new Notification('Hi there!')
+      }
+    })
+  }, [])
+
   const handleCardClick = useCallback(
     (cardId: Card['id']) => {
       if (disabled || flipped.includes(cardId) || matched.includes(cardId)) {
@@ -52,7 +69,7 @@ export const useGameLogic = (cards: Card[]) => {
           setFlipped([])
           setDisabled(false)
         } else {
-          setTimeout(() => {
+          timeoutRef.current = setTimeout(() => {
             setFlipped([])
             setDisabled(false)
           }, 1000)

@@ -31,7 +31,7 @@ const GetStartPage = ({ getStart }: GetStartPageProps) => {
     }
 
     return () => clearTimeout(countdown)
-  }, [timer])
+  }, [timer, getStart, navigate])
 
   return (
     <Box _dark={{ bg: 'black' }}>
