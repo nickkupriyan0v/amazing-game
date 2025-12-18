@@ -11,9 +11,7 @@ const {
 import { Client } from 'pg'
 import { Sequelize } from 'sequelize-typescript'
 import { Topic } from './models/topic.model'
-import { Reaction } from './models/reaction.model'
 import { Comment } from './models/comment.model'
-
 const { DATABASE_URL } = process.env
 
 if (!DATABASE_URL) {
@@ -22,7 +20,7 @@ if (!DATABASE_URL) {
 
 export const sequelize = new Sequelize(DATABASE_URL, {
   logging: false,
-  models: [Topic, Reaction, Comment],
+  models: [Topic, Comment],
 })
 
 export async function connectDb() {

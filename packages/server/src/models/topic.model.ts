@@ -1,7 +1,6 @@
 import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript'
 import { Comment } from './comment.model'
 import { ITopic } from '../types/topic.interface'
-import { Reaction } from './reaction.model'
 
 @Table({ tableName: 'topics' })
 export class Topic extends Model<ITopic> {
@@ -16,7 +15,4 @@ export class Topic extends Model<ITopic> {
 
   @HasMany(() => Comment)
   comments!: Comment[]
-
-  @HasMany(() => Reaction)
-  reactions!: Reaction[]
 }

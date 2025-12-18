@@ -1,10 +1,14 @@
 import { Request, Response } from 'express'
-import { IComment } from '../types/comment.interface'
+import { CommentAttribute } from '../types/comment.interface'
 import { Comment } from '../models/comment.model'
 
 export class CommentController {
   static async create(
-    req: Request<{ topicId?: string; parentId: number }, unknown, IComment>,
+    req: Request<
+      { topicId?: string; parentId: number },
+      unknown,
+      CommentAttribute
+    >,
     res: Response
   ) {
     const { text, login } = req.body
@@ -29,7 +33,6 @@ export class CommentController {
 
     if (!topicId || isNaN(topicId))
       return res.status(400).json({ message: 'Некорректный topicId' })
-
     const comment = await Comment.create({
       text,
       login,
@@ -54,7 +57,7 @@ export class CommentController {
     return res.json(comment)
   }
   static async update(
-    req: Request<{ id: string }, unknown, IComment>,
+    req: Request<{ id: string }, unknown, CommentAttribute>,
     res: Response
   ) {
     const { text, login } = req.body
@@ -75,7 +78,7 @@ export class CommentController {
   }
 
   static async delete(
-    req: Request<{ id: string }, unknown, IComment>,
+    req: Request<{ id: string }, unknown, CommentAttribute>,
     res: Response
   ) {
     const { login } = req.body

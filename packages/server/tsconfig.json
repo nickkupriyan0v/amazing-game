@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "es2022",
     "strict": true,
     "esModuleInterop": true,
-    "ignoreDeprecations": "6.0",
     "rootDir":"src",
     "composite": true,
     "sourceMap": true,
