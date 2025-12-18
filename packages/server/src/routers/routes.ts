@@ -1,7 +1,6 @@
-import { NextFunction, Router } from 'express'
+import { Router } from 'express'
 import { TopicController } from '../controllers/topic.controller'
 import { CommentController } from '../controllers/comment.controller'
-import { ReactionController } from '../controllers/reaction.controller'
 
 const router = Router()
 
@@ -30,10 +29,5 @@ router.get(
   CommentController.getCommentsWithReplies
 )
 router.post('/comments/:parentId/replies', CommentController.create)
-
-// Реакции
-router.post('/reactions', ReactionController.create)
-router.put('/reactions/:id', ReactionController.update),
-  router.delete('/reactions/:id', ReactionController.delete)
 
 export default router

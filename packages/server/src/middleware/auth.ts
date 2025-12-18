@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 
 export interface IUser {
   id: number
@@ -48,7 +48,8 @@ export const authMiddleware = async (
 
     next()
   } catch (error) {
-    const status = error.response?.status || 500
+    const err = error as AxiosError<{ reason?: string }>
+    const status = err.response?.status || 500
 
     if (status === 401) {
       return res.status(401).json({ message: 'Unauthorized' })
@@ -56,7 +57,7 @@ export const authMiddleware = async (
 
     res.status(401).json({
       message: 'Authentication failed',
-      details: error.message,
+      details: err.message,
     })
   }
 }

@@ -31,8 +31,6 @@ export class UserRequestsClass {
       .get(urlAPI + '/auth/user', { withCredentials: true })
       .then(response => {
         const result: SuccessResponse = { success: true, data: response.data }
-        console.log('Данные:', JSON.stringify(result, null, 2))
-        console.log('Cookies:', document.cookie)
         return result
       })
       .catch(error => {
