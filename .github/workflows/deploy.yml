@@ -1,0 +1,51 @@
+name: Deploy MemoryCards
+
+on:
+  push:
+    branches: [dev]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      # FRONTEND
+      - name: Build client
+        working-directory: client
+        run: |
+          npm ci
+          npm run build
+
+      # BACKEND
+      - name: Build server
+        working-directory: server
+        run: |
+          npm ci
+          npm run build
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /var/www/app
+            git pull origin main
+
+            cd packages/client
+            npm ci
+            npm run build
+
+            cd ../server
+            npm ci
+            npm run build
+
+            pm2 start ecosystem.config.js || pm2 restart api
