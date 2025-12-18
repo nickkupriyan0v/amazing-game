@@ -1,0 +1,8 @@
+import path from "path"
+
+module.exports = {
+  config: path.resolve("packages/server/src/config.js"),
+  migrationsPath: path.resolve("packages/server/src/migrations"),
+  seedersPath: path.resolve("packages/server/src/seeders"),
+  modelsPath: path.resolve("packages/server/src/models")
+};

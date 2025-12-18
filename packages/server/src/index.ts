@@ -15,6 +15,7 @@ app.use(
 )
 app.use(express.json())
 const port = Number(process.env.SERVER_PORT) || 3001
+
 // app.use(cookieParser())
 // app.use(authMiddleware)
 

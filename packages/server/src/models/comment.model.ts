@@ -22,7 +22,7 @@ export class Comment extends Model<
 
   @ForeignKey(() => Topic)
   @Column({ type: DataType.INTEGER, allowNull: false })
-  topicId!: number
+  topicId!: number | null
 
   @BelongsTo(() => Topic)
   topic!: Topic

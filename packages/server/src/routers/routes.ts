@@ -27,5 +27,4 @@ router.get(
   '/topics/:topicId/comments',
   CommentController.getCommentsWithReplies
 )
-router.post('/comments/:parentId/replies', CommentController.create)
 export default router
