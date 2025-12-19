@@ -8,7 +8,9 @@
     "dev": "cross-env NODE_ENV=development nodemon --exec ts-node --transpile-only src/index.ts",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "test": "jest ."
+    "test": "jest .",
+    "migrate":"sequelize-cli db:migrate",
+    "migrate-undo":"sequelize-cli db:migrate:undo"
   },
   "dependencies": {
     "@types/cookie-parser": "^1.4.10",
