@@ -21,15 +21,15 @@ export const useGame = (config = SETTINGS) => {
     count,
     seconds,
     startTimer,
+    resetTimer,
     handleCardClick,
     resetGame,
     isGameComplete,
   } = useGameLogic(cards)
 
   const reset = useCallback(() => {
-    resetBoard()
-    resetGame()
-  }, [resetBoard, resetGame])
+    resetTimer(), resetBoard(), resetGame()
+  }, [resetBoard, resetGame, resetTimer])
 
   const canvasSize = {
     width: cols * (cardWidth + spacing),

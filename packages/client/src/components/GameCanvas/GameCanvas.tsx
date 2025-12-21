@@ -26,6 +26,7 @@ const GameCanvas = ({
   }, [startTimer])
 
   useEffect(() => {
+    startTimer(true)
     const canvas = canvasRef.current
     if (!canvas) return
 
@@ -54,7 +55,7 @@ const GameCanvas = ({
         canvasSize.cardHeight
       )
     })
-  }, [cards, flipped, matched, canvasSize])
+  }, [cards, flipped, matched, canvasSize, startTimer])
 
   const handleCanvasClick = useCallback(
     (e: React.MouseEvent<HTMLCanvasElement>) => {

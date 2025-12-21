@@ -19,7 +19,7 @@ export const useGameLogic = (cards: Card[]) => {
 
   const resetTimer = useCallback(() => {
     setSeconds(0)
-    setTimerRunning(false)
+    setTimerRunning(true)
   }, [])
 
   useEffect(() => {
@@ -69,9 +69,8 @@ export const useGameLogic = (cards: Card[]) => {
     setMatched([])
     setCount(0)
     setDisabled(false)
-    setTimerRunning(false)
-    setSeconds(0)
-  }, [])
+    resetTimer
+  }, [resetTimer])
 
   const isGameComplete = useCallback(() => {
     return matched.length === cards.length && cards.length > 0
