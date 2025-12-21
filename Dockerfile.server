@@ -1,12 +1,11 @@
 ARG NODE_VERSION=22
-
-FROM node:${NODE_VERSION}-bookworm AS base
+FROM node:${NODE_VERSION}-bookworm AS builder
 WORKDIR /app
 
-FROM base AS builder
+COPY package.json yarn.lock lerna.json ./
+COPY packages/*/package.json ./packages/*/
 
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile --network-concurrency 1
+RUN yarn install --frozen-lockfile
 
 COPY . .
 RUN yarn lerna bootstrap
@@ -14,13 +13,11 @@ RUN yarn lerna bootstrap
 WORKDIR /app/packages/server
 RUN yarn build
 
-FROM base AS runtime
+FROM node:${NODE_VERSION}-bookworm
+WORKDIR /app
 
-ENV NODE_ENV=production
-
-COPY --from=builder /app /app
-
-WORKDIR /app/packages/server
+COPY --from=builder /app/packages/server/dist ./dist
+COPY --from=builder /app/packages/server/package.json ./
 
 EXPOSE 3001
 CMD ["node", "dist/index.js"]

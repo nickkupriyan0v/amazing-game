@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 import cors from 'cors'
 import express from 'express'
-import cookieParser from 'cookie-parser'
+// import cookieParser from 'cookie-parser'
 import { createClientAndConnect } from './db'
 import router from './routers/routes'
 dotenv.config()
