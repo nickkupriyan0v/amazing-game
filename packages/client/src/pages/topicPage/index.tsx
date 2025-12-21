@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Text, Card, Grid } from '@chakra-ui/react'
+import { Flex, Heading, Text, Card, Grid } from '@chakra-ui/react'
 import Header from '../../components/Header'
 import { useGetTopicByIdQuery } from '../../api/forumApi/forumApi'
 import { useParams } from 'react-router'
