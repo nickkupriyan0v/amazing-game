@@ -30,6 +30,7 @@
     "websocket-express": "^4.0.1"
   },
   "devDependencies": {
+    "lerna": "^5.4.3",
     "@babel/core": "^7.28.5",
     "@babel/preset-env": "^7.28.5",
     "@babel/preset-typescript": "^7.28.5",
