@@ -4,8 +4,6 @@ WORKDIR /app
 
 FROM base AS builder
 
-RUN yarn install -g lerna
-
 COPY yarn.lock ./yarn.lock
 COPY packages/server/package.json ./packages/server/package.json
 
@@ -14,7 +12,7 @@ RUN yarn install --frozen-lockfile --network-concurrency 1
 
 COPY packages/server/src ./src
 
-RUN yarn lerna bootstrap
+RUN npx lerna bootstrap
 RUN yarn build
 
 FROM base AS runtime
