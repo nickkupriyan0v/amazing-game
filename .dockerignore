@@ -1,0 +1,7 @@
+node_modules
+dist
+.docker
+.git
+*.log
+*.tmp
+.env
