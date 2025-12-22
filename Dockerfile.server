@@ -1,17 +1,17 @@
 ARG NODE_VERSION=22
-
 FROM node:${NODE_VERSION}-bookworm AS base
 WORKDIR /app
 
 FROM base AS builder
 
-COPY packages/server/package.json packages/server/yarn.lock ./packages/server/
+# Копируем root yarn.lock и server/package.json
+COPY yarn.lock ./yarn.lock
+COPY packages/server/package.json ./packages/server/package.json
+
+WORKDIR /app/packages/server
 RUN yarn install --frozen-lockfile --network-concurrency 1
 
-WORKDIR /app/packages/
-
-RUN yarn install --frozen-lockfile --network-concurrency 1
-
+# Копируем исходники
 COPY packages/server/src ./src
 COPY packages/server/public ./public
 
@@ -20,10 +20,7 @@ RUN yarn build
 
 FROM base AS runtime
 ENV NODE_ENV=production
-
 COPY --from=builder /app/packages/server /app/packages/server
-
 WORKDIR /app/packages/server
-
 EXPOSE 3001
 CMD ["node", "dist/index.js"]

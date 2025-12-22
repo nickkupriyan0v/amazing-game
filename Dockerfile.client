@@ -5,17 +5,16 @@ WORKDIR /app
 
 FROM base AS builder
 
-COPY packages/client/package.json packages/client/yarn.lock ./packages/client/
+COPY yarn.lock ./yarn.lock
+COPY packages/client/package.json ./packages/client/package.json
 
 WORKDIR /app/packages/client
-
 RUN yarn install --frozen-lockfile --network-concurrency 1
 
 COPY packages/client/src ./src
 COPY packages/client/public ./public
 
 RUN yarn lerna bootstrap
-
 RUN yarn build
 
 FROM base AS runtime
