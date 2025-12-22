@@ -26,3 +26,4 @@ WORKDIR /app/packages/client
 EXPOSE 3000
 
 CMD ["node", "dist-server/server.js"]
+
