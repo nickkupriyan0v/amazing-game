@@ -10,6 +10,7 @@ RUN yarn install --frozen-lockfile --network-concurrency 1
 
 WORKDIR /app/packages/server
 
+RUN npm install -g lerna
 RUN yarn build
 
 FROM base AS runtime
