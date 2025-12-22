@@ -9,7 +9,6 @@ import {
 } from 'sequelize-typescript'
 import { Topic } from './topic.model'
 import { CommentAttribute, CommentCreationAttributes } from 'comment.interface'
-
 @Table({ tableName: 'comments', timestamps: true })
 export class Comment extends Model<
   CommentAttribute,

@@ -76,7 +76,7 @@ export const GetComment = ({ comment }: GetRepliesProps) => {
             <Heading size="sm" mb={2}>
               Ответы:
             </Heading>
-            <Flex direction="column" gap={3}>
+            <Flex className="topics-list" overflow={'scroll'} h={800}>
               {data.replies.map(reply => (
                 <GetReply key={reply.id} reply={reply} />
               ))}

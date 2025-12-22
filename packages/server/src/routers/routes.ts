@@ -1,7 +1,6 @@
 import { Router } from 'express'
 import { TopicController } from '../controllers/topic.controller'
 import { CommentController } from '../controllers/comment.controller'
-
 const router = Router()
 
 // const authStub = (req: Request, res: Response, next: NextFunction) => {
@@ -28,6 +27,4 @@ router.get(
   '/topics/:topicId/comments',
   CommentController.getCommentsWithReplies
 )
-router.post('/comments/:parentId/replies', CommentController.create)
-
 export default router

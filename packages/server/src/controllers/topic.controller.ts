@@ -63,7 +63,7 @@ export class TopicController {
     return res.json(topic)
   }
 
-  static async list(res: Response) {
+  static async list(_req: Request, res: Response) {
     const topics = await Topic.findAll({
       include: ['comments'],
     })

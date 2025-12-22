@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Text, Card, Grid } from '@chakra-ui/react'
+import { Flex, Heading, Text, Card, Grid } from '@chakra-ui/react'
 import Header from '../../components/Header'
 import { useGetTopicByIdQuery } from '../../api/forumApi/forumApi'
 import { useParams } from 'react-router'
@@ -49,7 +49,12 @@ const TopicPage = () => {
           <Text mt={2}>{data.text}</Text>
         </Card.Root>
         <ModalComment id={id} />
-        <Grid templateColumns="repeat(5, 1fr)" gap={6} mt={8}>
+        <Grid
+          templateColumns="repeat(5, 1fr)"
+          gap={6}
+          mt={8}
+          overflow={'scroll'}
+          h={400}>
           {comments.map(comment => (
             <GetComment key={comment.id} comment={comment} />
           ))}

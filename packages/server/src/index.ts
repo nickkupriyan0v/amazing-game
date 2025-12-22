@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 import cors from 'cors'
 import express from 'express'
-import cookieParser from 'cookie-parser'
+// import cookieParser from 'cookie-parser'
 import { createClientAndConnect } from './db'
 import router from './routers/routes'
 dotenv.config()
@@ -15,7 +15,8 @@ app.use(
 )
 app.use(express.json())
 const port = Number(process.env.SERVER_PORT) || 3001
-app.use(cookieParser())
+
+// app.use(cookieParser())
 // app.use(authMiddleware)
 
 createClientAndConnect()

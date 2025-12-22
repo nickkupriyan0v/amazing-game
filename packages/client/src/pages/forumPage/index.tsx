@@ -42,7 +42,7 @@ const ForumPage = () => {
             </Text>
           )}
         </Box>
-        <Stack className="topics-list">
+        <Stack className="topics-list" overflow={'scroll'} h={800}>
           {isLoading && <Text>Загрузка..</Text>}
           {error && <Text>Произошла ошибка: {data}</Text>}
           <ModalForum />

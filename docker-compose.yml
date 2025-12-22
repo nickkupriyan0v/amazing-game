@@ -1,6 +1,19 @@
 version: '3.8'
 
 services:
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/ssl:ro
+    depends_on:
+      - client
+      - server
+
   db:
     image: postgres:15-alpine
     restart: unless-stopped
@@ -11,10 +24,8 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
       - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
-    ports:
-      - "${POSTGRES_PORT:-5432}:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-amazing} -d amazing_db"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-amazing} -d ${POSTGRES_DB:-amazing_db}"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -25,12 +36,12 @@ services:
       dockerfile: Dockerfile.server
     restart: unless-stopped
     environment:
-      POSTGRES_HOST: db
-      NODE_ENV: development
+      NODE_ENV: production
       DATABASE_URL: postgresql://${POSTGRES_USER:-amazing}:${POSTGRES_PASSWORD:-changeme}@db:5432/${POSTGRES_DB:-amazing_db}
+      POSTGRES_HOST: db
       PORT: ${SERVER_PORT:-3001}
-    ports:
-      - "${SERVER_PORT:-3001}:${SERVER_PORT:-3001}"
+    expose:
+      - "${SERVER_PORT:-3001}"
     depends_on:
       db:
         condition: service_healthy
@@ -42,13 +53,13 @@ services:
     restart: unless-stopped
     environment:
       CLIENT_PORT: ${CLIENT_PORT:-3000}
-      VITE_API_URL: http://localhost:${SERVER_PORT:-3001}
-    ports:
-      - "${CLIENT_PORT:-3000}:${CLIENT_PORT:-3000}"
+      VITE_API_URL: /api
+    expose:
+      - "${CLIENT_PORT:-3000}"
     depends_on:
       - server
-    volumes:
-      - ./packages/client/src:/app/packages/client/src
+    # volumes:
+    #   - ./packages/client/src:/app/packages/client/src
 
   adminer:
     image: adminer:latest

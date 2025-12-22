@@ -5,24 +5,24 @@ WORKDIR /app
 
 FROM base AS builder
 
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile --network-concurrency 1
-
-COPY . .
-
-RUN yarn lerna bootstrap
+COPY yarn.lock ./yarn.lock
+COPY packages/client/package.json ./packages/client/package.json
 
 WORKDIR /app/packages/client
+RUN yarn install --frozen-lockfile --network-concurrency 1
+
+COPY packages/client/src ./src
+COPY packages/client/public ./public
+
+RUN yarn lerna bootstrap
 RUN yarn build
 
 FROM base AS runtime
-
 ENV NODE_ENV=production
 
-COPY --from=builder /app /app
+COPY --from=builder /app/packages/client /app/packages/client
 
 WORKDIR /app/packages/client
-
 EXPOSE 3000
 
 CMD ["node", "dist-server/server.js"]
