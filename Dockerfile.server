@@ -4,14 +4,14 @@ WORKDIR /app
 
 FROM base AS builder
 
-# Копируем root yarn.lock и server/package.json
+RUN yarn install -g lerna
+
 COPY yarn.lock ./yarn.lock
 COPY packages/server/package.json ./packages/server/package.json
 
 WORKDIR /app/packages/server
 RUN yarn install --frozen-lockfile --network-concurrency 1
 
-# Копируем исходники
 COPY packages/server/src ./src
 
 RUN yarn lerna bootstrap
