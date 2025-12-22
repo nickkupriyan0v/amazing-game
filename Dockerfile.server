@@ -13,7 +13,6 @@ RUN yarn install --frozen-lockfile --network-concurrency 1
 
 # Копируем исходники
 COPY packages/server/src ./src
-COPY packages/server/public ./public
 
 RUN yarn lerna bootstrap
 RUN yarn build
