@@ -19,7 +19,6 @@ if (!DATABASE_URL) {
 }
 
 export const sequelize = new Sequelize(DATABASE_URL, {
-  dialect: 'postgres',
   logging: false,
   models: [Topic, Comment],
 })
