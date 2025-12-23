@@ -3,7 +3,7 @@ export const forumApi = createApi({
   reducerPath: 'forumApi',
 
   baseQuery: fetchBaseQuery({
-    baseUrl: '/api',
+    baseUrl: 'http://localhost:3001/api',
     credentials: 'include',
   }),
   tagTypes: ['Topics', 'Comments', 'Replies'],

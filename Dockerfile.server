@@ -1,34 +1,20 @@
 ARG NODE_VERSION=22
-FROM node:${NODE_VERSION}-bookworm AS builder
+FROM node:${NODE_VERSION}-bookworm AS base
 WORKDIR /app
 
-# 1️⃣ Копируем корневые package.json, yarn.lock и lerna.json
-COPY package.json yarn.lock lerna.json ./
+FROM base AS builder
 
-# 2️⃣ Копируем package.json всех пакетов
-COPY packages/*/package.json ./packages/
+COPY package.json yarn.lock ./
 
-# 3️⃣ Устанавливаем все зависимости (включая devDependencies)
-RUN yarn install --frozen-lockfile
+RUN yarn install --frozen-lockfile --network-concurrency 1
 
-# 4️⃣ Копируем весь исходный код
-COPY . .
+WORKDIR /app/packages/server
 
-# 5️⃣ Собираем сервер
-RUN npx lerna run build --scope @app/server --stream
+RUN yarn build
 
-
-# --- Stage 2: Runtime ---
-FROM node:${NODE_VERSION}-bookworm AS runtime
-WORKDIR /app
+FROM base AS runtime
 ENV NODE_ENV=production
-
-# 6️⃣ Копируем только скомпилированный пакет server
-COPY --from=builder /app/packages/server ./packages/server
-
-# 7️⃣ Рабочая директория для сервера
+COPY --from=builder /app/packages/server /app/packages/server
 WORKDIR /app/packages/server
 EXPOSE 3001
-
-# 8️⃣ Запуск сервера
 CMD ["node", "dist/index.js"]
