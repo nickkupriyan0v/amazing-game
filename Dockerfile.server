@@ -2,13 +2,19 @@ ARG NODE_VERSION=22
 FROM node:${NODE_VERSION}-bookworm AS builder
 WORKDIR /app
 
+# 1️⃣ Копируем корневые package.json, yarn.lock, lerna.json
 COPY package.json yarn.lock lerna.json ./
+
+# 2️⃣ Копируем все package.json пакетов
 COPY packages/*/package.json ./packages/
 
+# 3️⃣ Устанавливаем все зависимости (включая dev)
 RUN yarn install --frozen-lockfile
 
-COPY packages ./packages
+# 4️⃣ Копируем весь код
+COPY . .
 
+# 5️⃣ Собираем сервер
 RUN npx lerna run build --scope @app/server
 
 
@@ -16,6 +22,7 @@ FROM node:${NODE_VERSION}-bookworm AS runtime
 WORKDIR /app
 ENV NODE_ENV=production
 
+# Копируем только скомпилированный пакет server
 COPY --from=builder /app/packages/server ./packages/server
 
 WORKDIR /app/packages/server
