@@ -1,23 +1,26 @@
 import dotenv from 'dotenv'
 dotenv.config()
 
+
 module.exports = {
   development: {
-    username: "myuser",
-    password: "changeme123",
-    database: "myapp",
-    host: "127.0.0.1",
-    dialect: "postgres"
+    username: process.env.POSTGRES_USER || 'myuser',
+    password: process.env.POSTGRES_PASSWORD || 'changeme123',
+    database: process.env.POSTGRES_DB || 'myapp',
+    host: process.env.POSTGRES_HOST || 'localhost',
+    port: process.env.POSTGRES_PORT || 5432,
+    dialect: 'postgres',
   },
   test: {
-    username: "myuser",
-    password: "changeme123",
-    database: "myapp",
-    host: "127.0.0.1",
-    dialect: "postgres"
+    username: process.env.POSTGRES_USER || 'myuser',
+    password: process.env.POSTGRES_PASSWORD || 'changeme123',
+    database: process.env.POSTGRES_DB || 'myapp',
+    host: process.env.POSTGRES_HOST || 'localhost',
+    port: process.env.POSTGRES_PORT || 5432,
+    dialect: 'postgres',
   },
   production: {
-    use_env_variable: "DATABASE_URL",
-    dialect: "postgres"
-  }
+    use_env_variable: 'DATABASE_URL',
+    dialect: 'postgres',
+  },
 }
