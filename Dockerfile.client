@@ -10,7 +10,7 @@ COPY packages/client/package.json ./packages/client/package.json
 
 WORKDIR /app/packages/client
 RUN yarn install --frozen-lockfile --network-concurrency 1
-
+RUN npx lerna run build --scope @app/client
 COPY packages/client/src ./src
 COPY packages/client/public ./public
 
