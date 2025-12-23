@@ -1,22 +1,14 @@
 module.exports = {
   development: {
-    username:'myuser',
-    password:'changeme123',
-    database:'myapp',
-    host:'localhost',
-    port:5432,
+    url: "postgresql://myuser:changeme123@localhost:5432/myapp",
     dialect: 'postgres',
   },
   test: {
-    username:'myuser',
-    password:'changeme123',
-    database:'myapp',
-    host:'localhost',
-    port:5432,
+    url: "postgresql://myuser:changeme123@localhost:5432/myapp",
     dialect: 'postgres',
   },
   production: {
-    use_env_variable: 'DATABASE_URL',
+    url: "postgresql://myuser:changeme123@localhost:5432/myapp",
     dialect: 'postgres',
   },
 }
