@@ -1,17 +1,20 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-require('dotenv').config()
-
 module.exports = {
   development: {
-    url: process.env.DATABASE_URL,
-    dialect: 'postgres',
+    username: "myuser",
+    password: "changeme123",
+    database: "myapp",
+    host: "127.0.0.1",
+    dialect: "postgres"
   },
   test: {
-    url: process.env.DATABASE_URL,
-    dialect: 'postgres',
+    username: "myuser",
+    password: "changeme123",
+    database: "myapp",
+    host: "127.0.0.1",
+    dialect: "postgres"
   },
   production: {
-    url: process.env.DATABASE_URL,
-    dialect: 'postgres',
-  },
+    use_env_variable: "DATABASE_URL",
+    dialect: "postgres"
+  }
 }
