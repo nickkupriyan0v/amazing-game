@@ -12,7 +12,7 @@ import { Client } from 'pg'
 import { Sequelize } from 'sequelize-typescript'
 import { Topic } from './models/topic.model'
 import { Comment } from './models/comment.model'
-const { DATABASE_URL } = process.env
+const DATABASE_URL = 'postgresql://myuser:changeme123@localhost:5432/myapp'
 
 if (!DATABASE_URL) {
   throw new Error('❌ DATABASE_URL не найдено in .env')
