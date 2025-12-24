@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "spa":"vite",
-    "dev": "tsc --project tsconfig.server.json && cross-env NODE_ENV=development EXTERNAL_SERVER_URL='http://localhost:3000' INTERNAL_SERVER_URL='http://localhost:3000' node dist-server/server.js vite",
+    "dev":"vite",
     "build": "npm run build-client && npm run build-ssr && npm run build-server",
     "build-client": "vite build --outDir dist/client",
     "build-ssr": "vite build --ssr ./src/entry-server.tsx --outDir dist/server",

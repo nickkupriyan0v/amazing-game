@@ -9,7 +9,10 @@ import { addUserInfo2Store } from './features/addUserInfo2Store'
 import { ColorModeProvider } from './components/ui/color-mode'
 
 const router = createBrowserRouter(routes)
+
 const initApp = async () => {
+  await addUserInfo2Store(store.dispatch)
+
   ReactDOM.hydrateRoot(
     document.getElementById('root') as HTMLElement,
     <Provider store={store}>
@@ -20,7 +23,6 @@ const initApp = async () => {
       </ChakraProvider>
     </Provider>
   )
-  addUserInfo2Store(store.dispatch)
 }
 
 initApp()
