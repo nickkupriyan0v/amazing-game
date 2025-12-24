@@ -10,7 +10,7 @@
     "test": "lerna run test -- --verbose",
     "lint": "lerna run lint",
     "format": "lerna run format",
-    "preview": "lerna run preview"
+    "preview": "lerna run preview --scope server --stream && lerna run preview --scope client --stream"
   },
   "license": "MIT",
   "workspaces": [
