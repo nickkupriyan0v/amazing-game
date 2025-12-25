@@ -13,8 +13,7 @@ const router = createBrowserRouter(routes)
 const initApp = async () => {
   await addUserInfo2Store(store.dispatch)
 
-  ReactDOM.hydrateRoot(
-    document.getElementById('root') as HTMLElement,
+  ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <Provider store={store}>
       <ChakraProvider value={defaultSystem}>
         <ColorModeProvider>

@@ -3,12 +3,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev":"vite",
-    "build": "npm run build-client && npm run build-ssr && npm run build-server",
-    "build-client": "vite build --outDir dist/client",
-    "build-ssr": "vite build --ssr ./src/entry-server.tsx --outDir dist/server",
-    "build-server": "tsc -p tsconfig.server.json",
-    "preview": "node dist-server/server"
+  "dev": "vite",
+  "build": "npm run build-client",
+  "build-client": "vite build --outDir dist/client",
+  "preview": "vite preview"
   },
   "dependencies": {
     "@chakra-ui/color-mode": "^2.2.0",

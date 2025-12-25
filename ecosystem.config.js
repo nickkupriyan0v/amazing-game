@@ -11,9 +11,9 @@ module.exports = {
     {
       name: 'client-ssr',
       script: 'packages/client/dist-server/server.js',
+      watch:false,
       env: {
         NODE_ENV: 'production',
-        PORT: 3000,
       },
     },
   ],
